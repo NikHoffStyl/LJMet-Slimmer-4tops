@@ -591,8 +591,8 @@ void step1::Loop(TString inTreeName, TString outTreeName )
    outputTree->Branch("TJetLeadPt",&TJetLeadPt,"TJetLeadPt/F"); 
 
    outputTree->Branch("genTtbarIdCategory_TTbarMassCalc",&genTtbarIdCategory_TTbarMassCalc);    
-   outputTree->Branch("genTtbarId_TTbarMassCalc",&genTtbarId_TTbarMassCalc);    
-  
+   outputTree->Branch("genTtbarId_TTbarMassCalc",&genTtbarId_TTbarMassCalc);
+
   // ----------------------------------------------------------------------------
   // Define and initialize objects / cuts / efficiencies
   // ----------------------------------------------------------------------------
@@ -934,7 +934,7 @@ void step1::Loop(TString inTreeName, TString outTreeName )
 	// In Data, AK4JetBTag_MultiLepCalc variable is still using DeepJet,
 	// so we need to change it to DeepCSV
 	AK4JetBTag_MultiLepCalc->at(ijet) = AK4JetDeepCSVb_MultiLepCalc->at(ijet) + AK4JetDeepCSVbb_MultiLepCalc->at(ijet) > btagWPdcsv;
-	}	  	  	
+	}
 	// ----------------------------------------------------------------------------
 	// Counts and pt ordering pair
 	// ----------------------------------------------------------------------------
@@ -1497,12 +1497,12 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       double Atmp = 4.0*((lepton_lv.Energy())*(lepton_lv.Energy())-(lepton_lv.Pz())*(lepton_lv.Pz()));
       double Btmp = -4.0*Dtmp*(lepton_lv.Pz());
       double Ctmp = 4.0*(lepton_lv.Energy())*(lepton_lv.Energy())*(metpt)*(metpt)-Dtmp*Dtmp;
-      
+
       double nuPz_1;
       double nuPz_2;
-      
+
       double DETtmp = Btmp*Btmp-4.0*Atmp*Ctmp;
-      
+
       TLorentzVector Wlv_1, Wlv_2, Wlv, lvTop;
       if(DETtmp >= 0) {
 	nuPz_1 = (-Btmp+TMath::Sqrt(DETtmp))/(2.0*Atmp);
@@ -1530,7 +1530,7 @@ void step1::Loop(TString inTreeName, TString outTreeName )
 	if (fabs(Wlv_1.M()-MW) < fabs(Wlv_2.M()-MW)) Wlv_2 = Wlv_1;
 	else Wlv_1 = Wlv_2;
       }
-      
+
       // ----------------------------------------------------------------------------
       // top --> W b --> l nu b using W from above
       // ----------------------------------------------------------------------------
@@ -1572,7 +1572,7 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       recLeptonicTopEta = lvTop.Eta();
       recLeptonicTopPhi = lvTop.Phi();
       recLeptonicTopMass = lvTop.M();
-      
+
       // ----------------------------------------------------------------------------
       // Apply pt ordering to AK8 vectors 
       // ----------------------------------------------------------------------------
