@@ -14,6 +14,7 @@
 #include <vector>
 #include <TH3.h>
 #include "HardcodedConditions.h"
+#include "BTagCalibForLJMet.h"
 
 using namespace std;
 
@@ -76,9 +77,32 @@ wgthist->Write();
 // MAIN EVENT LOOP
 // ----------------------------------------------------------------------------
 
-void step1::Loop(TString inTreeName, TString outTreeName ) 
+void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationForLJMet* calib = NULL)
 {
+  // btagCalibration initialization -csv reshaping
+  if (calib == NULL)
+  {
+    std::string btagcsvfile("DeepCSV_94XSF_V5_B_F.csv");
+    if (Year== 2018) {
+      btagcsvfile = "DeepCSV_102XSF_V2.csv"; 
+    }
+    cout << "CSV reshaping file " << btagcsvfile << endl;
+    calib = new const BTagCalibrationForLJMet("DeepCSV", btagcsvfile); 
+  }
+  BTagCalibrationForLJMetReader reader(BTagEntryForLJMet::OP_RESHAPING,  // operating point
+			       "central",             // central sys type
+			       {"up_jes", "down_jes", "up_lf", "down_lf", "up_hfstats1", "down_hfstats1",
+				   "up_hfstats2", "down_hfstats2", "up_cferr1", "down_cferr1", "up_cferr2",
+				   "down_cferr2", "up_hf", "down_hf", "up_lfstats1", "down_lfstats1",
+				   "up_lfstats2", "down_lfstats2"});      // other sys types
   
+  reader.load(*calib,                 // calibration instance
+	      BTagEntryForLJMet::FLAV_B,     // btag flavour
+	      "iterativefit");       // measurement type
+  reader.load(*calib, BTagEntryForLJMet::FLAV_C, "iterativefit");     // for FLAV_C
+  reader.load(*calib, BTagEntryForLJMet::FLAV_UDSG, "iterativefit");     // for FLAV_UDSG
+
+
   HardcodedConditions hardcodedConditions;
   
   // ----------------------------------------------------------------------------
@@ -369,6 +393,15 @@ void step1::Loop(TString inTreeName, TString outTreeName )
    outputTree->Branch("triggerXSF",&triggerXSF,"triggerXSF/F");
    outputTree->Branch("triggerVlqXSF",&triggerVlqXSF,"triggerVlqXSF/F");
    outputTree->Branch("isoSF",&isoSF,"isoSF/F");
+   outputTree->Branch("btagCSVWeight",&btagCSVWeight,"btagCSVWeight/F");
+   outputTree->Branch("btagCSVWeight_HFup",&btagCSVWeight_HFup,"btagCSVWeight_HFup/F");
+   outputTree->Branch("btagCSVWeight_HFdn",&btagCSVWeight_HFdn,"btagCSVWeight_HFdn/F");
+   outputTree->Branch("btagCSVWeight_LFup",&btagCSVWeight_LFup,"btagCSVWeight_LFup/F");
+   outputTree->Branch("btagCSVWeight_LFdn",&btagCSVWeight_LFdn,"btagCSVWeight_LFdn/F");
+   outputTree->Branch("njetsWeight",&njetsWeight,"njetsWeight/F");
+   outputTree->Branch("njetsWeightUp",&njetsWeightUp,"njetsWeightUp/F");
+   outputTree->Branch("njetsWeightDown",&njetsWeightDown,"njetsWeightDown/F");
+   outputTree->Branch("tthfWeight",&tthfWeight,"tthfWeight/F");
    
    //ttbar generator
    outputTree->Branch("ttbarMass_TTbarMassCalc",&ttbarMass_TTbarMassCalc,"ttbarMass_TTbarMassCalc/D");
@@ -710,7 +743,7 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       nb = inputTree->GetEntry(jentry);   nbytes += nb;
       if (Cut(ientry) != 1) continue;
       
-      //  if (ientry > 5000) continue;
+        //if (ientry > 5000) break;
       
       if(jentry % 1000 ==0) std::cout<<"Completed "<<jentry<<" out of "<<nentries<<" events"<<std::endl;
 
@@ -821,6 +854,20 @@ void step1::Loop(TString inTreeName, TString outTreeName )
 		}
       }
 
+
+      // ----------------------------------------------------------------------------
+      // ttHF weight calculation
+      // ----------------------------------------------------------------------------
+      njetsWeight = hardcodedConditions.GetNjetSF(NJets_JetSubCalc, Year, "nominal", isTT);
+      njetsWeightUp = hardcodedConditions.GetNjetSF(NJets_JetSubCalc, Year, "up", isTT);
+      njetsWeightDown = hardcodedConditions.GetNjetSF(NJets_JetSubCalc, Year, "down", isTT);
+
+
+      // ----------------------------------------------------------------------------
+      // njet weight calculation
+      // ----------------------------------------------------------------------------
+      tthfWeight = hardcodedConditions.GetTtHfSF(isTT, outTTBB, outTT2B||outTT1B||outTTCC||outTTLF);
+
       // ----------------------------------------------------------------------------
       // Generator-level HT correction
       // ----------------------------------------------------------------------------      
@@ -863,6 +910,11 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       NJets_JetSubCalc = 0;
       AK4HT = 0;
       vector<pair<double,int>> jetptindpair;
+      btagCSVWeight = 1.0;
+      btagCSVWeight_HFup = 1.0;
+      btagCSVWeight_HFdn = 1.0;
+      btagCSVWeight_LFup = 1.0;
+      btagCSVWeight_LFdn = 1.0;
 
       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc->size(); ijet++){
 	// ----------------------------------------------------------------------------
@@ -930,7 +982,35 @@ void step1::Loop(TString inTreeName, TString outTreeName )
 		AK4JetBTag_lSFup_MultiLepCalc->at(ijet) = applySF(istagged,btagSF+btagSFerr,btagEff);
 		AK4JetBTag_lSFdn_MultiLepCalc->at(ijet) = applySF(istagged,btagSF-btagSFerr,btagEff);
 		}
+	// csv reshaping
+	double csv = AK4JetDeepCSVb_MultiLepCalc->at(ijet) + AK4JetDeepCSVbb_MultiLepCalc->at(ijet);
+	double jptForBtag(ijetPt>1000. ? 999. : ijetPt), jetaForBtag(fabs(ijetEta));
+	float csvWgt(1.0), csvWgt_hfup(1.0), csvWgt_hfdn(1.0), csvWgt_lfup(1.0), csvWgt_lfdn(1.0);
+	if (abs(ijetHFlv) ==5) { 
+	    csvWgt = reader.eval_auto_bounds("central", BTagEntryForLJMet::FLAV_B, jetaForBtag, jptForBtag, csv);
+	    csvWgt_hfup = reader.eval_auto_bounds("up_hf", BTagEntryForLJMet::FLAV_B, jetaForBtag, jptForBtag, csv);
+            csvWgt_hfdn = reader.eval_auto_bounds("down_hf", BTagEntryForLJMet::FLAV_B, jetaForBtag, jptForBtag, csv);
+            csvWgt_lfup = reader.eval_auto_bounds("up_lf", BTagEntryForLJMet::FLAV_B, jetaForBtag, jptForBtag, csv);
+            csvWgt_lfdn = reader.eval_auto_bounds("down_lf", BTagEntryForLJMet::FLAV_B, jetaForBtag, jptForBtag, csv);            
 	}
+	else if (abs(ijetHFlv) ==4) {
+	    csvWgt = reader.eval_auto_bounds("central", BTagEntryForLJMet::FLAV_C, jetaForBtag, jptForBtag, csv);
+	}
+	else {
+	    csvWgt = reader.eval_auto_bounds("central", BTagEntryForLJMet::FLAV_UDSG, jetaForBtag, jptForBtag, csv);
+            csvWgt_hfup = reader.eval_auto_bounds("up_hf", BTagEntryForLJMet::FLAV_UDSG, jetaForBtag, jptForBtag, csv);
+            csvWgt_hfdn = reader.eval_auto_bounds("down_hf", BTagEntryForLJMet::FLAV_UDSG, jetaForBtag, jptForBtag, csv);
+            csvWgt_lfup = reader.eval_auto_bounds("up_lf", BTagEntryForLJMet::FLAV_UDSG, jetaForBtag, jptForBtag, csv);
+            csvWgt_lfdn = reader.eval_auto_bounds("down_lf", BTagEntryForLJMet::FLAV_UDSG, jetaForBtag, jptForBtag, csv);
+	}	 
+
+	if (csvWgt != 0) btagCSVWeight *= csvWgt;
+        if (csvWgt_hfup != 0) btagCSVWeight_HFup *= csvWgt_hfup;
+	if (csvWgt_hfdn != 0) btagCSVWeight_HFdn *= csvWgt_hfdn;
+        if (csvWgt_lfup != 0) btagCSVWeight_LFup *= csvWgt_lfup;
+        if (csvWgt_lfdn != 0) btagCSVWeight_LFdn *= csvWgt_lfdn;
+	}
+
 	else{
 	// In Data, AK4JetBTag_MultiLepCalc variable is still using DeepJet,
 	// so we need to change it to DeepCSV
@@ -945,6 +1025,7 @@ void step1::Loop(TString inTreeName, TString outTreeName )
 	AK4HT+=theJetPt_JetSubCalc->at(ijet);
       }
 
+	//cout << " csv wgt " << btagCSVWeight << endl; // debug -wz
 
 
        // ----------------------------------------------------------------------------
@@ -1450,7 +1531,16 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       // ----------------------------------------------------------------------------
       // Skip events that fail # of btag requirement
       // ----------------------------------------------------------------------------  
-      if(NJetsCSVwithSF_MultiLepCalc<nbjetsCut && NJetsCSVwithSF_MultiLepCalc_bSFup<nbjetsCut && NJetsCSVwithSF_MultiLepCalc_bSFdn<nbjetsCut && NJetsCSVwithSF_MultiLepCalc_lSFup<nbjetsCut && NJetsCSVwithSF_MultiLepCalc_lSFdn<nbjetsCut) continue;
+      if(NJetsCSVwithSF_MultiLepCalc<nbjetsCut && 
+      	 NJetsCSVwithSF_MultiLepCalc_bSFup<nbjetsCut && 
+      	 NJetsCSVwithSF_MultiLepCalc_bSFdn<nbjetsCut && 
+      	 NJetsCSVwithSF_MultiLepCalc_lSFup<nbjetsCut && 
+      	 NJetsCSVwithSF_MultiLepCalc_lSFdn<nbjetsCut && 
+      	 NJetsCSVwithSF_JetSubCalc<nbjetsCut && 
+      	 NJetsCSVwithSF_JetSubCalc_bSFup<nbjetsCut && 
+      	 NJetsCSVwithSF_JetSubCalc_bSFdn<nbjetsCut && 
+      	 NJetsCSVwithSF_JetSubCalc_lSFup<nbjetsCut && 
+      	 NJetsCSVwithSF_JetSubCalc_lSFdn<nbjetsCut) continue;
 
       // ----------------------------------------------------------------------------
       // 13TeV Top pT reweighting -- TTbarMassCalc top vectors are the wrong tops....
@@ -2119,9 +2209,16 @@ void step1::Loop(TString inTreeName, TString outTreeName )
       // 2 = isrRedHi isr:muRfac=0.707, 3 = fsrRedHi fsr:muRfac=0.707, 4 = isrRedLo isr:muRfac=1.414, 5 = fsrRedLo fsr:muRfac=1.414, 
       // 6 = isrDefHi isr:muRfac=0.5, 7 = fsrDefHi fsr:muRfac=0.5,  8 = isrDefLo isr:muRfac=2.0,   9 = fsrDefLo fsr:muRfac=2.0, 
       // 10 = isrConHi isr:muRfac=0.25, 11 = fsrConHi fsr:muRfac=0.25, 12 = isrConLo isr:muRfac=4.0, 13 = fsrConLo fsr:muRfac=4.0
+      double the_ps_weight=1.0;
       if (evtWeightsMC_MultiLepCalc->size()>=14)
          for(auto & i: {6,7,8,9})
-            renormPSWeights.push_back(evtWeightsMC_MultiLepCalc->at(i)/evtWeightsMC_MultiLepCalc->at(0));
+         {
+            the_ps_weight = evtWeightsMC_MultiLepCalc->at(i)/evtWeightsMC_MultiLepCalc->at(0);
+            if (fabs(the_ps_weight)>100)
+               renormPSWeights.push_back(1.0);
+            else
+               renormPSWeights.push_back(the_ps_weight);
+         }
       else renormPSWeights={1,1,1,1};
 
       //ME-PS
