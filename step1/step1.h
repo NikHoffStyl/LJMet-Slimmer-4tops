@@ -18,6 +18,7 @@
 #include "vector"
 #include "TLorentzVector.h"
 #include "HardcodedConditions.h"
+#include "BTagCalibForLJMet.h"
 
 enum shift:char;
 
@@ -139,6 +140,10 @@ public :
    vector<double>  pdfWeights;
    vector<double>  pdfNewWeights;
    float_t         pdfNewNominalWeight;
+   Float_t         njetsWeight;
+   Float_t         njetsWeightUp;
+   Float_t         njetsWeightDown;
+   Float_t         tthfWeight;
 
    Float_t         leptonPt_MultiLepCalc;
    Float_t         leptonEta_MultiLepCalc;
@@ -336,6 +341,12 @@ public :
    vector<int>     NresolvedTops2pFake_shifts;
    vector<int>     NresolvedTops5pFake_shifts;
    vector<int>     NresolvedTops10pFake_shifts;
+
+   float	   btagCSVWeight;
+   float 	   btagCSVWeight_HFup;
+   float           btagCSVWeight_HFdn;
+   float           btagCSVWeight_LFup;
+   float           btagCSVWeight_LFdn;
 
    // Declaration of leaf types
    Bool_t          flagBadMu_MultiLepCalc;
@@ -1251,7 +1262,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString inTreeName, TString outTreeName);
+   virtual void     Loop(TString inTreeName, TString outTreeName, const BTagCalibrationForLJMet* calib);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
    virtual void     saveHistograms();

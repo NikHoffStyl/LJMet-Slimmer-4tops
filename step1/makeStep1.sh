@@ -31,6 +31,7 @@ XRDpath=root://brux11.hep.brown.edu:1094/$inputDir
 fi
 
 echo "Running step1 over list: ${idlist}"
+rm filelist
 for iFile in $idlist; do
     inFile=${iFile}
     if [[ $iFile == ext* ]] ;
@@ -41,9 +42,13 @@ for iFile in $idlist; do
 	inFile=${iFile:1}
     fi
 
-    echo "creating ${outfilename}_${iFile}.root by reading ${infilename}_${inFile}"
-    root -l -b -q makeStep1.C\(\"$macroDir\",\"$XRDpath/${infilename}_${inFile}.root\",\"${outfilename}_${iFile}.root\",${Year}\)
+    echo "adding ${outfilename}_${iFile}.root to the list by reading ${infilename}_${inFile}"
+    echo  $XRDpath/${infilename}_${inFile}.root,${outfilename}_${iFile}.root>> filelist
+    # root -l -b -q makeStep1.C\(\"$macroDir\",\"$XRDpath/${infilename}_${inFile}.root\",\"${outfilename}_${iFile}.root\",${Year}\)
 done
+
+# root -l -b -q makeStep1.C\(\"$macroDir\",\"filelist\",${Year}\)
+echo gROOT-\>LoadMacro\(\"makeStep1.C++\"\)\; makeStep1\(\"$macroDir\",\"filelist\",${Year}\)\; | root -b -l
 
 echo "ROOT Files:"
 ls -l *.root
@@ -61,6 +66,14 @@ for SHIFT in nominal JECup JECdown JERup JERdown
 
   echo "gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/nistylia/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
   gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+  if [[ $outputDir == /pnfs/iihe/* ]] ;
+  then # for qsub jobs
+    echo "gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/$USER/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+    gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+  else # for condor jobs on lpc
+    echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+    xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+  fi
 
   XRDEXIT=$?
   if [[ $XRDEXIT -ne 0 ]]; then
