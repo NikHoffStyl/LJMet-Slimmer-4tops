@@ -4798,6 +4798,8 @@ pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2016(double pt, int njets
 }
 pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2017(double pt, int njets)
 {
+    double effJet;
+    double effJet_error;
 	if (njets == 5) {
         if  ( pt < 40.0 ) {
             effJet = 0.0260346442315;
@@ -5194,6 +5196,8 @@ pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2016(double pt, int nje
 }
 pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2017(double pt, int njets)
 {
+    double effJet;
+    double effJet_error;
 	if (njets == 5) {
         if  ( pt < 40.0) {
             effJet = 0.022100125935;
@@ -5447,6 +5451,8 @@ pair<double,double> HardcodedConditions::GetMcTRFveta2pb2016(double eta, int nje
 }
 pair<double,double> HardcodedConditions::GetMcTRFveta2pb2017(double eta, int njets)
 {
+    double effJeteta;
+    double effJeteta_error;
 	if (njets == 5) {
         if  (eta < -1.92) {
             effJeteta = 0.0307382097711;
@@ -6008,6 +6014,8 @@ pair<double,double> HardcodedConditions::GetDataTRFveta2pb2016(double eta, int n
 }
 pair<double,double> HardcodedConditions::GetDataTRFveta2pb2017(double eta, int njets)
 {
+    double effJeteta;
+    double effJeteta_error;
 	if (njets == 5) {
         if  ( eta < -1.56) {
             effJeteta = 0.0302365111897;
@@ -6308,6 +6316,8 @@ pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2016(double mdr, int nje
 }
 pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2017(double mdr, int njets)
 {
+    double effJetDr;
+    double effJetDr_error;
 	if (njets == 5) {
         if  (mdr < 0.588235294118) {
             effJetDr = 0.0346283073319 ;
@@ -6829,6 +6839,8 @@ pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2016(double mdr, int n
 }
 pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2017(double mdr, int njets)
 {
+    double effJetDr;
+    double effJetDr_error;
 	if (njets == 5) {
         if  ( mdr < 0.78431372549) {
             effJetDr = 0.0333390344535;
@@ -7080,6 +7092,8 @@ pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2016(double pt, int njets
 }
 pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2017(double pt, int njets)
 {
+    double effJet_b3p;
+    double effJet_error_b3p;
 	if (njets == 5) {
         if  (pt < 50.0) {
             effJet_b3p = 0.0194421567861;
@@ -7355,6 +7369,8 @@ pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2016(double pt, int nje
 }
 pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2017(double pt, int njets)
 {
+    double effJet_b3p;
+    double effJet_error_b3p;
 	if (njets == 5) {
         if  ( pt < 60.0) {
             effJet_b3p = 0.0204733949166;
@@ -7547,6 +7563,8 @@ pair<double,double> HardcodedConditions::GetMcTRFveta3pb2016(double eta, int nje
 }
 pair<double,double> HardcodedConditions::GetMcTRFveta3pb2017(double eta, int njets)
 {
+    double effJeteta_b3p;
+    double effJeteta_error_b3p;
 	if (njets == 5) {
         if  (eta < -1.08) {
             effJeteta_b3p = 0.0280887482328;
@@ -7842,6 +7860,8 @@ pair<double,double> HardcodedConditions::GetDataTRFveta3pb2016(double eta, int n
 }
 pair<double,double> HardcodedConditions::GetDataTRFveta3pb2017(double eta, int njets)
 {
+    double effJeteta_b3p;
+    double effJeteta_error_b3p;
 	if (njets == 5) {
         if  ( eta < -0.96) {
             effJeteta_b3p = 0.0248024593348;
@@ -8045,6 +8065,8 @@ pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2016(double mdr, int nje
 }
 pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2017(double mdr, int njets)
 {
+    double effJetDr_b3p;
+    double effJetDr_error_b3p;
 	if (njets == 5) {
         if  (mdr < 0.686274509804) {
             effJetDr_b3p = 0.0267793024662;
@@ -8320,6 +8342,8 @@ pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2016(double mdr, int n
 }
 pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2017(double mdr, int njets)
 {
+    double effJetDr_b3p;
+    double effJetDr_error_b3p;
 	if (njets == 5) {
         if  ( mdr < 0.980392156863) {
             effJetDr_b3p = 0.0275351495968;
