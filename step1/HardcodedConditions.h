@@ -21,7 +21,7 @@ public:
     pair<double,double> GetTRFvpt3pb(double pt, int njets, int year = 2017, bool sampleMC = true);
     pair<double,double> GetTRFveta3pb(double eta, int njets, int year = 2017, bool sampleMC = true);
     pair<double,double> GetTRFvmdr3pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
-    
+
     double GetEGammaGsfSF(double pt, double eta, int year = 2017);
     double GetElectronIdSF(double pt, double eta, int year = 2017);
     double GetElectronIsoSF(double pt, double eta, int year = 2017);
@@ -90,7 +90,7 @@ private:
     pair<double,double> GetDataTRFvmdr3pb2016(double mdr, int njets);
     pair<double,double> GetDataTRFvmdr3pb2017(double mdr, int njets);
     pair<double,double> GetDataTRFvmdr3pb2018(double mdr, int njets);
-    
+
     double GetEGammaGsfSF2016(double pt, double eta);
     double GetEGammaGsfSF2017(double pt, double eta);
     double GetEGammaGsfSF2018(double pt, double eta);
