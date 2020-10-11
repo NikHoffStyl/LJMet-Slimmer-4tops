@@ -4679,3 +4679,3713 @@ void HardcodedConditions::GetPileupWeight2018(int nTrueInt, float *pileupweight,
 }
 
 
+/*.-----------------------------------------------------------------.
+  /  .-.                                                         .-.  \
+ |  /   \                                                       /   \  |
+ | |\_.  |                                                     |    /| |
+ |\|  | /|                 TRF WEIGHT SECTION                  |\  | |/|
+ | `---' |                                                     | `---' |
+ |       |                                                     |       |
+ |       |-----------------------------------------------------|       |
+ \       |                                                     |       /
+  \     /                                                       \     /
+   `---'                                                         `---'*/
+pair<double,double> HardcodedConditions::GetTRFvpt2pb(double pt, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFvpt2pb2016(pt, njets);
+    else if (year==2017) return GetMcTRFvpt2pb2017(pt, njets);
+    else if (year==2018) return GetMcTRFvpt2pb2018(pt, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFvpt2pb2016(pt, njets);
+    else if (year==2017) return GetDataTRFvpt2pb2017(pt, njets);
+    else if (year==2018) return GetDataTRFvpt2pb2018(pt, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2016(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2017(double pt, int njets)
+{
+	if (njets == 5) {
+        if  ( pt < 40.0 ) {
+            effJet = 0.0260346442315;
+            effJet_error = 0.000668817792262;}
+        else if  ( pt >= 40.0 && pt < 50.0 ) {
+            effJet = 0.0294159456364;
+            effJet_error = 0.000828497686565;}
+        else if  ( pt >= 50.0 && pt < 60.0 ) {
+            effJet = 0.031296085069;
+            effJet_error = 0.000941388670988;}
+        else if  ( pt >= 60.0 && pt < 70.0 ) {
+            effJet = 0.0346541011668;
+            effJet_error = 0.00106192607369;}
+        else if  ( pt >= 70.0 && pt < 80.0 ) {
+            effJet = 0.0338014215896;
+            effJet_error = 0.0011341733115;}
+        else if  ( pt >= 80.0 && pt < 90.0 ) {
+            effJet = 0.0376401027569;
+            effJet_error = 0.00126253699437;}
+        else if  ( pt >= 90.0 && pt < 100.0 ) {
+            effJet = 0.0377614637095;
+            effJet_error = 0.00132766283735;}
+        else if  ( pt >= 100.0 && pt < 110.0 ) {
+            effJet = 0.0417959108332;
+            effJet_error = 0.00146935507365;}
+        else if  ( pt >= 110.0 && pt < 120.0 ) {
+            effJet = 0.0419631000709;
+            effJet_error = 0.00154703368247;}
+        else if  ( pt >= 120.0 && pt < 130.0 ) {
+            effJet = 0.0428986391579;
+            effJet_error = 0.00166379587151;}
+        else if  ( pt >= 130.0 && pt < 140.0 ) {
+            effJet = 0.0439805420459;
+            effJet_error = 0.00174488606572;}
+        else if  ( pt >= 140.0 && pt < 150.0 ) {
+            effJet = 0.0492611769886;
+            effJet_error = 0.00192873270891;}
+        else if  ( pt >= 150.0 && pt < 160.0 ) {
+            effJet = 0.042363087998;
+            effJet_error = 0.00184509836706;}
+        else if  ( pt >= 160.0 && pt < 170.0 ) {
+            effJet = 0.0417129725916;
+            effJet_error = 0.00190608897034;}
+        else if  ( pt >= 170.0 && pt < 190.0 ) {
+            effJet = 0.0449228734517;
+            effJet_error = 0.00149523950222;}
+        else if  ( pt >= 190.0 && pt < 210.0 ) {
+            effJet = 0.0466419149994;
+            effJet_error = 0.00163807955064;}
+        else if  ( pt >= 210.0 && pt < 230.0 ) {
+            effJet = 0.0427226020857;
+            effJet_error = 0.00170262615487;}
+        else if  ( pt >= 230.0 && pt < 250.0 ) {
+            effJet = 0.0424213845859;
+            effJet_error = 0.00180386799712;}
+        else if  ( pt >= 250.0 && pt < 270.0 ) {
+            effJet = 0.0425547479741;
+            effJet_error = 0.00199559146655;}
+        else if  ( pt >= 270.0 && pt < 300.0 ) {
+            effJet = 0.0351140013682;
+            effJet_error = 0.00164347464647;}
+        else if  ( pt >= 300.0 && pt < 360.0 ) {
+            effJet = 0.0326903114272;
+            effJet_error = 0.00143414913353;}
+        else if  ( pt >= 360.0 ) {
+            effJet = 0.0268690188799;
+            effJet_error = 0.00131189543396;}
+	}
+	else if (njets ==6) {
+        if  (pt < 40.0) {
+            effJet = 0.0253041805664;
+            effJet_error = 0.00054824439809;
+            }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0291931400033;
+            effJet_error = 0.000694580305216;
+            }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0325059042973;
+            effJet_error = 0.000822438945834;
+            }
+        else if  (pt >= 60.0 && pt < 70.0) {
+            effJet = 0.0345413278086;
+            effJet_error = 0.000932725442366;
+            }
+        else if  (pt >= 70.0 && pt < 80.0) {
+            effJet = 0.0375157320599;
+            effJet_error = 0.00104798973971;
+            }
+        else if  (pt >= 80.0 && pt < 90.0) {
+            effJet = 0.0376207902985;
+            effJet_error = 0.00112020374845;
+            }
+        else if  (pt >= 90.0 && pt < 100.0) {
+            effJet = 0.0395759586726;
+            effJet_error = 0.00123612528658;
+            }
+        else if  (pt >= 100.0 && pt < 110.0) {
+            effJet = 0.0406891773094;
+            effJet_error = 0.00133409729602;
+            }
+        else if  (pt >= 110.0 && pt < 120.0) {
+            effJet = 0.0420165840129;
+            effJet_error = 0.00142397411398;
+            }
+        else if  (pt >= 120.0 && pt < 130.0) {
+            effJet = 0.0415645358421;
+            effJet_error = 0.00152879869478;
+            }
+        else if  (pt >= 130.0 && pt < 140.0) {
+            effJet = 0.0451868451647;
+            effJet_error = 0.00167488737671;
+            }
+        else if  (pt >= 140.0 && pt < 150.0) {
+            effJet = 0.0458222332152;
+            effJet_error = 0.00177782346688;
+            }
+        else if  (pt >= 150.0 && pt < 160.0) {
+            effJet = 0.0421099865023;
+            effJet_error = 0.00178961918337;
+            }
+        else if  (pt >= 160.0 && pt < 170.0) {
+            effJet = 0.0473719872237;
+            effJet_error = 0.00200317672907;
+            }
+        else if  (pt >= 170.0 && pt < 180.0) {
+            effJet = 0.0458257278083;
+            effJet_error = 0.00206622271506;
+            }
+        else if  (pt >= 180.0 && pt < 190.0) {
+            effJet = 0.0462253897699;
+            effJet_error = 0.00223055720655;
+            }
+        else if  (pt >= 190.0 && pt < 210.0) {
+            effJet = 0.0453924386433;
+            effJet_error = 0.00165934482798;
+            }
+        else if  (pt >= 210.0 && pt < 230.0) {
+            effJet = 0.045244410233;
+            effJet_error = 0.00186617326832;
+            }
+        else if  (pt >= 230.0 && pt < 250.0) {
+            effJet = 0.0435432982035;
+            effJet_error = 0.00203890628372;
+            }
+        else if  (pt >= 250.0 && pt < 290.0) {
+            effJet = 0.0362786551634;
+            effJet_error = 0.00150698253029;
+            }
+        else if  (pt >= 290.0 && pt < 340.0) {
+            effJet = 0.0371585963623;
+            effJet_error = 0.00176370038229;
+            }
+        else if  (pt >= 340.0) {
+            effJet = 0.0288923324758;
+            effJet_error = 0.00134161914058;
+            }
+	}
+	else if (njets ==7) {
+	    if  (pt < 40.0) {
+            effJet = 0.0261801034377;
+            effJet_error = 0.000591542337652;}
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0299439728027;
+            effJet_error = 0.000742849456823;}
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0344446190915;
+            effJet_error = 0.000910329511442;}
+        else if  (pt >= 60.0 && pt < 70.0) {
+            effJet = 0.0368750605115;
+            effJet_error = 0.00103608042925;}
+        else if  (pt >= 70.0 && pt < 80.0) {
+            effJet = 0.0393913655636;
+            effJet_error = 0.00117563909134;}
+        else if  (pt >= 80.0 && pt < 90.0) {
+            effJet = 0.0390568818437;
+            effJet_error = 0.00126810735904;}
+        else if  (pt >= 90.0 && pt < 100.0) {
+            effJet = 0.0437383747469;
+            effJet_error = 0.00145561220207;}
+        else if  (pt >= 100.0 && pt < 110.0) {
+            effJet = 0.0443782643219;
+            effJet_error = 0.00157541132303;}
+        else if  (pt >= 110.0 && pt < 120.0) {
+            effJet = 0.0449537249845;
+            effJet_error = 0.00167439032298;}
+        else if  (pt >= 120.0 && pt < 130.0) {
+            effJet = 0.0449266213571;
+            effJet_error = 0.00181013153744;}
+        else if  (pt >= 130.0 && pt < 140.0) {
+            effJet = 0.0431451972172;
+            effJet_error = 0.00190598142766;}
+        else if  (pt >= 140.0 && pt < 150.0) {
+            effJet = 0.0486002504717;
+            effJet_error = 0.00219997606109;}
+        else if  (pt >= 150.0 && pt < 170.0) {
+            effJet = 0.0480589546286;
+            effJet_error = 0.0016759120362;}
+        else if  (pt >= 170.0 && pt < 190.0) {
+            effJet = 0.050350473682;
+            effJet_error = 0.00193418853044;}
+        else if  (pt >= 190.0 && pt < 220.0) {
+            effJet = 0.0425803483778;
+            effJet_error = 0.00164240601353;}
+        else if  (pt >= 220.0 && pt < 260.0) {
+            effJet = 0.0433949783066;
+            effJet_error = 0.00179121017205;}
+        else if  (pt >= 260.0 && pt < 310.0) {
+            effJet = 0.0407295117791;
+            effJet_error = 0.0019766089901;}
+        else if  (pt >= 310.0) {
+            effJet = 0.0348145457058;
+            effJet_error = 0.0016041321604;}
+	}
+	else if (njets ==8) {
+        if  ( pt < 40.0) {
+            effJet = 0.027589788298;
+            effJet_error = 0.000694547432371;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0311259701822;
+            effJet_error = 0.000821917707461;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0345211397457;
+            effJet_error = 0.000993688598382;
+        }
+        else if  (pt >= 60.0 && pt < 70.0) {
+            effJet = 0.0380963060281;
+            effJet_error = 0.00114768930855;
+        }
+        else if  (pt >= 70.0 && pt < 80.0) {
+            effJet = 0.0396136443314;
+            effJet_error = 0.00137336731616;
+        }
+        else if  (pt >= 80.0 && pt < 90.0) {
+            effJet = 0.0400559007072;
+            effJet_error = 0.00141896226938;
+        }
+        else if  (pt >= 90.0 && pt < 100.0) {
+            effJet = 0.0415004834622;
+            effJet_error = 0.00150623348219;
+        }
+        else if  (pt >= 100.0 && pt < 110.0) {
+            effJet = 0.0424118455823;
+            effJet_error = 0.00172907132094;
+        }
+        else if  (pt >= 110.0 && pt < 120.0) {
+            effJet = 0.0459994957507;
+            effJet_error = 0.00201830120049;
+        }
+        else if  (pt >= 120.0 && pt < 140.0) {
+            effJet = 0.0491100067606;
+            effJet_error = 0.00170783383637;
+        }
+        else if  (pt >= 140.0 && pt < 160.0) {
+            effJet = 0.0473618239503;
+            effJet_error = 0.00179519787732;
+        }
+        else if  (pt >= 160.0 && pt < 180.0) {
+            effJet = 0.0468878365929;
+            effJet_error = 0.00211398422801;
+        }
+        else if  (pt >= 180.0 && pt < 210.0) {
+            effJet = 0.048764703058;
+            effJet_error = 0.00208082645569;
+        }
+        else if  (pt >= 210.0 && pt < 250.0) {
+            effJet = 0.0431174457652;
+            effJet_error = 0.00200774886319;
+        }
+        else if  (pt >= 250.0 && pt < 300.0) {
+            effJet = 0.0369787606939;
+            effJet_error = 0.00178650178191;
+        }
+        else if  (pt >= 300.0) {
+            effJet = 0.0334785731355;
+            effJet_error = 0.00163129148364;
+        }
+	}
+	else if (njets ==9) {
+        if  ( pt < 40.0) {
+            effJet = 0.0263934516914;
+            effJet_error = 0.000834255664126;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0321611096634;
+            effJet_error = 0.00106154709629;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0344441491129;
+            effJet_error = 0.00115226484631;
+        }
+        else if  (pt >= 60.0 && pt < 70.0) {
+            effJet = 0.0399058675124;
+            effJet_error = 0.00152159032889;
+        }
+        else if  (pt >= 70.0 && pt < 80.0) {
+            effJet = 0.0390847747708;
+            effJet_error = 0.00156342908488;
+        }
+        else if  (pt >= 80.0 && pt < 90.0) {
+            effJet = 0.0423611053353;
+            effJet_error = 0.00194063594931;
+        }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet = 0.0465140172217;
+            effJet_error = 0.0017206978437;
+        }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet = 0.046678160978;
+            effJet_error = 0.00192221130785;
+        }
+        else if  (pt >= 130.0 && pt < 150.0) {
+            effJet = 0.045867548242;
+            effJet_error = 0.00192371650071;
+        }
+        else if  (pt >= 150.0 && pt < 170.0) {
+            effJet = 0.0482073961282;
+            effJet_error = 0.00233608360164;
+        }
+        else if  (pt >= 170.0 && pt < 200.0) {
+            effJet = 0.0524137634222;
+            effJet_error = 0.00247922307376;
+        }
+        else if  (pt >= 200.0 && pt < 260.0) {
+            effJet = 0.0448208189513;
+            effJet_error = 0.00195416551079;
+        }
+        else if  (pt >= 260.0) {
+            effJet = 0.038524209277;
+            effJet_error = 0.00179208006962;
+        }
+	}
+	else if (njets ==10) {
+        if  ( pt < 40.0) {
+            effJet = 0.027119080827;
+            effJet_error = 0.00114841106106;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0316572383327;
+            effJet_error = 0.00139298026638;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0367356857808;
+            effJet_error = 0.00160015651479;
+        }
+        else if  (pt >= 60.0 && pt < 80.0) {
+            effJet = 0.0405514408029;
+            effJet_error = 0.00177666303056;
+        }
+        else if  (pt >= 80.0 && pt < 110.0) {
+            effJet = 0.0458334910064;
+            effJet_error = 0.0018736726274;
+        }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet = 0.0452604376054;
+            effJet_error = 0.00202036398084;
+        }
+        else if  (pt >= 130.0 && pt < 170.0) {
+            effJet = 0.0462061353054;
+            effJet_error = 0.0018804135359;
+        }
+        else if  (pt >= 170.0 && pt < 260.0) {
+            effJet = 0.0486364094843;
+            effJet_error = 0.0021864673604;
+        }
+        else if  (pt >= 260.0) {
+            effJet = 0.0424039440807;
+            effJet_error = 0.00203481302706;
+        }
+	}
+	else {
+	    effJet = 1.0;
+	    effJet_error = 0.0;
+	}
+
+	pair<double, double> effpair (effJet, effJet_error);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2018(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+	pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2016(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2017(double pt, int njets)
+{
+	if (njets == 5) {
+        if  ( pt < 40.0) {
+            effJet = 0.022100125935;
+            effJet_error = 0.00202950811707;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0283439554478;
+            effJet_error = 0.00252169026424;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet = 0.0345059302679;
+            effJet_error = 0.00237477828586;
+        }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet = 0.0366597615796;
+            effJet_error = 0.00268861375535;
+        }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet = 0.0401481675011;
+            effJet_error = 0.00312032161853;
+        }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet = 0.0444641885613;
+            effJet_error = 0.0037779497509;
+        }
+        else if  (pt >= 130.0 && pt < 150.0) {
+            effJet = 0.051999700785;
+            effJet_error = 0.00424825401933;
+        }
+        else if  (pt >= 150.0 && pt < 170.0) {
+            effJet = 0.0462796584012;
+            effJet_error = 0.00436715213855;
+        }
+        else if  (pt >= 170.0 && pt < 200.0) {
+            effJet = 0.0434648771625;
+            effJet_error = 0.00381052324769;
+        }
+        else if  (pt >= 200.0 && pt < 240.0) {
+            effJet = 0.0421009012062;
+            effJet_error = 0.00389513218187;
+        }
+        else if  (pt >= 240.0 && pt < 300.0) {
+            effJet = 0.0399142365276;
+            effJet_error = 0.00354738697365;
+        }
+        else if  (pt >= 300.0) {
+            effJet = 0.0342524829831;
+            effJet_error = 0.00330177738594;
+        }
+	}
+	else if (njets ==6) {
+        if  ( pt < 40.0) {
+            effJet = 0.0250288349094;
+            effJet_error = 0.0016731193274;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0320991653859;
+            effJet_error = 0.0022459067651;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet = 0.0329501619291;
+            effJet_error = 0.00189434230186;
+        }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet = 0.0421944013644;
+            effJet_error = 0.00256590571668;
+        }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet = 0.0438367775375;
+            effJet_error = 0.00300445068018;
+        }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet = 0.0470246734831;
+            effJet_error = 0.00344786757007;
+        }
+        else if  (pt >= 130.0 && pt < 190.0) {
+            effJet = 0.0490897712827;
+            effJet_error = 0.00367347424029;
+        }
+        else if  (pt >= 190.0 && pt < 250.0) {
+            effJet = 0.0462504304088;
+            effJet_error = 0.00329203905646;
+        }
+        else if  (pt >= 250.0) {
+            effJet = 0.0377069927797;
+            effJet_error = 0.00293733979612;
+        }
+	}
+	else if (njets ==7) {
+        if  ( pt < 40.0) {
+            effJet = 0.0280391725007;
+            effJet_error = 0.00191325832356;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0336238708532;
+            effJet_error = 0.00253570777536;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet = 0.0377811263696;
+            effJet_error = 0.00309920193134;
+        }
+        else if  (pt >= 60.0 && pt < 80.0) {
+            effJet = 0.0367760016004;
+            effJet_error = 0.00256455967454;
+        }
+        else if  (pt >= 80.0 && pt < 100.0) {
+            effJet = 0.0470039587882;
+            effJet_error = 0.00339871536718;
+        }
+        else if  (pt >= 100.0 && pt < 120.0) {
+            effJet = 0.0479115288488;
+            effJet_error = 0.0040162983037;
+        }
+        else if  (pt >= 120.0 && pt < 150.0) {
+            effJet = 0.0475175391297;
+            effJet_error = 0.00379952914017;
+        }
+        else if  (pt >= 150.0 && pt < 180.0) {
+            effJet = 0.0544982148154;
+            effJet_error = 0.00490443295334;
+        }
+        else if  (pt >= 180.0 && pt < 230.0) {
+            effJet = 0.0471135701755;
+            effJet_error = 0.00442801975219;
+        }
+        else if  (pt >= 230.0) {
+            effJet = 0.0405189400429;
+            effJet_error = 0.0038252848229;
+        }
+	}
+	else if (njets ==8) {
+        if  ( pt < 50.0) {
+            effJet = 0.0292882859019;
+            effJet_error = 0.00205239569099;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet = 0.0358035298334;
+            effJet_error = 0.00314324727158;
+        }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet = 0.0464403141494;
+            effJet_error = 0.00444532996088;
+        }
+        else if  (pt >= 90.0 && pt < 120.0) {
+            effJet = 0.0608072052218;
+            effJet_error = 0.00509767514111;
+        }
+        else if  (pt >= 120.0 && pt < 190.0) {
+            effJet = 0.0412699137067;
+            effJet_error = 0.00396831195396;
+        }
+        else if  (pt >= 190.0) {
+            effJet = 0.0518322547322;
+            effJet_error = 0.00491509861933;
+        }
+	}
+	else if (njets ==9) {
+        if  ( pt < 40.0) {
+            effJet = 0.0294471894369;
+            effJet_error = 0.00411759408845;
+        }
+        else if  (pt >= 40.0 && pt < 70.0) {
+            effJet = 0.0320825324464;
+            effJet_error = 0.00363669418263;
+        }
+        else if  (pt >= 70.0 && pt < 100.0) {
+            effJet = 0.0511683662694;
+            effJet_error = 0.00668200259406;
+        }
+        else if  (pt >= 100.0 && pt < 160.0) {
+            effJet = 0.0458400175763;
+            effJet_error = 0.00638453677811;
+        }
+        else if  (pt >= 160.0) {
+            effJet = 0.0473431702771;
+            effJet_error = 0.00678365840734;
+        }
+	}
+	else if (njets ==10) {
+        if  ( pt < 40.0) {
+            effJet = 0.0325174812154;
+            effJet_error = 0.00738830163772;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet = 0.0409118286591;
+            effJet_error = 0.0103666387526;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet = 0.0446577891165;
+            effJet_error = 0.00988667933087;
+        }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet = 0.0499497359675;
+            effJet_error = 0.0135841538942;
+        }
+        else if  (pt >= 90.0 && pt < 120.0) {
+            effJet = 0.046757115364;
+            effJet_error = 0.0134641377023;
+        }
+        else if  (pt >= 120.0 && pt < 170.0) {
+            effJet = 0.0503051010136;
+            effJet_error = 0.0131935472627;
+        }
+        else if  (pt >= 170.0) {
+            effJet = 0.0496264037853;
+            effJet_error = 0.0134469616611;
+        }
+	}
+
+    pair<double, double> effpair (effJet, effJet_error);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2018(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+
+
+// --------------------------------------------------------------------------------------------------------------------
+pair<double,double> HardcodedConditions::GetTRFveta2pb(double eta, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFveta2pb2016(eta, njets);
+    else if (year==2017) return GetMcTRFveta2pb2017(eta, njets);
+    else if (year==2018) return GetMcTRFveta2pb2018(eta, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFveta2pb2016(eta, njets);
+    else if (year==2017) return GetDataTRFveta2pb2017(eta, njets);
+    else if (year==2018) return GetDataTRFveta2pb2018(eta, njets);
+    else {
+      pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta2pb2016(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta2pb2017(double eta, int njets)
+{
+	if (njets == 5) {
+        if  (eta < -1.92) {
+            effJeteta = 0.0307382097711;
+            effJeteta_error = 0.00114820383958;
+            }
+        else if  (eta >= -1.92 && eta < -1.68) {
+            effJeteta = 0.0374326321578;
+            effJeteta_error = 0.00153487648942;
+            }
+        else if  (eta >= -1.68 && eta < -1.44) {
+            effJeteta = 0.0392070472943;
+            effJeteta_error = 0.00139012513572;
+            }
+        else if  (eta >= -1.44 && eta < -1.32) {
+            effJeteta = 0.038360286837;
+            effJeteta_error = 0.00183756126625;
+            }
+        else if  (eta >= -1.32 && eta < -1.2) {
+            effJeteta = 0.0375794819519 ;
+            effJeteta_error = 0.00181471639958;
+            }
+        else if  (eta >= -1.2 && eta < -1.08) {
+            effJeteta = 0.0353237696026 ;
+            effJeteta_error = 0.00164620398282;
+            }
+        else if  (eta >= -1.08 && eta < -0.96) {
+            effJeteta = 0.0363659958803 ;
+            effJeteta_error = 0.00165248028934;
+            }
+        else if  (eta >= -0.96 && eta < -0.84) {
+            effJeteta = 0.0368736086456 ;
+            effJeteta_error = 0.00162261489037;
+            }
+        else if  (eta >= -0.84 && eta < -0.72) {
+            effJeteta = 0.0351343646855 ;
+            effJeteta_error = 0.00157083303758;
+            }
+        else if  (eta >= -0.72 && eta < -0.6) {
+            effJeteta = 0.0380682136948 ;
+            effJeteta_error = 0.00158898495392;
+            }
+        else if  (eta >= -0.6 && eta < -0.48) {
+            effJeteta = 0.0378636641859 ;
+            effJeteta_error = 0.00158119028859;
+            }
+        else if  (eta >= -0.48 && eta < -0.36) {
+            effJeteta = 0.0339118735219 ;
+            effJeteta_error = 0.00144788203415;
+            }
+        else if  (eta >= -0.36 && eta < -0.24) {
+            effJeteta = 0.0364974429719 ;
+            effJeteta_error = 0.00149206711399;
+            }
+        else if  (eta >= -0.24 && eta < -0.12) {
+            effJeteta = 0.0312449367511 ;
+            effJeteta_error = 0.00135887312396;
+            }
+        else if  (eta >= -0.12 && eta < 0.0) {
+            effJeteta = 0.0351548085936 ;
+            effJeteta_error = 0.00144892220732;
+            }
+        else if  (eta >= 0.0 && eta < 0.12) {
+            effJeteta = 0.035428770884 ;
+            effJeteta_error = 0.00145358470077;
+            }
+        else if  (eta >= 0.12 && eta < 0.24) {
+            effJeteta = 0.036039219737 ;
+            effJeteta_error = 0.00148577565313;
+            }
+        else if  (eta >= 0.24 && eta < 0.36) {
+            effJeteta = 0.0369089714992 ;
+            effJeteta_error = 0.00151145849268;
+            }
+        else if  (eta >= 0.36 && eta < 0.48) {
+            effJeteta = 0.0371124865756 ;
+            effJeteta_error = 0.00153065834163;
+            }
+        else if  (eta >= 0.48 && eta < 0.6) {
+            effJeteta = 0.0361085467666 ;
+            effJeteta_error = 0.00151394244072;
+            }
+        else if  (eta >= 0.6 && eta < 0.72) {
+            effJeteta = 0.0368808510232 ;
+            effJeteta_error = 0.00154075304922;
+            }
+        else if  (eta >= 0.72 && eta < 0.84) {
+            effJeteta = 0.03718214628 ;
+            effJeteta_error = 0.00159050191296;
+            }
+        else if  (eta >= 0.84 && eta < 0.96) {
+            effJeteta = 0.0379886700494 ;
+            effJeteta_error = 0.00163962591561;
+            }
+        else if  (eta >= 0.96 && eta < 1.08) {
+            effJeteta = 0.0399625123789;
+            effJeteta_error = 0.00171794321938;
+            }
+        else if  (eta >= 1.08 && eta < 1.2) {
+            effJeteta = 0.0376755571062;
+            effJeteta_error = 0.00170486855584;
+            }
+        else if  (eta >= 1.2 && eta < 1.32) {
+            effJeteta = 0.038637418251 ;
+            effJeteta_error = 0.00178810834731;
+            }
+        else if  (eta >= 1.32 && eta < 1.56) {
+            effJeteta = 0.0375493165124;
+            effJeteta_error = 0.00128877305779;
+            }
+        else if  (eta >= 1.56 && eta < 1.8) {
+            effJeteta = 0.0353259735324;
+            effJeteta_error = 0.00137958036238;
+            }
+        else if  (eta >= 1.8 && eta < 2.04) {
+            effJeteta = 0.0337824973797;
+            effJeteta_error = 0.00153393710512;
+            }
+        else if (eta  >= 2.04) {
+            effJeteta = 0.0302144874062 ;
+            effJeteta_error = 0.00135186297111;
+            }
+	}
+	else if (njets ==6) {
+        if  (eta < -1.92) {
+            effJeteta = 0.0300761661833;
+            effJeteta_error = 0.000998829078314;
+            }
+        else if  (eta >= -1.92 && eta < -1.68) {
+            effJeteta = 0.0358881547211 ;
+            effJeteta_error = 0.00135791722309;
+            }
+        else if  (eta >= -1.68 && eta < -1.56) {
+            effJeteta = 0.0407156441625 ;
+            effJeteta_error = 0.00190137850795;
+            }
+        else if  (eta >= -1.56 && eta < -1.44) {
+            effJeteta = 0.0369726910716;
+            effJeteta_error = 0.00166302152953;
+            }
+        else if  (eta >= -1.44 && eta < -1.32) {
+            effJeteta = 0.0358898686188 ;
+            effJeteta_error = 0.00162597559316;
+            }
+        else if  (eta >= -1.32 && eta < -1.2) {
+            effJeteta = 0.0364564842226 ;
+            effJeteta_error = 0.00162443307035;
+            }
+        else if  (eta >= -1.2 && eta < -1.08) {
+            effJeteta = 0.0379293917702 ;
+            effJeteta_error = 0.00161409154993;
+            }
+        else if  (eta >= -1.08 && eta < -0.96) {
+            effJeteta = 0.0382957140505 ;
+            effJeteta_error = 0.00156780656147;
+            }
+        else if  (eta >= -0.96 && eta < -0.84) {
+            effJeteta = 0.0382027052301 ;
+            effJeteta_error = 0.0015299093501;
+            }
+        else if  (eta >= -0.84 && eta < -0.72) {
+            effJeteta = 0.0368687778064 ;
+            effJeteta_error = 0.0014820566888;
+            }
+        else if  (eta >= -0.72 && eta < -0.6) {
+            effJeteta = 0.0354609887907 ;
+            effJeteta_error = 0.00142688398;
+            }
+        else if  (eta >= -0.6 && eta < -0.48) {
+            effJeteta = 0.0384873106352 ;
+            effJeteta_error = 0.00146533218604;
+            }
+        else if  (eta >= -0.48 && eta < -0.36) {
+            effJeteta = 0.0351672584318 ;
+            effJeteta_error = 0.00139574217498;
+            }
+        else if  (eta >= -0.36 && eta < -0.24) {
+            effJeteta = 0.0348425497427 ;
+            effJeteta_error = 0.00137666989884;
+            }
+        else if  (eta >= -0.24 && eta < -0.12) {
+            effJeteta = 0.0322060816691 ;
+            effJeteta_error = 0.00131357822538;
+            }
+        else if  (eta >= -0.12 && eta < 0.0) {
+            effJeteta = 0.0336830345644 ;
+            effJeteta_error = 0.001320635473;
+            }
+        else if  (eta >= 0.0 && eta < 0.12) {
+            effJeteta = 0.0330649260561 ;
+            effJeteta_error = 0.00131312337413;
+            }
+        else if  (eta >= 0.12 && eta < 0.24) {
+            effJeteta = 0.0340828019959 ;
+            effJeteta_error = 0.00133970614423;
+            }
+        else if  (eta >= 0.24 && eta < 0.36) {
+            effJeteta = 0.0371063334839 ;
+            effJeteta_error = 0.00142900173617;
+            }
+        else if  (eta >= 0.36 && eta < 0.48) {
+            effJeteta = 0.0386700387476 ;
+            effJeteta_error = 0.00146894913601;
+            }
+        else if  (eta >= 0.48 && eta < 0.6) {
+            effJeteta = 0.0365918374914 ;
+            effJeteta_error = 0.00144597486792;
+            }
+        else if  (eta >= 0.6 && eta < 0.72) {
+            effJeteta = 0.0391778428033 ;
+            effJeteta_error = 0.00149885338245;
+            }
+        else if  (eta >= 0.72 && eta < 0.84) {
+            effJeteta = 0.0391967410508 ;
+            effJeteta_error = 0.00151222741126;
+            }
+        else if  (eta >= 0.84 && eta < 0.96) {
+            effJeteta = 0.03898184727 ;
+            effJeteta_error = 0.00157259775328;
+            }
+        else if  (eta >= 0.96 && eta < 1.08) {
+            effJeteta = 0.0367457362082 ;
+            effJeteta_error = 0.00154353497082;
+            }
+        else if  (eta >= 1.08 && eta < 1.2) {
+            effJeteta = 0.035302570955 ;
+            effJeteta_error = 0.00153265161462;
+            }
+        else if  (eta >= 1.2 && eta < 1.32) {
+            effJeteta = 0.0378680582239 ;
+            effJeteta_error = 0.00165239018956;
+            }
+        else if  (eta >= 1.32 && eta < 1.44) {
+            effJeteta = 0.0355128422904 ;
+            effJeteta_error = 0.00162283267664;
+            }
+        else if  (eta >= 1.44 && eta < 1.56) {
+            effJeteta = 0.0385910189186;
+            effJeteta_error = 0.00171289149176;
+            }
+        else if  (eta >= 1.56 && eta < 1.8) {
+            effJeteta = 0.0363528703005 ;
+            effJeteta_error = 0.00129438161207;
+            }
+        else if  (eta >= 1.8 && eta < 2.04) {
+            effJeteta = 0.0329215080683;
+            effJeteta_error = 0.00135627950435;
+            }
+        else if (eta  >= 2.04) {
+            effJeteta = 0.0287599064254 ;
+            effJeteta_error = 0.00116178871555;
+            }
+	}
+	else if (njets ==7) {
+        if  ( eta < -1.92) {
+            effJeteta = 0.0325849612454;
+            effJeteta_error = 0.00115722429906;
+        }
+        else if  (eta >= -1.92 && eta < -1.68) {
+            effJeteta = 0.0349995098584;
+            effJeteta_error = 0.00145562184374;
+        }
+        else if  (eta >= -1.68 && eta < -1.44) {
+            effJeteta = 0.0380940768909;
+            effJeteta_error = 0.0013896149555;
+        }
+        else if  (eta >= -1.44 && eta < -1.2) {
+            effJeteta = 0.0359148455557;
+            effJeteta_error = 0.00126987367526;
+        }
+        else if  (eta >= -1.2 && eta < -1.08) {
+            effJeteta = 0.0375233715009;
+            effJeteta_error = 0.0017945614374;
+        }
+        else if  (eta >= -1.08 && eta < -0.96) {
+            effJeteta = 0.0353013640013;
+            effJeteta_error = 0.0016969780311;
+        }
+        else if  (eta >= -0.96 && eta < -0.84) {
+            effJeteta = 0.0354943060054;
+            effJeteta_error = 0.00164034820639;
+        }
+        else if  (eta >= -0.84 && eta < -0.72) {
+            effJeteta = 0.0396301420051;
+            effJeteta_error = 0.00175063795341;
+        }
+        else if  (eta >= -0.72 && eta < -0.6) {
+            effJeteta = 0.0383400731286;
+            effJeteta_error = 0.00167160128006;
+        }
+        else if  (eta >= -0.6 && eta < -0.48) {
+            effJeteta = 0.0377271118258;
+            effJeteta_error = 0.0016619122286;
+        }
+        else if  (eta >= -0.48 && eta < -0.36) {
+            effJeteta = 0.0363386983293;
+            effJeteta_error = 0.00158708302718;
+        }
+        else if  (eta >= -0.36 && eta < -0.24) {
+            effJeteta = 0.0352046553881;
+            effJeteta_error = 0.00156349057724;
+        }
+        else if  (eta >= -0.24 && eta < -0.12) {
+            effJeteta = 0.0352695019785;
+            effJeteta_error = 0.00154319209769;
+        }
+        else if  (eta >= -0.12 && eta < 0.0) {
+            effJeteta = 0.0369992129915;
+            effJeteta_error = 0.00161130813466;
+        }
+        else if  (eta >= 0.0 && eta < 0.12) {
+            effJeteta = 0.0391178194972;
+            effJeteta_error = 0.00166747790626;
+        }
+        else if  (eta >= 0.12 && eta < 0.24) {
+            effJeteta = 0.0350685746692;
+            effJeteta_error = 0.00156605926922;
+        }
+        else if  (eta >= 0.24 && eta < 0.36) {
+            effJeteta = 0.0377932080841;
+            effJeteta_error = 0.00162308814003;
+        }
+        else if  (eta >= 0.36 && eta < 0.48) {
+            effJeteta = 0.0380869397841;
+            effJeteta_error = 0.00164807196747;
+        }
+        else if  (eta >= 0.48 && eta < 0.6) {
+            effJeteta = 0.0380247047999;
+            effJeteta_error = 0.00166338535791;
+        }
+        else if  (eta >= 0.6 && eta < 0.72) {
+            effJeteta = 0.0397580025541;
+            effJeteta_error = 0.00169895762899;
+        }
+        else if  (eta >= 0.72 && eta < 0.84) {
+            effJeteta = 0.0410768036;
+            effJeteta_error = 0.00175713724855;
+        }
+        else if  (eta >= 0.84 && eta < 0.96) {
+            effJeteta = 0.0388973175172;
+            effJeteta_error = 0.00173686990401;
+        }
+        else if  (eta >= 0.96 && eta < 1.08) {
+            effJeteta = 0.0386192520625;
+            effJeteta_error = 0.00176832096335;
+        }
+        else if  (eta >= 1.08 && eta < 1.2) {
+            effJeteta = 0.0402215382056;
+            effJeteta_error = 0.00184551884148;
+        }
+        else if  (eta >= 1.2 && eta < 1.32) {
+            effJeteta = 0.0386836924274;
+            effJeteta_error = 0.00184484788953;
+        }
+        else if  (eta >= 1.32 && eta < 1.56) {
+            effJeteta = 0.0377946187063;
+            effJeteta_error = 0.00132593024707;
+        }
+        else if  (eta >= 1.56 && eta < 1.8) {
+            effJeteta = 0.0400163534808;
+            effJeteta_error = 0.00150401759621;
+        }
+        else if  (eta >= 1.8 && eta < 2.04) {
+            effJeteta = 0.0373607434267;
+            effJeteta_error = 0.00157183094939;
+        }
+        else if (eta  >= 2.04) {
+            effJeteta = 0.029394730563;
+            effJeteta_error = 0.00127085614367;
+        }
+	}
+	else if (njets ==8) {
+        if  ( eta < -1.8) {
+            effJeteta = 0.0315612221309;
+            effJeteta_error = 0.0010988295504;
+        }
+        else if  (eta >= -1.8 && eta < -1.44) {
+            effJeteta = 0.0378793478892;
+            effJeteta_error = 0.00132787225406;
+        }
+        else if  (eta >= -1.44 && eta < -1.2) {
+            effJeteta = 0.0384572139672;
+            effJeteta_error = 0.00148931276119;
+        }
+        else if  (eta >= -1.2 && eta < -0.96) {
+            effJeteta = 0.038963225308;
+            effJeteta_error = 0.00145151139543;
+        }
+        else if  (eta >= -0.96 && eta < -0.72) {
+            effJeteta = 0.0351498769907;
+            effJeteta_error = 0.00128217856129;
+        }
+        else if  (eta >= -0.72 && eta < -0.48) {
+            effJeteta = 0.0368426071745;
+            effJeteta_error = 0.00125237225287;
+        }
+        else if  (eta >= -0.48 && eta < -0.24) {
+            effJeteta = 0.0390685775562;
+            effJeteta_error = 0.00133975181018;
+        }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta = 0.0365417930034;
+            effJeteta_error = 0.00127752642201;
+        }
+        else if  (eta >= 0.0 && eta < 0.24) {
+            effJeteta = 0.0351599897946;
+            effJeteta_error = 0.00120368562903;
+        }
+        else if  (eta >= 0.24 && eta < 0.48) {
+            effJeteta = 0.0400342144164;
+            effJeteta_error = 0.00140020550715;
+        }
+        else if  (eta >= 0.48 && eta < 0.72) {
+            effJeteta = 0.037428547071;
+            effJeteta_error = 0.0012711928697;
+        }
+        else if  (eta >= 0.72 && eta < 0.96) {
+            effJeteta = 0.0386573454916;
+            effJeteta_error = 0.00139805712279;
+        }
+        else if  (eta >= 0.96 && eta < 1.2) {
+            effJeteta = 0.0383655054305;
+            effJeteta_error = 0.00141613173592;
+        }
+        else if  (eta >= 1.2 && eta < 1.44) {
+            effJeteta = 0.038770049306;
+            effJeteta_error = 0.00149693679308;
+        }
+        else if  (eta >= 1.44 && eta < 1.8) {
+            effJeteta = 0.0372863552378;
+            effJeteta_error = 0.00128554844545;
+        }
+        else if (eta  >= 1.8) {
+            effJeteta = 0.0340092628433;
+            effJeteta_error = 0.00119940225265;
+        }
+	}
+	else if (njets ==9) {
+       if  ( eta < -1.8) {
+            effJeteta = 0.0346518892115;
+            effJeteta_error = 0.00148644110873;
+        }
+        else if  (eta >= -1.8 && eta < -1.44) {
+            effJeteta = 0.0380739188525;
+            effJeteta_error = 0.0015757074583;
+        }
+        else if  (eta >= -1.44 && eta < -1.2) {
+            effJeteta = 0.0354914655016;
+            effJeteta_error = 0.00172235586551;
+        }
+        else if  (eta >= -1.2 && eta < -0.96) {
+            effJeteta = 0.0390399576056;
+            effJeteta_error = 0.00181101639489;
+        }
+        else if  (eta >= -0.96 && eta < -0.72) {
+            effJeteta = 0.0364643751458;
+            effJeteta_error = 0.00149190384231;
+        }
+        else if  (eta >= -0.72 && eta < -0.48) {
+            effJeteta = 0.0388771988949;
+            effJeteta_error = 0.00161339297471;
+        }
+        else if  (eta >= -0.48 && eta < -0.24) {
+            effJeteta = 0.0383752522963;
+            effJeteta_error = 0.00183008241423;
+        }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta = 0.0361936999699;
+            effJeteta_error = 0.00157519304004;
+        }
+        else if  (eta >= 0.0 && eta < 0.24) {
+            effJeteta = 0.0370890088064;
+            effJeteta_error = 0.00158423335691;
+        }
+        else if  (eta >= 0.24 && eta < 0.48) {
+            effJeteta = 0.0383177005311;
+            effJeteta_error = 0.00162007414041;
+        }
+        else if  (eta >= 0.48 && eta < 0.72) {
+            effJeteta = 0.0387581786289;
+            effJeteta_error = 0.00156555771905;
+        }
+        else if  (eta >= 0.72 && eta < 0.96) {
+            effJeteta = 0.0374238189864;
+            effJeteta_error = 0.0016949787124;
+        }
+        else if  (eta >= 0.96 && eta < 1.2) {
+            effJeteta = 0.0415179756753;
+            effJeteta_error = 0.00192159842989;
+        }
+        else if  (eta >= 1.2 && eta < 1.44) {
+            effJeteta = 0.0391770422861;
+            effJeteta_error = 0.00185350085824;
+        }
+        else if  (eta >= 1.44 && eta < 1.8) {
+            effJeteta = 0.0366147281896;
+            effJeteta_error = 0.00150680894587;
+        }
+        else if (eta  >= 1.8) {
+            effJeteta = 0.0353314395334;
+            effJeteta_error = 0.0015990871657;
+        }
+	}
+	else if (njets ==10) {
+        if  ( eta < -1.08) {
+            effJeteta = 0.0360612156111;
+            effJeteta_error = 0.0011964126676;
+        }
+        else if  (eta >= -1.08 && eta < -0.6) {
+            effJeteta = 0.0394537651886;
+            effJeteta_error = 0.00159618186464;
+        }
+        else if  (eta >= -0.6 && eta < -0.12) {
+            effJeteta = 0.0383137611734;
+            effJeteta_error = 0.00163538415238;
+        }
+        else if  (eta >= -0.12 && eta < 0.36) {
+            effJeteta = 0.0389419075471;
+            effJeteta_error = 0.00172318927056;
+        }
+        else if  (eta >= 0.36 && eta < 0.84) {
+            effJeteta = 0.0402237145239;
+            effJeteta_error = 0.00173252858497;
+        }
+        else if  (eta >= 0.84 && eta < 1.2) {
+            effJeteta = 0.0378120405327;
+            effJeteta_error = 0.00174197475216;
+        }
+        else if  (eta >= 1.2 && eta < 1.68) {
+            effJeteta = 0.0415272316623;
+            effJeteta_error = 0.00181174202083;
+        }
+        else if (eta  >= 1.68) {
+            effJeteta = 0.0334189251008;
+            effJeteta_error = 0.00153541699634;
+        }
+	}
+	else {
+	    effJeteta = 1.0;
+	    effJeteta_error = 0.0;
+	}
+
+    pair<double, double> effpair (effJeteta, effJeteta_error);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta2pb2018(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta2pb2016(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta2pb2017(double eta, int njets)
+{
+	if (njets == 5) {
+        if  ( eta < -1.56) {
+            effJeteta = 0.0302365111897;
+            effJeteta_error = 0.00259683207254;
+        }
+        else if  (eta >= -1.56 && eta < -1.2) {
+            effJeteta = 0.0317492546059;
+            effJeteta_error = 0.00305910882592;
+        }
+        else if  (eta >= -1.2 && eta < -0.96) {
+            effJeteta = 0.0391972727612;
+            effJeteta_error = 0.00376617315657;
+        }
+        else if  (eta >= -0.96 && eta < -0.72) {
+            effJeteta = 0.0436894572522;
+            effJeteta_error = 0.00389228699777;
+        }
+        else if  (eta >= -0.72 && eta < -0.48) {
+            effJeteta = 0.0379764842481;
+            effJeteta_error = 0.00352077967505;
+        }
+        else if  (eta >= -0.48 && eta < -0.24) {
+            effJeteta = 0.0320682358785;
+            effJeteta_error = 0.00315676355985;
+        }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta = 0.0338782822747;
+            effJeteta_error = 0.00317822393246;
+        }
+        else if  (eta >= 0.0 && eta < 0.36) {
+            effJeteta = 0.0305046206638;
+            effJeteta_error = 0.00270144201082;
+        }
+        else if  (eta >= 0.36 && eta < 0.6) {
+            effJeteta = 0.042957838834;
+            effJeteta_error = 0.00368510912068;
+        }
+        else if  (eta >= 0.6 && eta < 0.84) {
+            effJeteta = 0.0452808680806;
+            effJeteta_error = 0.00376120375706;
+        }
+        else if  (eta >= 0.84 && eta < 1.08) {
+            effJeteta = 0.0415301353151;
+            effJeteta_error = 0.00384310591028;
+        }
+        else if  (eta >= 1.08 && eta < 1.44) {
+            effJeteta = 0.0403050727195;
+            effJeteta_error = 0.00327658354765;
+        }
+        else if  (eta >= 1.44 && eta < 1.8) {
+            effJeteta = 0.0367533903074;
+            effJeteta_error = 0.00346791325282;
+        }
+        else if (eta  >= 1.8) {
+            effJeteta = 0.0385173296434;
+            effJeteta_error = 0.00367980078378;
+        }
+	}
+	else if (njets ==6) {
+        if  ( eta < -1.8) {
+            effJeteta = 0.0317523839331;
+            effJeteta_error = 0.0028207277987;
+        }
+        else if  (eta >= -1.8 && eta < -1.44) {
+            effJeteta = 0.037573598417;
+            effJeteta_error = 0.00322920752553;
+        }
+        else if  (eta >= -1.44 && eta < -1.2) {
+            effJeteta = 0.0425329606943;
+            effJeteta_error = 0.00376477143151;
+        }
+        else if  (eta >= -1.2 && eta < -0.96) {
+            effJeteta = 0.0434610412915;
+            effJeteta_error = 0.00374755465966;
+        }
+        else if  (eta >= -0.96 && eta < -0.72) {
+            effJeteta = 0.0369122547353;
+            effJeteta_error = 0.00333404165688;
+        }
+        else if  (eta >= -0.72 && eta < -0.48) {
+            effJeteta = 0.0399685366262;
+            effJeteta_error = 0.00329589880301;
+        }
+        else if  (eta >= -0.48 && eta < -0.24) {
+            effJeteta = 0.0350516381717;
+            effJeteta_error = 0.00299255947391;
+        }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta = 0.0444111321634;
+            effJeteta_error = 0.0033235789393;
+        }
+        else if  (eta >= 0.0 && eta < 0.24) {
+            effJeteta = 0.0417165486332;
+            effJeteta_error = 0.00329575744902;
+        }
+        else if  (eta >= 0.24 && eta < 0.48) {
+            effJeteta = 0.0394401281022;
+            effJeteta_error = 0.00328760074271;
+        }
+        else if  (eta >= 0.48 && eta < 0.72) {
+            effJeteta = 0.0443711435168;
+            effJeteta_error = 0.00348775261418;
+        }
+        else if  (eta >= 0.72 && eta < 1.32) {
+            effJeteta = 0.0349343651389;
+            effJeteta_error = 0.00329513908817;
+        }
+        else if  (eta >= 1.32 && eta < 1.68) {
+            effJeteta = 0.0389852444351;
+            effJeteta_error = 0.00313927199081;
+        }
+        else if (eta  >= 1.68) {
+            effJeteta = 0.030669475701;
+            effJeteta_error = 0.0025306003061;
+        }
+	}
+	else if (njets ==7) {
+        if  ( eta < -1.56) {
+            effJeteta = 0.0342747240348;
+            effJeteta_error = 0.00267316092182;
+        }
+        else if  (eta >= -1.56 && eta < -1.2) {
+            effJeteta = 0.0373778311253;
+            effJeteta_error = 0.00352482246385;
+        }
+        else if  (eta >= -1.2 && eta < -0.84) {
+            effJeteta = 0.0371800538599;
+            effJeteta_error = 0.00330947530902;
+        }
+        else if  (eta >= -0.84 && eta < -0.48) {
+            effJeteta = 0.0397478269471;
+            effJeteta_error = 0.00334530952143;
+        }
+        else if  (eta >= -0.48 && eta < -0.12) {
+            effJeteta = 0.0405864962402;
+            effJeteta_error = 0.00318283736655;
+        }
+        else if  (eta >= -0.12 && eta < 0.12) {
+            effJeteta = 0.0424770197874;
+            effJeteta_error = 0.00396584403597;
+        }
+        else if  (eta >= 0.12 && eta < 0.36) {
+            effJeteta = 0.0446506346678;
+            effJeteta_error = 0.00404275663147;
+        }
+        else if  (eta >= 0.36 && eta < 0.6) {
+            effJeteta = 0.0453584667324;
+            effJeteta_error = 0.00418235937878;
+        }
+        else if  (eta >= 0.6 && eta < 0.84) {
+            effJeteta = 0.0403717556217;
+            effJeteta_error = 0.00392034113853;
+        }
+        else if  (eta >= 0.84 && eta < 1.2) {
+            effJeteta = 0.0422942214897;
+            effJeteta_error = 0.0035633480379;
+        }
+        else if  (eta >= 1.2 && eta < 1.68) {
+            effJeteta = 0.0384679783676;
+            effJeteta_error = 0.00315107834057;
+        }
+        else if (eta  >= 1.68) {
+            effJeteta = 0.0342221410001;
+            effJeteta_error = 0.00299566255934;
+        }
+	}
+	else if (njets ==8) {
+        if  ( eta < -1.08) {
+            effJeteta = 0.0302711128464;
+            effJeteta_error = 0.00264460515351;
+        }
+        else if  (eta >= -1.08 && eta < -0.6) {
+            effJeteta = 0.0461664036714;
+            effJeteta_error = 0.00448943024719;
+        }
+        else if  (eta >= -0.6 && eta < -0.12) {
+            effJeteta = 0.0425528996269;
+            effJeteta_error = 0.00403009383992;
+        }
+        else if  (eta >= -0.12 && eta < 0.36) {
+            effJeteta = 0.0437617782726;
+            effJeteta_error = 0.00394700112025;
+        }
+        else if  (eta >= 0.36 && eta < 0.84) {
+            effJeteta = 0.0423107547235;
+            effJeteta_error = 0.00401529713975;
+        }
+        else if  (eta >= 0.84 && eta < 1.44) {
+            effJeteta = 0.0390244302566;
+            effJeteta_error = 0.0037946531093;
+        }
+        else if (eta  >= 1.44) {
+            effJeteta = 0.0411893724569;
+            effJeteta_error = 0.00379884657402;
+        }
+	}
+	else if (njets ==9) {
+        if  ( eta < -0.72) {
+            effJeteta = 0.0354012284098;
+            effJeteta_error = 0.00397542390412;
+        }
+        else if  (eta >= -0.72 && eta < -0.12) {
+            effJeteta = 0.0428977594134;
+            effJeteta_error = 0.00584795212889;
+        }
+        else if  (eta >= -0.12 && eta < 0.48) {
+            effJeteta = 0.0412879929115;
+            effJeteta_error = 0.00574178003052;
+        }
+        else if  (eta >= 0.48 && eta < 1.32) {
+            effJeteta = 0.0364730873075;
+            effJeteta_error = 0.00488881605963;
+        }
+        else if (eta  >= 1.32) {
+            effJeteta = 0.0382127382977;
+            effJeteta_error = 0.00554201399302;
+        }
+	}
+	else if (njets ==10) {
+        if  ( eta < -1.32) {
+            effJeteta = 0.0304431422672;
+            effJeteta_error = 0.00830361741171;
+        }
+        else if  (eta >= -1.32 && eta < -0.96) {
+            effJeteta = 0.0733990085202;
+            effJeteta_error = 0.018534466715;
+        }
+        else if  (eta >= -0.96 && eta < -0.36) {
+            effJeteta = 0.0331809961749;
+            effJeteta_error = 0.00925991219082;
+        }
+        else if  (eta >= -0.36 && eta < 0.12) {
+            effJeteta = 0.0446700614171;
+            effJeteta_error = 0.0116783588001;
+        }
+        else if  (eta >= 0.12 && eta < 0.6) {
+            effJeteta = 0.0494904560843;
+            effJeteta_error = 0.0125857835406;
+        }
+        else if  (eta >= 0.6 && eta < 0.84) {
+            effJeteta = 0.0687292547398;
+            effJeteta_error = 0.0195105251302;
+        }
+        else if  (eta >= 0.84 && eta < 1.56) {
+            effJeteta = 0.0319363756591;
+            effJeteta_error = 0.00938988511031;
+        }
+        else if (eta  >= 1.56) {
+            effJeteta = 0.04404462307;
+            effJeteta_error = 0.0122167996413;
+        }
+	}
+	else {
+	    effJeteta = 1.0;
+	    effJeteta_error = 0.0;
+	}
+
+    pair<double, double> effpair (effJeteta, effJeteta_error);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta2pb2018(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+
+
+// --------------------------------------------------------------------------------------------------------------------
+pair<double,double> HardcodedConditions::GetTRFvmdr2pb(double mdr, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFvmdr2pb2016(mdr, njets);
+    else if (year==2017) return GetMcTRFvmdr2pb2017(mdr, njets);
+    else if (year==2018) return GetMcTRFvmdr2pb2018(mdr, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFvmdr2pb2016(mdr, njets);
+    else if (year==2017) return GetDataTRFvmdr2pb2017(mdr, njets);
+    else if (year==2018) return GetDataTRFvmdr2pb2018(mdr, njets);
+    else {
+      pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2016(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2017(double mdr, int njets)
+{
+	if (njets == 5) {
+        if  (mdr < 0.588235294118) {
+            effJetDr = 0.0346283073319 ;
+            effJetDr_error = 0.00108779000216 ;
+            }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr = 0.0355076389924;
+            effJetDr_error = 0.00119169861462 ;
+            }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr = 0.0356544630471 ;
+            effJetDr_error = 0.00117937086531 ;
+            }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr = 0.0351591590162 ;
+            effJetDr_error = 0.00118986290534;
+            }
+        else if  (mdr >= 0.882352941176 && mdr < 0.980392156863) {
+            effJetDr = 0.03614732701 ;
+            effJetDr_error = 0.00120185164592;
+            }
+        else if  (mdr >= 0.980392156863 && mdr < 1.07843137255) {
+            effJetDr = 0.0367517669546 ;
+            effJetDr_error = 0.00121839275505;
+            }
+        else if  (mdr >= 1.07843137255 && mdr < 1.17647058824) {
+            effJetDr = 0.0373279768506 ;
+            effJetDr_error = 0.00126362637552 ;
+            }
+        else if  (mdr >= 1.17647058824 && mdr < 1.27450980392) {
+            effJetDr = 0.0351134849006 ;
+            effJetDr_error = 0.00125296964511;
+            }
+        else if  (mdr >= 1.27450980392 && mdr < 1.37254901961) {
+            effJetDr = 0.0354489901313 ;
+            effJetDr_error = 0.00132198000242;
+            }
+        else if  (mdr >= 1.37254901961 && mdr < 1.47058823529) {
+            effJetDr = 0.0363120107532 ;
+            effJetDr_error = 0.00136687120137 ;
+            }
+        else if  (mdr >= 1.47058823529 && mdr < 1.56862745098) {
+            effJetDr = 0.0354981372633;
+            effJetDr_error = 0.00137168616549;
+            }
+        else if  (mdr >= 1.56862745098 && mdr < 1.66666666667) {
+            effJetDr = 0.0340652290811 ;
+            effJetDr_error = 0.00139088496551;
+            }
+        else if  (mdr >= 1.66666666667 && mdr < 1.76470588235) {
+            effJetDr = 0.0361978158204 ;
+            effJetDr_error = 0.00146533679204;
+            }
+        else if  (mdr >= 1.76470588235 && mdr < 1.86274509804) {
+            effJetDr = 0.0381082808242;
+            effJetDr_error = 0.00156059237366;
+            }
+        else if  (mdr >= 1.86274509804 && mdr < 1.96078431373) {
+            effJetDr = 0.0341873818746 ;
+            effJetDr_error = 0.00149647154019 ;
+            }
+        else if  (mdr >= 1.96078431373 && mdr < 2.05882352941) {
+            effJetDr = 0.0355616182543 ;
+            effJetDr_error = 0.00156835489979 ;
+            }
+        else if  (mdr >= 2.05882352941 && mdr < 2.1568627451) {
+            effJetDr = 0.0338839286842 ;
+            effJetDr_error = 0.00154341046432 ;
+            }
+        else if  (mdr >= 2.1568627451 && mdr < 2.25490196078) {
+            effJetDr = 0.0369148777343 ;
+            effJetDr_error = 0.0016667516511 ;
+            }
+        else if  (mdr >= 2.25490196078 && mdr < 2.35294117647) {
+            effJetDr = 0.0375734709404 ;
+            effJetDr_error = 0.0017323544863 ;
+            }
+        else if  (mdr >= 2.35294117647 && mdr < 2.45098039216) {
+            effJetDr = 0.0381207220696 ;
+            effJetDr_error = 0.00176804309566 ;
+            }
+        else if  (mdr >= 2.45098039216 && mdr < 2.54901960784) {
+            effJetDr = 0.0387030966886 ;
+            effJetDr_error = 0.00185462383845 ;
+            }
+        else if  (mdr >= 2.54901960784 && mdr < 2.74509803922) {
+            effJetDr = 0.0392457087995 ;
+            effJetDr_error = 0.00136904595148 ;
+            }
+        else if  (mdr >= 2.74509803922 && mdr < 2.94117647059) {
+            effJetDr = 0.0388349159048 ;
+            effJetDr_error = 0.00150897243634 ;
+            }
+        else if  (mdr >= 2.94117647059 && mdr < 3.13725490196) {
+            effJetDr = 0.0371204986374 ;
+            effJetDr_error = 0.00168179237452 ;
+            }
+        else if (mdr >= 3.13725490196) {
+            effJetDr = 0.0329718580207 ;
+            effJetDr_error = 0.00145761305276 ;
+            }
+	}
+	else if (njets ==6) {
+        if  (mdr < 0.588235294118) {
+            effJetDr = 0.0395415846352 ;
+            effJetDr_error = 0.0011511938459 ;
+            }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr = 0.034618839886 ;
+            effJetDr_error = 0.00116834566886 ;
+            }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr = 0.0335124600026 ;
+            effJetDr_error = 0.00112320855174 ;
+            }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr = 0.0352848425974 ;
+            effJetDr_error = 0.00118215952064 ;
+            }
+        else if  (mdr >= 0.882352941176 && mdr < 0.980392156863) {
+            effJetDr = 0.0369879057022 ;
+            effJetDr_error = 0.00117518906956 ;
+            }
+        else if  (mdr >= 0.980392156863 && mdr < 1.07843137255) {
+            effJetDr = 0.0354632510628 ;
+            effJetDr_error = 0.00114712061473 ;
+            }
+        else if  (mdr >= 1.07843137255 && mdr < 1.17647058824) {
+            effJetDr = 0.0355262392261 ;
+            effJetDr_error = 0.00116616664308 ;
+            }
+        else if  (mdr >= 1.17647058824 && mdr < 1.27450980392) {
+            effJetDr = 0.0383794053482 ;
+            effJetDr_error = 0.00123066288949 ;
+            }
+        else if  (mdr >= 1.27450980392 && mdr < 1.37254901961) {
+            effJetDr = 0.0369256152775 ;
+            effJetDr_error = 0.00122049449726 ;
+            }
+        else if  (mdr >= 1.37254901961 && mdr < 1.47058823529) {
+            effJetDr = 0.03334654136 ;
+            effJetDr_error = 0.00116112937159 ;
+            }
+        else if  (mdr >= 1.47058823529 && mdr < 1.56862745098) {
+            effJetDr = 0.0349092258898 ;
+            effJetDr_error = 0.00123170372138 ;
+            }
+        else if  (mdr >= 1.56862745098 && mdr < 1.66666666667) {
+            effJetDr = 0.0338581648309 ;
+            effJetDr_error = 0.00122837963972 ;
+            }
+        else if  (mdr >= 1.66666666667 && mdr < 1.76470588235) {
+            effJetDr = 0.035582337466 ;
+            effJetDr_error = 0.00129246475504 ;
+            }
+        else if  (mdr >= 1.76470588235 && mdr < 1.86274509804) {
+            effJetDr = 0.0367792831883 ;
+            effJetDr_error = 0.00135295786915 ;
+            }
+        else if  (mdr >= 1.86274509804 && mdr < 1.96078431373) {
+            effJetDr = 0.0374233581811 ;
+            effJetDr_error = 0.00139204536982 ;
+            }
+        else if  (mdr >= 1.96078431373 && mdr < 2.05882352941) {
+            effJetDr = 0.0367424076643 ;
+            effJetDr_error = 0.00140157547071 ;
+            }
+        else if  (mdr >= 2.05882352941 && mdr < 2.1568627451) {
+            effJetDr = 0.0361620677584 ;
+            effJetDr_error = 0.00141978200157 ;
+            }
+        else if  (mdr >= 2.1568627451 && mdr < 2.25490196078) {
+            effJetDr = 0.036092936532 ;
+            effJetDr_error = 0.00145306007616 ;
+            }
+        else if  (mdr >= 2.25490196078 && mdr < 2.35294117647) {
+            effJetDr = 0.0351458534272 ;
+            effJetDr_error = 0.00147587353876 ;
+            }
+        else if  (mdr >= 2.35294117647 && mdr < 2.45098039216) {
+            effJetDr = 0.0377960013489 ;
+            effJetDr_error = 0.00156703786041 ;
+            }
+        else if  (mdr >= 2.45098039216 && mdr < 2.54901960784) {
+            effJetDr = 0.0356535661249 ;
+            effJetDr_error = 0.00156649871497 ;
+            }
+        else if  (mdr >= 2.54901960784 && mdr < 2.64705882353) {
+            effJetDr = 0.035891958092 ;
+            effJetDr_error = 0.00164044540922 ;
+            }
+        else if  (mdr >= 2.64705882353 && mdr < 2.74509803922) {
+            effJetDr = 0.0371616114158 ;
+            effJetDr_error = 0.00175574540509;
+            }
+        else if  (mdr >= 2.74509803922 && mdr < 2.94117647059) {
+            effJetDr = 0.0361549708747 ;
+            effJetDr_error = 0.00134032760136 ;
+            }
+        else if  (mdr >= 2.94117647059 && mdr < 3.23529411765) {
+            effJetDr = 0.0344774723747 ;
+            effJetDr_error = 0.00129585458523 ;
+            }
+        else if (mdr >= 3.23529411765) {
+            effJetDr = 0.03076127638 ;
+            effJetDr_error = 0.00147232632284 ;
+            }
+	}
+	else if (njets ==7) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr = 0.04608791926;
+            effJetDr_error = 0.0014698620728;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr = 0.0372709418473;
+            effJetDr_error = 0.00140572008363;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr = 0.0357783367764;
+            effJetDr_error = 0.00136411922705;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr = 0.0398356992508;
+            effJetDr_error = 0.00145944029957;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 0.980392156863) {
+            effJetDr = 0.0385801150312;
+            effJetDr_error = 0.00140873423465;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.07843137255) {
+            effJetDr = 0.034990264118;
+            effJetDr_error = 0.00128554255385;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.17647058824) {
+            effJetDr = 0.0356772581868;
+            effJetDr_error = 0.00133155044866;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.27450980392) {
+            effJetDr = 0.0381891077447;
+            effJetDr_error = 0.00138968351409;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.37254901961) {
+            effJetDr = 0.037581332528;
+            effJetDr_error = 0.00140343811017;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.47058823529) {
+            effJetDr = 0.0350120538189;
+            effJetDr_error = 0.00132364632178;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.56862745098) {
+            effJetDr = 0.0347817761971;
+            effJetDr_error = 0.00135559775109;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.66666666667) {
+            effJetDr = 0.0369324352613;
+            effJetDr_error = 0.00141507210079;
+        }
+        else if  (mdr >= 1.66666666667 && mdr < 1.76470588235) {
+            effJetDr = 0.0389784730019;
+            effJetDr_error = 0.0015191862593;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.86274509804) {
+            effJetDr = 0.0382472327786;
+            effJetDr_error = 0.00150711061748;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 1.96078431373) {
+            effJetDr = 0.0356364550484;
+            effJetDr_error = 0.00143761490186;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.05882352941) {
+            effJetDr = 0.0345057057057;
+            effJetDr_error = 0.00147271564078;
+        }
+        else if  (mdr >= 2.05882352941 && mdr < 2.1568627451) {
+            effJetDr = 0.0378955889869;
+            effJetDr_error = 0.00159792778218;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.25490196078) {
+            effJetDr = 0.0360903535605;
+            effJetDr_error = 0.0015490683174;
+        }
+        else if  (mdr >= 2.25490196078 && mdr < 2.35294117647) {
+            effJetDr = 0.0381280757364;
+            effJetDr_error = 0.00167192557005;
+        }
+        else if  (mdr >= 2.35294117647 && mdr < 2.45098039216) {
+            effJetDr = 0.0366671592046;
+            effJetDr_error = 0.00171668410441;
+        }
+        else if  (mdr >= 2.45098039216 && mdr < 2.54901960784) {
+            effJetDr = 0.0359772692627;
+            effJetDr_error = 0.00172112120641;
+        }
+        else if  (mdr >= 2.54901960784 && mdr < 2.74509803922) {
+            effJetDr = 0.0357598150652;
+            effJetDr_error = 0.00131314979843;
+        }
+        else if  (mdr >= 2.74509803922 && mdr < 2.94117647059) {
+            effJetDr = 0.0363260531982;
+            effJetDr_error = 0.00147317936977;
+        }
+        else if  (mdr >= 2.94117647059 && mdr < 3.13725490196) {
+            effJetDr = 0.0338128194909;
+            effJetDr_error = 0.0016319751835;
+        }
+        else if (mdr >= 3.13725490196) {
+            effJetDr = 0.0335764909268;
+            effJetDr_error = 0.00143041774869;
+        }
+	}
+	else if (njets ==8) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr = 0.0483183936643;
+            effJetDr_error = 0.00172577967516;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr = 0.0424180970229;
+            effJetDr_error = 0.00175617353492;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr = 0.0400384948582;
+            effJetDr_error = 0.00166933244229;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr = 0.0389967611432;
+            effJetDr_error = 0.0016471692813;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 0.980392156863) {
+            effJetDr = 0.0403350862112;
+            effJetDr_error = 0.00166494357861;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.07843137255) {
+            effJetDr = 0.039387115813;
+            effJetDr_error = 0.00161451357869;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.17647058824) {
+            effJetDr = 0.0392987789544;
+            effJetDr_error = 0.00165840928236;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.27450980392) {
+            effJetDr = 0.0388059357666;
+            effJetDr_error = 0.00158230961977;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.37254901961) {
+            effJetDr = 0.0365062545696;
+            effJetDr_error = 0.00152534886564;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.47058823529) {
+            effJetDr = 0.033592016041;
+            effJetDr_error = 0.00140144031749;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.56862745098) {
+            effJetDr = 0.0389240923381;
+            effJetDr_error = 0.00162356658212;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.66666666667) {
+            effJetDr = 0.0355624515366;
+            effJetDr_error = 0.00152920420666;
+        }
+        else if  (mdr >= 1.66666666667 && mdr < 1.76470588235) {
+            effJetDr = 0.0351362511464;
+            effJetDr_error = 0.00164147694846;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.86274509804) {
+            effJetDr = 0.0359228861449;
+            effJetDr_error = 0.00160215044177;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 1.96078431373) {
+            effJetDr = 0.0394440493148;
+            effJetDr_error = 0.00184123467532;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.05882352941) {
+            effJetDr = 0.0376746977781;
+            effJetDr_error = 0.0018054085878;
+        }
+        else if  (mdr >= 2.05882352941 && mdr < 2.1568627451) {
+            effJetDr = 0.0368926889383;
+            effJetDr_error = 0.00169670438421;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.35294117647) {
+            effJetDr = 0.0335175776244;
+            effJetDr_error = 0.00117599183427;
+        }
+        else if  (mdr >= 2.35294117647 && mdr < 2.54901960784) {
+            effJetDr = 0.0333237630988;
+            effJetDr_error = 0.00123994120018;
+        }
+        else if  (mdr >= 2.54901960784 && mdr < 2.74509803922) {
+            effJetDr = 0.0322785703681;
+            effJetDr_error = 0.00134791251822;
+        }
+        else if  (mdr >= 2.74509803922 && mdr < 3.03921568627) {
+            effJetDr = 0.0330009800264;
+            effJetDr_error = 0.00131762882476;
+        }
+        else if (mdr >= 3.03921568627) {
+            effJetDr = 0.0290354056798;
+            effJetDr_error = 0.00129004684814;
+        }
+	}
+	else if (njets ==9) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr = 0.0521611388129;
+            effJetDr_error = 0.00220996388377;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.78431372549) {
+            effJetDr = 0.0437901648679;
+            effJetDr_error = 0.00156709336004;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr = 0.0430973041153;
+            effJetDr_error = 0.00206043080796;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr = 0.0384535866667;
+            effJetDr_error = 0.00143071810095;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr = 0.0386860729156;
+            effJetDr_error = 0.00147181358367;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr = 0.0389344423456;
+            effJetDr_error = 0.00147094413769;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.56862745098) {
+            effJetDr = 0.0357524500847;
+            effJetDr_error = 0.00174656192318;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.76470588235) {
+            effJetDr = 0.0352070284945;
+            effJetDr_error = 0.00124254308064;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.96078431373) {
+            effJetDr = 0.0348022259942;
+            effJetDr_error = 0.00131979327364;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.1568627451) {
+            effJetDr = 0.0348210373809;
+            effJetDr_error = 0.00151514750028;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.35294117647) {
+            effJetDr = 0.0377139333702;
+            effJetDr_error = 0.00181841804557;
+        }
+        else if  (mdr >= 2.35294117647 && mdr < 2.64705882353) {
+            effJetDr = 0.0350201422405;
+            effJetDr_error = 0.00138869856804;
+        }
+        else if  (mdr >= 2.64705882353 && mdr < 2.94117647059) {
+            effJetDr = 0.0313905614958;
+            effJetDr_error = 0.00144186793278;
+        }
+        else if (mdr >= 2.94117647059) {
+            effJetDr = 0.0293511958461;
+            effJetDr_error = 0.00128195092949;
+        }
+	}
+	else if (njets ==10) {
+        if  ( mdr < 0.78431372549) {
+            effJetDr = 0.0496094252968;
+            effJetDr_error = 0.00175085499176;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.980392156863) {
+            effJetDr = 0.0409081250053;
+            effJetDr_error = 0.00188170255292;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.27450980392) {
+            effJetDr = 0.0376917197066;
+            effJetDr_error = 0.00168550515451;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr = 0.0374384733364;
+            effJetDr_error = 0.00181299901603;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.76470588235) {
+            effJetDr = 0.0392320997655;
+            effJetDr_error = 0.0017584659176;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.05882352941) {
+            effJetDr = 0.035475868066;
+            effJetDr_error = 0.00162228752677;
+        }
+        else if  (mdr >= 2.05882352941 && mdr < 2.35294117647) {
+            effJetDr = 0.0377446218399;
+            effJetDr_error = 0.00171440884389;
+        }
+        else if  (mdr >= 2.35294117647 && mdr < 2.74509803922) {
+            effJetDr = 0.0326959815283;
+            effJetDr_error = 0.00153282005562;
+        }
+        else if (mdr >= 2.74509803922) {
+            effJetDr = 0.0293723211038;
+            effJetDr_error = 0.00138676186907;
+        }
+	}
+	else {
+	    effJetDr = 1.0;
+	    effJetDr_error = 0.0;
+	}
+
+    pair<double, double> effpair (effJetDr, effJetDr_error);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2018(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2016(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2017(double mdr, int njets)
+{
+	if (njets == 5) {
+        if  ( mdr < 0.78431372549) {
+            effJetDr = 0.0333390344535;
+            effJetDr_error = 0.00201467567841;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.980392156863) {
+            effJetDr = 0.0350097698013;
+            effJetDr_error = 0.00256676242827;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.27450980392) {
+            effJetDr = 0.0325405833509;
+            effJetDr_error = 0.00211818294811;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.56862745098) {
+            effJetDr = 0.0336666946016;
+            effJetDr_error = 0.00243211705216;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.86274509804) {
+            effJetDr = 0.0403114704988;
+            effJetDr_error = 0.0027705440518;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 2.25490196078) {
+            effJetDr = 0.0383445783842;
+            effJetDr_error = 0.00282032687611;
+        }
+        else if  (mdr >= 2.25490196078 && mdr < 2.64705882353) {
+            effJetDr = 0.0439071418047;
+            effJetDr_error = 0.00306989430222;
+        }
+        else if (mdr >= 2.64705882353) {
+            effJetDr = 0.0413397044544;
+            effJetDr_error = 0.00279826152286;
+        }
+	}
+	else if (njets ==6) {
+        if  ( mdr < 0.686274509804) {
+            effJetDr = 0.0416874031547;
+            effJetDr_error = 0.00267101227808;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.882352941176) {
+            effJetDr = 0.0338524589768;
+            effJetDr_error = 0.00251751814022;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr = 0.0367972973407;
+            effJetDr_error = 0.00258393953168;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr = 0.0355774113169;
+            effJetDr_error = 0.00257939053536;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.37254901961) {
+            effJetDr = 0.0400077134077;
+            effJetDr_error = 0.00386418521927;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.76470588235) {
+            effJetDr = 0.036937661713;
+            effJetDr_error = 0.00291233085865;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.96078431373) {
+            effJetDr = 0.0419639076792;
+            effJetDr_error = 0.00319161632153;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.1568627451) {
+            effJetDr = 0.0386788367544;
+            effJetDr_error = 0.00329630495109;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.45098039216) {
+            effJetDr = 0.0340331328546;
+            effJetDr_error = 0.00265820315795;
+        }
+        else if  (mdr >= 2.45098039216 && mdr < 2.64705882353) {
+            effJetDr = 0.0425493307088;
+            effJetDr_error = 0.00395637810818;
+        }
+        else if  (mdr >= 2.64705882353 && mdr < 2.94117647059) {
+            effJetDr = 0.0450254591879;
+            effJetDr_error = 0.00359859823703;
+        }
+        else if (mdr >= 2.94117647059) {
+            effJetDr = 0.0371934529857;
+            effJetDr_error = 0.00327002388726;
+        }
+	}
+	else if (njets ==7) {
+        if  ( mdr < 0.686274509804) {
+            effJetDr = 0.0470280584144;
+            effJetDr_error = 0.00356677816439;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.882352941176) {
+            effJetDr = 0.0413518766822;
+            effJetDr_error = 0.00340035774918;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr = 0.0360641233433;
+            effJetDr_error = 0.00316205983146;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr = 0.0357633493209;
+            effJetDr_error = 0.00306585229387;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr = 0.0465370750104;
+            effJetDr_error = 0.00353913260382;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.66666666667) {
+            effJetDr = 0.0435281753167;
+            effJetDr_error = 0.00358589896387;
+        }
+        else if  (mdr >= 1.66666666667 && mdr < 1.86274509804) {
+            effJetDr = 0.0386377289876;
+            effJetDr_error = 0.0034515553857;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 2.1568627451) {
+            effJetDr = 0.0368702656916;
+            effJetDr_error = 0.00286380516911;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.45098039216) {
+            effJetDr = 0.039990824065;
+            effJetDr_error = 0.00324655889064;
+        }
+        else if  (mdr >= 2.45098039216 && mdr < 2.74509803922) {
+            effJetDr = 0.0368375018982;
+            effJetDr_error = 0.00349444375683;
+        }
+        else if (mdr >= 2.74509803922) {
+            effJetDr = 0.0304491884073;
+            effJetDr_error = 0.00271295768911;
+        }
+	}
+	else if (njets ==8) {
+        if  ( mdr < 0.980392156863) {
+            effJetDr = 0.0433835488189;
+            effJetDr_error = 0.00312902791498;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.37254901961) {
+            effJetDr = 0.0404097696932;
+            effJetDr_error = 0.00332263467236;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.76470588235) {
+            effJetDr = 0.0392526245271;
+            effJetDr_error = 0.00337989737678;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.05882352941) {
+            effJetDr = 0.0441699924519;
+            effJetDr_error = 0.00426812321482;
+        }
+        else if  (mdr >= 2.05882352941 && mdr < 2.54901960784) {
+            effJetDr = 0.0370340439201;
+            effJetDr_error = 0.00342899703562;
+        }
+        else if (mdr >= 2.54901960784) {
+            effJetDr = 0.0338912358267;
+            effJetDr_error = 0.00328010613632;
+        }
+	}
+	else if (njets ==9) {
+        if  ( mdr < 0.980392156863) {
+            effJetDr = 0.042771642078;
+            effJetDr_error = 0.00508813577949;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.37254901961) {
+            effJetDr = 0.0383418708638;
+            effJetDr_error = 0.00538099211224;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.76470588235) {
+            effJetDr = 0.0410140740165;
+            effJetDr_error = 0.00563946775078;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.35294117647) {
+            effJetDr = 0.0353574026768;
+            effJetDr_error = 0.00467245398827;
+        }
+        else if (mdr >= 2.35294117647) {
+            effJetDr = 0.0344015277753;
+            effJetDr_error = 0.00457785779029;
+        }
+	}
+	else if (njets ==10) {
+        if  ( mdr < 0.980392156863) {
+            effJetDr = 0.0385623213971;
+            effJetDr_error = 0.00845790790971;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.27450980392) {
+            effJetDr = 0.0500292786164;
+            effJetDr_error = 0.0123457350162;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.56862745098) {
+            effJetDr = 0.0629358872356;
+            effJetDr_error = 0.0135308250026;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.86274509804) {
+            effJetDr = 0.0504393722509;
+            effJetDr_error = 0.0123115169806;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 2.45098039216) {
+            effJetDr = 0.0340118397667;
+            effJetDr_error = 0.00807590580426;
+        }
+        else if (mdr >= 2.45098039216) {
+            effJetDr = 0.0338266124698;
+            effJetDr_error = 0.00854940526021;
+        }
+	}
+	else {
+	    effJetDr = 1.0;
+	    effJetDr_error = 0.0;
+	}
+
+    pair<double, double> effpair (effJetDr, effJetDr_error);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2018(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+
+
+// ====================================================================================================================
+pair<double,double> HardcodedConditions::GetTRFvpt3pb(double pt, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFvpt3pb2016(pt, njets);
+    else if (year==2017) return GetMcTRFvpt3pb2017(pt, njets);
+    else if (year==2018) return GetMcTRFvpt3pb2018(pt, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFvpt3pb2016(pt, njets);
+    else if (year==2017) return GetDataTRFvpt3pb2017(pt, njets);
+    else if (year==2018) return GetDataTRFvpt3pb2018(pt, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2016(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2017(double pt, int njets)
+{
+	if (njets == 5) {
+        if  (pt < 50.0) {
+            effJet_b3p = 0.0194421567861;
+            effJet_error_b3p = 0.0016081243988;
+            }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0273749658517 ;
+            effJet_error_b3p = 0.00240586958091;
+            }
+        else if  (pt >= 70.0 && pt < 100.0) {
+            effJet_b3p = 0.0297444447525 ;
+            effJet_error_b3p = 0.00254057222972;
+            }
+        else if  (pt >= 100.0 && pt < 130.0) {
+            effJet_b3p = 0.0333002384093 ;
+            effJet_error_b3p = 0.00311957591719;
+            }
+        else if  (pt >= 130.0 && pt < 180.0) {
+            effJet_b3p = 0.0303963979365 ;
+            effJet_error_b3p = 0.00271778085134;
+            }
+        else if  (pt >= 180.0 && pt < 240.0) {
+            effJet_b3p = 0.0330348632824 ;
+            effJet_error_b3p = 0.00321670685867;
+            }
+        else if  (pt >= 240.0) {
+            effJet_b3p = 0.0274411280392 ;
+            effJet_error_b3p = 0.00266703847475;
+            }
+	}
+	else if (njets ==6) {
+        if  (pt < 40.0) {
+            effJet_b3p = 0.0182434700223;
+            effJet_error_b3p = 0.00140834600441;
+            }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet_b3p = 0.0241974772949;
+            effJet_error_b3p = 0.00198229138726;
+            }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0239743056186;
+            effJet_error_b3p = 0.00166672186648;
+            }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet_b3p = 0.0290513254025;
+            effJet_error_b3p = 0.00213292261083;
+            }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet_b3p = 0.0289528394283;
+            effJet_error_b3p = 0.00258230709623;
+            }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet_b3p = 0.032893311134;
+            effJet_error_b3p = 0.00293626122211;
+            }
+        else if  (pt >= 130.0 && pt < 150.0) {
+            effJet_b3p = 0.0384836858392;
+            effJet_error_b3p = 0.00369337830485;
+            }
+        else if  (pt >= 150.0 && pt < 180.0) {
+            effJet_b3p = 0.0403397707367;
+            effJet_error_b3p = 0.00351238799581;
+            }
+        else if  (pt >= 180.0 && pt < 210.0) {
+            effJet_b3p = 0.0425221167194;
+            effJet_error_b3p = 0.00412340947604;
+            }
+        else if  (pt >= 210.0 && pt < 270.0) {
+            effJet_b3p = 0.0341924507603;
+            effJet_error_b3p = 0.0031781076806;
+            }
+        else if  (pt >= 270.0) {
+            effJet_b3p = 0.0304626734011;
+            effJet_error_b3p = 0.00298187215754;
+            }
+	}
+	else if (njets ==7) {
+        if  ( pt < 40.0) {
+                effJet_b3p = 0.0219542099263;
+                effJet_error_b3p = 0.0014890490208;
+            }
+            else if  (pt >= 40.0 && pt < 50.0) {
+                effJet_b3p = 0.0260998075232;
+                effJet_error_b3p = 0.00193485629955;
+            }
+            else if  (pt >= 50.0 && pt < 60.0) {
+                effJet_b3p = 0.0254757225389;
+                effJet_error_b3p = 0.00211397989008;
+            }
+            else if  (pt >= 60.0 && pt < 70.0) {
+                effJet_b3p = 0.0313094850394;
+                effJet_error_b3p = 0.00261091837577;
+            }
+            else if  (pt >= 70.0 && pt < 80.0) {
+                effJet_b3p = 0.0320031888062;
+                effJet_error_b3p = 0.00295422502094;
+            }
+            else if  (pt >= 80.0 && pt < 90.0) {
+                effJet_b3p = 0.032199023769;
+                effJet_error_b3p = 0.00314335583047;
+            }
+            else if  (pt >= 90.0 && pt < 110.0) {
+                effJet_b3p = 0.0364834910648;
+                effJet_error_b3p = 0.00276617758818;
+            }
+            else if  (pt >= 110.0 && pt < 130.0) {
+                effJet_b3p = 0.0356864225828;
+                effJet_error_b3p = 0.00308088903411;
+            }
+            else if  (pt >= 130.0 && pt < 160.0) {
+                effJet_b3p = 0.037184677959;
+                effJet_error_b3p = 0.00312056463263;
+            }
+            else if  (pt >= 160.0 && pt < 200.0) {
+                effJet_b3p = 0.0366008941371;
+                effJet_error_b3p = 0.00305462703137;
+            }
+            else if  (pt >= 200.0 && pt < 260.0) {
+                effJet_b3p = 0.0391503977444;
+                effJet_error_b3p = 0.00364694479977;
+            }
+            else if  (pt >= 260.0) {
+                effJet_b3p = 0.0327050231624;
+                effJet_error_b3p = 0.00319644960768;
+            }
+	}
+	else if (njets ==8) {
+        if  ( pt < 40.0) {
+            effJet_b3p = 0.0249688720663;
+            effJet_error_b3p = 0.00173148046862;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet_b3p = 0.0249617581106;
+            effJet_error_b3p = 0.00169059133486;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet_b3p = 0.0298775512299;
+            effJet_error_b3p = 0.00252677906282;
+        }
+        else if  (pt >= 60.0 && pt < 70.0) {
+            effJet_b3p = 0.0279212637892;
+            effJet_error_b3p = 0.00238792142878;
+        }
+        else if  (pt >= 70.0 && pt < 80.0) {
+            effJet_b3p = 0.0376775231943;
+            effJet_error_b3p = 0.00362795598904;
+        }
+        else if  (pt >= 80.0 && pt < 90.0) {
+            effJet_b3p = 0.0346713294761;
+            effJet_error_b3p = 0.00331325446034;
+        }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet_b3p = 0.0370317005328;
+            effJet_error_b3p = 0.00267470813399;
+        }
+        else if  (pt >= 110.0 && pt < 130.0) {
+            effJet_b3p = 0.0415390436078;
+            effJet_error_b3p = 0.0037001226215;
+        }
+        else if  (pt >= 130.0 && pt < 150.0) {
+            effJet_b3p = 0.0399392726563;
+            effJet_error_b3p = 0.00362508736615;
+        }
+        else if  (pt >= 150.0 && pt < 190.0) {
+            effJet_b3p = 0.0410245030202;
+            effJet_error_b3p = 0.0035995607433;
+        }
+        else if  (pt >= 190.0 && pt < 250.0) {
+            effJet_b3p = 0.0371810378543;
+            effJet_error_b3p = 0.00344441401413;
+        }
+        else if  (pt >= 250.0) {
+            effJet_b3p = 0.0311832074372;
+            effJet_error_b3p = 0.00288176565537;
+        }
+	}
+	else if (njets ==9) {
+        if  ( pt < 40.0) {
+            effJet_b3p = 0.021439614287;
+            effJet_error_b3p = 0.00156337431797;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet_b3p = 0.0308665629727;
+            effJet_error_b3p = 0.00279296608517;
+        }
+        else if  (pt >= 50.0 && pt < 60.0) {
+            effJet_b3p = 0.0304644371881;
+            effJet_error_b3p = 0.00244756344334;
+        }
+        else if  (pt >= 60.0 && pt < 80.0) {
+            effJet_b3p = 0.030384129581;
+            effJet_error_b3p = 0.00217790159273;
+        }
+        else if  (pt >= 80.0 && pt < 100.0) {
+            effJet_b3p = 0.0309140107886;
+            effJet_error_b3p = 0.00220634738142;
+        }
+        else if  (pt >= 100.0 && pt < 120.0) {
+            effJet_b3p = 0.0356071805518;
+            effJet_error_b3p = 0.00309344158751;
+        }
+        else if  (pt >= 120.0 && pt < 130.0) {
+            effJet_b3p = 0.0372138310623;
+            effJet_error_b3p = 0.00313187060224;
+        }
+        else if  (pt >= 130.0 && pt < 160.0) {
+            effJet_b3p = 0.0355796292797;
+            effJet_error_b3p = 0.00331260918967;
+        }
+        else if  (pt >= 160.0 && pt < 190.0) {
+            effJet_b3p = 0.0400024871699;
+            effJet_error_b3p = 0.00382360236208;
+        }
+        else if  (pt >= 190.0 && pt < 230.0) {
+            effJet_b3p = 0.0347488138415;
+            effJet_error_b3p = 0.0029378036404;
+        }
+        else if  (pt >= 230.0) {
+            effJet_b3p = 0.0367979930732;
+            effJet_error_b3p = 0.00360496697253;
+        }
+	}
+	else if (njets ==10) {
+        if  ( pt < 50.0) {
+            effJet_b3p = 0.0221470293606;
+            effJet_error_b3p = 0.00146591856642;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0305663928846;
+            effJet_error_b3p = 0.00247426385231;
+        }
+        else if  (pt >= 70.0 && pt < 100.0) {
+            effJet_b3p = 0.0382657079113;
+            effJet_error_b3p = 0.0032941957685;
+        }
+        else if  (pt >= 100.0 && pt < 130.0) {
+            effJet_b3p = 0.0283769741268;
+            effJet_error_b3p = 0.00241287261539;
+        }
+        else if  (pt >= 130.0 && pt < 170.0) {
+            effJet_b3p = 0.0322017149609;
+            effJet_error_b3p = 0.00285546908686;
+        }
+        else if  (pt >= 170.0 && pt < 230.0) {
+            effJet_b3p = 0.0369680593619;
+            effJet_error_b3p = 0.00353311764706;
+        }
+        else if  (pt >= 230.0) {
+            effJet_b3p = 0.039901875122;
+            effJet_error_b3p = 0.00381656885082;
+        }
+	}
+	else {
+	    effJet_b3p = 1.0;
+	    effJet_error_b3p = 0.0;
+	}
+
+	pair<double, double> effpair (effJet_b3p, effJet_error_b3p);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2018(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+	pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2016(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2017(double pt, int njets)
+{
+	if (njets == 5) {
+        if  ( pt < 60.0) {
+            effJet_b3p = 0.0204733949166;
+            effJet_error_b3p = 0.00450874599693;
+        }
+        else if  (pt >= 60.0 && pt < 110.0) {
+            effJet_b3p = 0.0251007911789;
+            effJet_error_b3p = 0.00536956073937;
+        }
+        else if  (pt >= 110.0 && pt < 150.0) {
+            effJet_b3p = 0.0345576680326;
+            effJet_error_b3p = 0.00877575147266;
+        }
+        else if  (pt >= 150.0 && pt < 210.0) {
+            effJet_b3p = 0.0410592292506;
+            effJet_error_b3p = 0.00978502474719;
+        }
+        else if  (pt >= 210.0) {
+            effJet_b3p = 0.0303724514768;
+            effJet_error_b3p = 0.00771264227032;
+        }
+	}
+	else if (njets ==6) {
+        if  ( pt < 50.0) {
+            effJet_b3p = 0.0193943115196;
+            effJet_error_b3p = 0.00358136056407;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0308756612784;
+            effJet_error_b3p = 0.00571957882372;
+        }
+        else if  (pt >= 70.0 && pt < 90.0) {
+            effJet_b3p = 0.0324181528216;
+            effJet_error_b3p = 0.00707909411733;
+        }
+        else if  (pt >= 90.0 && pt < 110.0) {
+            effJet_b3p = 0.0321108112428;
+            effJet_error_b3p = 0.00783964229545;
+        }
+        else if  (pt >= 110.0 && pt < 140.0) {
+            effJet_b3p = 0.0376737265083;
+            effJet_error_b3p = 0.00801891383401;
+        }
+        else if  (pt >= 140.0 && pt < 170.0) {
+            effJet_b3p = 0.0395406616419;
+            effJet_error_b3p = 0.0100831940953;
+        }
+        else if  (pt >= 170.0 && pt < 250.0) {
+            effJet_b3p = 0.0350360858255;
+            effJet_error_b3p = 0.00766186727142;
+        }
+        else if  (pt >= 250.0) {
+            effJet_b3p = 0.0362805517166;
+            effJet_error_b3p = 0.00920478629188;
+        }
+	}
+	else if (njets ==7) {
+        if  ( pt < 40.0) {
+            effJet_b3p = 0.0195671088828;
+            effJet_error_b3p = 0.00432933804955;
+        }
+        else if  (pt >= 40.0 && pt < 50.0) {
+            effJet_b3p = 0.0264527519786;
+            effJet_error_b3p = 0.0058548865007;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0251425261402;
+            effJet_error_b3p = 0.00541231549166;
+        }
+        else if  (pt >= 70.0 && pt < 100.0) {
+            effJet_b3p = 0.030371890754;
+            effJet_error_b3p = 0.00582254537225;
+        }
+        else if  (pt >= 100.0 && pt < 120.0) {
+            effJet_b3p = 0.0432108555938;
+            effJet_error_b3p = 0.0102298888384;
+        }
+        else if  (pt >= 120.0 && pt < 150.0) {
+            effJet_b3p = 0.0445002219186;
+            effJet_error_b3p = 0.00961846597523;
+        }
+        else if  (pt >= 150.0 && pt < 200.0) {
+            effJet_b3p = 0.0406121541061;
+            effJet_error_b3p = 0.00948857415677;
+        }
+        else if  (pt >= 200.0) {
+            effJet_b3p = 0.0308537127489;
+            effJet_error_b3p = 0.00736058883238;
+        }
+	}
+	else if (njets ==8) {
+	    if  ( pt < 50.0) {
+            effJet_b3p = 0.0193988791757;
+            effJet_error_b3p = 0.0040867610642;
+        }
+        else if  (pt >= 50.0 && pt < 70.0) {
+            effJet_b3p = 0.0299547273164;
+            effJet_error_b3p = 0.0073578701591;
+        }
+        else if  (pt >= 70.0 && pt < 100.0) {
+            effJet_b3p = 0.0318330067708;
+            effJet_error_b3p = 0.00772812544122;
+        }
+        else if  (pt >= 100.0 && pt < 130.0) {
+            effJet_b3p = 0.0476660951618;
+            effJet_error_b3p = 0.0119546776009;
+        }
+        else if  (pt >= 130.0 && pt < 200.0) {
+            effJet_b3p = 0.0451025795348;
+            effJet_error_b3p = 0.0106843576156;
+        }
+        else if  (pt >= 200.0) {
+            effJet_b3p = 0.0460555364682;
+            effJet_error_b3p = 0.0116148336251;
+        }
+	}
+	else if (njets ==9) {
+        if  ( pt < 50.0) {
+            effJet_b3p = 0.0298189301071;
+            effJet_error_b3p = 0.00739621591409;
+        }
+        else if  (pt >= 50.0 && pt < 100.0) {
+            effJet_b3p = 0.0279354827666;
+            effJet_error_b3p = 0.00764099929901;
+        }
+        else if  (pt >= 100.0) {
+            effJet_b3p = 0.0305789732265;
+            effJet_error_b3p = 0.00898829494254;
+        }
+	}
+	else if (njets ==10) {
+        if  ( pt < 50.0) {
+            effJet_b3p = 0.0287416827694;
+            effJet_error_b3p = 0.0107811930426;
+        }
+        else if  (pt >= 50.0 && pt < 90.0) {
+            effJet_b3p = 0.0477917599261;
+            effJet_error_b3p = 0.0167697072664;
+        }
+        else if  (pt >= 90.0) {
+            effJet_b3p = 0.0367749826695;
+            effJet_error_b3p = 0.0142149216177;
+        }
+	}
+	else {
+	    effJet_b3p = 1.0;
+	    effJet_error_b3p = 0.0;
+	}
+
+	pair<double, double> effpair (effJet_b3p, effJet_error_b3p);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2018(double pt, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+
+
+// --------------------------------------------------------------------------------------------------------------------
+pair<double,double> HardcodedConditions::GetTRFveta3pb(double eta, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFveta3pb2016(eta, njets);
+    else if (year==2017) return GetMcTRFveta3pb2017(eta, njets);
+    else if (year==2018) return GetMcTRFveta3pb2018(eta, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFveta3pb2016(eta, njets);
+    else if (year==2017) return GetDataTRFveta3pb2017(eta, njets);
+    else if (year==2018) return GetDataTRFveta3pb2018(eta, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta3pb2016(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta3pb2017(double eta, int njets)
+{
+	if (njets == 5) {
+        if  (eta < -1.08) {
+            effJeteta_b3p = 0.0280887482328;
+            effJeteta_error_b3p = 0.00207657327109;
+            }
+        else if  (eta >= -1.08 && eta < -0.6) {
+            effJeteta_b3p = 0.0290673438329;
+            effJeteta_error_b3p = 0.00285865963636;
+            }
+        else if  (eta >= -0.6 && eta < -0.12) {
+            effJeteta_b3p = 0.0283670841636;
+            effJeteta_error_b3p = 0.00255801561106;
+            }
+        else if  (eta >= -0.12 && eta < 0.36) {
+            effJeteta_b3p = 0.0279635480295;
+            effJeteta_error_b3p = 0.0025881317843;
+            }
+        else if  (eta >= 0.36 && eta < 0.84) {
+            effJeteta_b3p = 0.0269612031085;
+            effJeteta_error_b3p = 0.00254394025233;
+            }
+        else if  (eta >= 0.84 && eta < 1.32) {
+            effJeteta_b3p = 0.0302649201927;
+            effJeteta_error_b3p = 0.00290103896819;
+            }
+        else if (eta  >= 1.32) {
+            effJeteta_b3p = 0.0228989151507;
+            effJeteta_error_b3p = 0.00205309697431;
+            }
+	}
+	else if (njets ==6) {
+        if  (eta < -1.68) {
+            effJeteta_b3p = 0.0263619728807;
+            effJeteta_error_b3p = 0.00232322147895;
+            }
+        else if  (eta >= -1.68 && eta < -1.32) {
+            effJeteta_b3p = 0.03134312685;
+            effJeteta_error_b3p = 0.00300365600596;
+            }
+        else if  (eta >= -1.32 && eta < -0.96) {
+            effJeteta_b3p = 0.0258820944325;
+            effJeteta_error_b3p = 0.00239778206661;
+            }
+        else if  (eta >= -0.96 && eta < -0.6) {
+            effJeteta_b3p = 0.0293252762101;
+            effJeteta_error_b3p = 0.00242205920762;
+            }
+        else if  (eta >= -0.6 && eta < -0.24) {
+            effJeteta_b3p = 0.0290371582527;
+            effJeteta_error_b3p = 0.00236532758821;
+            }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta_b3p = 0.0316240095157;
+            effJeteta_error_b3p = 0.00299181230788;
+            }
+        else if  (eta >= 0.0 && eta < 0.24) {
+            effJeteta_b3p = 0.0269472008532;
+            effJeteta_error_b3p = 0.00258214893992;
+            }
+        else if  (eta >= 0.24 && eta < 0.6) {
+            effJeteta_b3p = 0.0263346315447;
+            effJeteta_error_b3p = 0.00226484172169;
+            }
+        else if  (eta >= 0.6 && eta < 0.96) {
+            effJeteta_b3p = 0.030266804247;
+            effJeteta_error_b3p = 0.0024980608258;
+            }
+        else if  (eta >= 0.96 && eta < 1.32) {
+            effJeteta_b3p = 0.0282340011966;
+            effJeteta_error_b3p = 0.00247553419483;
+            }
+        else if  (eta >= 1.32 && eta < 1.68) {
+            effJeteta_b3p = 0.0333264044201;
+            effJeteta_error_b3p = 0.00300102750315;
+            }
+        else if (eta  >= 1.68) {
+            effJeteta_b3p = 0.0240514056564;
+            effJeteta_error_b3p = 0.00211047900364;
+            }
+	}
+	else if (njets ==7) {
+        if  ( eta < -1.56) {
+            effJeteta_b3p = 0.0276739585194;
+            effJeteta_error_b3p = 0.00208647770528;
+        }
+        else if  (eta >= -1.56 && eta < -1.2) {
+            effJeteta_b3p = 0.0341012546035;
+            effJeteta_error_b3p = 0.00289400448125;
+        }
+        else if  (eta >= -1.2 && eta < -0.84) {
+            effJeteta_b3p = 0.028039581752;
+            effJeteta_error_b3p = 0.0023582823083;
+        }
+        else if  (eta >= -0.84 && eta < -0.6) {
+            effJeteta_b3p = 0.0315502595624;
+            effJeteta_error_b3p = 0.00303315278318;
+        }
+        else if  (eta >= -0.6 && eta < -0.36) {
+            effJeteta_b3p = 0.0326213466825;
+            effJeteta_error_b3p = 0.00301949695856;
+        }
+        else if  (eta >= -0.36 && eta < -0.12) {
+            effJeteta_b3p = 0.0344137071437;
+            effJeteta_error_b3p = 0.00314615083463;
+        }
+        else if  (eta >= -0.12 && eta < 0.12) {
+            effJeteta_b3p = 0.035631582752;
+            effJeteta_error_b3p = 0.00315683489254;
+        }
+        else if  (eta >= 0.12 && eta < 0.48) {
+            effJeteta_b3p = 0.0266644866974;
+            effJeteta_error_b3p = 0.00215366736439;
+        }
+        else if  (eta >= 0.48 && eta < 0.72) {
+            effJeteta_b3p = 0.0317828497112;
+            effJeteta_error_b3p = 0.00288142905397;
+        }
+        else if  (eta >= 0.72 && eta < 1.08) {
+            effJeteta_b3p = 0.028612025592;
+            effJeteta_error_b3p = 0.00232150836275;
+        }
+        else if  (eta >= 1.08 && eta < 1.44) {
+            effJeteta_b3p = 0.0313911877508;
+            effJeteta_error_b3p = 0.00261423956315;
+        }
+        else if  (eta >= 1.44 && eta < 1.8) {
+            effJeteta_b3p = 0.0320808000742;
+            effJeteta_error_b3p = 0.00290756290498;
+        }
+        else if (eta  >= 1.8) {
+            effJeteta_b3p = 0.0261689234955;
+            effJeteta_error_b3p = 0.00241804811347;
+        }
+	}
+	else if (njets ==8) {
+        if  ( eta < -1.68) {
+            effJeteta_b3p = 0.0260377893502;
+            effJeteta_error_b3p = 0.00204873266745;
+        }
+        else if  (eta >= -1.68 && eta < -1.32) {
+            effJeteta_b3p = 0.0342952043252;
+            effJeteta_error_b3p = 0.00312338408624;
+        }
+        else if  (eta >= -1.32 && eta < -0.96) {
+            effJeteta_b3p = 0.033419906851;
+            effJeteta_error_b3p = 0.00277249585599;
+        }
+        else if  (eta >= -0.96 && eta < -0.6) {
+            effJeteta_b3p = 0.0304254360889;
+            effJeteta_error_b3p = 0.00253532521324;
+        }
+        else if  (eta >= -0.6 && eta < -0.36) {
+            effJeteta_b3p = 0.0326011193182;
+            effJeteta_error_b3p = 0.00317956895331;
+        }
+        else if  (eta >= -0.36 && eta < 0.0) {
+            effJeteta_b3p = 0.031809011408;
+            effJeteta_error_b3p = 0.00241304047942;
+        }
+        else if  (eta >= 0.0 && eta < 0.24) {
+            effJeteta_b3p = 0.0276063304785;
+            effJeteta_error_b3p = 0.002387440146;
+        }
+        else if  (eta >= 0.24 && eta < 0.48) {
+            effJeteta_b3p = 0.0365359040488;
+            effJeteta_error_b3p = 0.0035102223124;
+        }
+        else if  (eta >= 0.48 && eta < 0.72) {
+            effJeteta_b3p = 0.0332578509964;
+            effJeteta_error_b3p = 0.00292429921885;
+        }
+        else if  (eta >= 0.72 && eta < 0.96) {
+            effJeteta_b3p = 0.0306882934653;
+            effJeteta_error_b3p = 0.00290427075825;
+        }
+        else if  (eta >= 0.96 && eta < 1.32) {
+            effJeteta_b3p = 0.0321683138326;
+            effJeteta_error_b3p = 0.00264463473906;
+        }
+        else if  (eta >= 1.32 && eta < 1.68) {
+            effJeteta_b3p = 0.0315608711804;
+            effJeteta_error_b3p = 0.00297013816305;
+        }
+        else if (eta  >= 1.68) {
+            effJeteta_b3p = 0.0330853053787;
+            effJeteta_error_b3p = 0.00289523576039;
+        }
+	}
+	else if (njets ==9) {
+        if  ( eta < -1.56) {
+            effJeteta_b3p = 0.0291862529914;
+            effJeteta_error_b3p = 0.00219977835571;
+        }
+        else if  (eta >= -1.56 && eta < -1.2) {
+            effJeteta_b3p = 0.0330542810955;
+            effJeteta_error_b3p = 0.0030072918251;
+        }
+        else if  (eta >= -1.2 && eta < -0.84) {
+            effJeteta_b3p = 0.029282337034;
+            effJeteta_error_b3p = 0.00242232539282;
+        }
+        else if  (eta >= -0.84 && eta < -0.6) {
+            effJeteta_b3p = 0.0300794018776;
+            effJeteta_error_b3p = 0.00249073811406;
+        }
+        else if  (eta >= -0.6 && eta < -0.24) {
+            effJeteta_b3p = 0.0310878037507;
+            effJeteta_error_b3p = 0.00270566977604;
+        }
+        else if  (eta >= -0.24 && eta < 0.12) {
+            effJeteta_b3p = 0.0289720900906;
+            effJeteta_error_b3p = 0.00268716267823;
+        }
+        else if  (eta >= 0.12 && eta < 0.36) {
+            effJeteta_b3p = 0.0309279793492;
+            effJeteta_error_b3p = 0.00296160655658;
+        }
+        else if  (eta >= 0.36 && eta < 0.6) {
+            effJeteta_b3p = 0.029755527746;
+            effJeteta_error_b3p = 0.00283253322046;
+        }
+        else if  (eta >= 0.6 && eta < 0.96) {
+            effJeteta_b3p = 0.0344276081918;
+            effJeteta_error_b3p = 0.00339534281555;
+        }
+        else if  (eta >= 0.96 && eta < 1.32) {
+            effJeteta_b3p = 0.0347433138672;
+            effJeteta_error_b3p = 0.00336062123206;
+        }
+        else if  (eta >= 1.32 && eta < 1.92) {
+            effJeteta_b3p = 0.0306409534588;
+            effJeteta_error_b3p = 0.00270378545109;
+        }
+        else if (eta  >= 1.92) {
+            effJeteta_b3p = 0.0219622304876;
+            effJeteta_error_b3p = 0.0019158133578;
+        }
+	}
+	else if (njets ==10) {
+        if  ( eta < -1.08) {
+            effJeteta_b3p = 0.0313268013256;
+            effJeteta_error_b3p = 0.00242946647347;
+        }
+        else if  (eta >= -1.08 && eta < -0.6) {
+            effJeteta_b3p = 0.0327533742764;
+            effJeteta_error_b3p = 0.00317666230056;
+        }
+        else if  (eta >= -0.6 && eta < -0.12) {
+            effJeteta_b3p = 0.0310773426514;
+            effJeteta_error_b3p = 0.00277038689712;
+        }
+        else if  (eta >= -0.12 && eta < 0.24) {
+            effJeteta_b3p = 0.0274941252782;
+            effJeteta_error_b3p = 0.00247882324859;
+        }
+        else if  (eta >= 0.24 && eta < 0.6) {
+            effJeteta_b3p = 0.0280859128774;
+            effJeteta_error_b3p = 0.00245011937773;
+        }
+        else if  (eta >= 0.6 && eta < 1.08) {
+            effJeteta_b3p = 0.0298208903948;
+            effJeteta_error_b3p = 0.00258957061505;
+        }
+        else if  (eta >= 1.08 && eta < 1.44) {
+            effJeteta_b3p = 0.0262963770789;
+            effJeteta_error_b3p = 0.00252974532588;
+        }
+        else if (eta  >= 1.44) {
+            effJeteta_b3p = 0.0283428343994;
+            effJeteta_error_b3p = 0.00277293039245;
+        }
+	}
+	else {
+	    effJeteta_b3p = 1.0;
+	    effJeteta_error_b3p = 0.0;
+	}
+
+    pair<double, double> effpair (effJeteta_b3p, effJeteta_error_b3p);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFveta3pb2018(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta3pb2016(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta3pb2017(double eta, int njets)
+{
+	if (njets == 5) {
+        if  ( eta < -0.96) {
+            effJeteta_b3p = 0.0248024593348;
+            effJeteta_error_b3p = 0.00577508647022;
+        }
+        else if  (eta >= -0.96 && eta < 0.0) {
+            effJeteta_b3p = 0.0236931908156;
+            effJeteta_error_b3p = 0.00527834232739;
+        }
+        else if  (eta >= 0.0 && eta < 0.72) {
+            effJeteta_b3p = 0.0262872992432;
+            effJeteta_error_b3p = 0.0063151982451;
+        }
+        else if  (eta >= 0.72 && eta < 1.44) {
+            effJeteta_b3p = 0.0299264744929;
+            effJeteta_error_b3p = 0.00732407039627;
+        }
+        else if (eta  >= 1.44) {
+            effJeteta_b3p = 0.0381744750808;
+            effJeteta_error_b3p = 0.00907712469102;
+        }
+	}
+	else if (njets ==6) {
+        if  ( eta < -1.44) {
+            effJeteta_b3p = 0.0200919794113;
+            effJeteta_error_b3p = 0.00535926088163;
+        }
+        else if  (eta >= -1.44 && eta < -0.96) {
+            effJeteta_b3p = 0.032425998236;
+            effJeteta_error_b3p = 0.00726487999433;
+        }
+        else if  (eta >= -0.96 && eta < -0.6) {
+            effJeteta_b3p = 0.0349988775163;
+            effJeteta_error_b3p = 0.00813908892577;
+        }
+        else if  (eta >= -0.6 && eta < -0.24) {
+            effJeteta_b3p = 0.0307511194873;
+            effJeteta_error_b3p = 0.00743380913911;
+        }
+        else if  (eta >= -0.24 && eta < 0.0) {
+            effJeteta_b3p = 0.0342990559149;
+            effJeteta_error_b3p = 0.00837100670778;
+        }
+        else if  (eta >= 0.0 && eta < 0.48) {
+            effJeteta_b3p = 0.0354983060355;
+            effJeteta_error_b3p = 0.00667798050572;
+        }
+        else if  (eta >= 0.48 && eta < 0.96) {
+            effJeteta_b3p = 0.031687292034;
+            effJeteta_error_b3p = 0.00683869477119;
+        }
+        else if  (eta >= 0.96 && eta < 1.56) {
+            effJeteta_b3p = 0.0292345755909;
+            effJeteta_error_b3p = 0.00633278576574;
+        }
+        else if (eta  >= 1.56) {
+            effJeteta_b3p = 0.0258057949193;
+            effJeteta_error_b3p = 0.00658255900475;
+        }
+	}
+	else if (njets ==7) {
+	    if  ( eta < -1.32) {
+            effJeteta_b3p = 0.0212533451864;
+            effJeteta_error_b3p = 0.00496778883482;
+        }
+        else if  (eta >= -1.32 && eta < -0.84) {
+            effJeteta_b3p = 0.0280701757682;
+            effJeteta_error_b3p = 0.00681208738171;
+        }
+        else if  (eta >= -0.84 && eta < -0.48) {
+            effJeteta_b3p = 0.0365484830481;
+            effJeteta_error_b3p = 0.00807804702805;
+        }
+        else if  (eta >= -0.48 && eta < 0.0) {
+            effJeteta_b3p = 0.0283919367271;
+            effJeteta_error_b3p = 0.00634981556317;
+        }
+        else if  (eta >= 0.0 && eta < 0.36) {
+            effJeteta_b3p = 0.0281605413726;
+            effJeteta_error_b3p = 0.00702351607196;
+        }
+        else if  (eta >= 0.36 && eta < 0.72) {
+            effJeteta_b3p = 0.0297433805522;
+            effJeteta_error_b3p = 0.00741999752559;
+        }
+        else if  (eta >= 0.72 && eta < 1.08) {
+            effJeteta_b3p = 0.0384401816416;
+            effJeteta_error_b3p = 0.00883204432939;
+        }
+        else if  (eta >= 1.08 && eta < 1.56) {
+            effJeteta_b3p = 0.0375618694574;
+            effJeteta_error_b3p = 0.00808230884009;
+        }
+        else if (eta  >= 1.56) {
+            effJeteta_b3p = 0.0257771228329;
+            effJeteta_error_b3p = 0.00643136173264;
+        }
+	}
+	else if (njets ==8) {
+        if  ( eta < -1.56) {
+            effJeteta_b3p = 0.0367520089083;
+            effJeteta_error_b3p = 0.00982611300665;
+        }
+        else if  (eta >= -1.56 && eta < -0.84) {
+            effJeteta_b3p = 0.0336485214681;
+            effJeteta_error_b3p = 0.00806566616166;
+        }
+        else if  (eta >= -0.84 && eta < -0.12) {
+            effJeteta_b3p = 0.0312383609441;
+            effJeteta_error_b3p = 0.00695171519637;
+        }
+        else if  (eta >= -0.12 && eta < 0.6) {
+            effJeteta_b3p = 0.0315751404099;
+            effJeteta_error_b3p = 0.00683074039612;
+        }
+        else if  (eta >= 0.6 && eta < 1.56) {
+            effJeteta_b3p = 0.0232702973292;
+            effJeteta_error_b3p = 0.00560447965208;
+        }
+        else if (eta  >= 1.56) {
+            effJeteta_b3p = 0.0423070671438;
+            effJeteta_error_b3p = 0.0102950555286;
+        }
+	}
+	else if (njets ==9) {
+        if  ( eta < -1.2) {
+            effJeteta_b3p = 0.0230838381828;
+            effJeteta_error_b3p = 0.0103792694291;
+        }
+        else if  (eta >= -1.2 && eta < -0.6) {
+            effJeteta_b3p = 0.0598828247949;
+            effJeteta_error_b3p = 0.0173364879491;
+        }
+        else if  (eta >= -0.6 && eta < 0.48) {
+            effJeteta_b3p = 0.0263389227659;
+            effJeteta_error_b3p = 0.00763048678591;
+        }
+        else if (eta  >= 0.48) {
+            effJeteta_b3p = 0.0232855985637;
+            effJeteta_error_b3p = 0.00660729597744;
+        }
+	}
+	else if (njets ==10) {
+        if  ( eta < -0.36) {
+            effJeteta_b3p = 0.030583815302;
+            effJeteta_error_b3p = 0.0108328901416;
+        }
+        else if  (eta >= -0.36 && eta < 0.48) {
+            effJeteta_b3p = 0.0471971908625;
+            effJeteta_error_b3p = 0.01775329848;
+        }
+        else if (eta  >= 0.48) {
+            effJeteta_b3p = 0.0356509519113;
+            effJeteta_error_b3p = 0.0136232059296;
+        }
+	}
+	else {
+	    effJeteta_b3p = 1.0;
+	    effJeteta_error_b3p = 0.0;
+	}
+	pair<double, double> effpair (effJeteta_b3p, effJeteta_error_b3p);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFveta3pb2018(double eta, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+
+
+// --------------------------------------------------------------------------------------------------------------------
+pair<double,double> HardcodedConditions::GetTRFvmdr3pb(double mdr, int njets, int year, bool sampleMC)
+{
+  //Mc TRF are only for testing, use Data TRFs for actual estimates
+  if (sampleMC == true) {
+    if      (year==2016) return GetMcTRFvmdr3pb2016(mdr, njets);
+    else if (year==2017) return GetMcTRFvmdr3pb2017(mdr, njets);
+    else if (year==2018) return GetMcTRFvmdr3pb2018(mdr, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+  else {
+    if      (year==2016) return GetDataTRFvmdr3pb2016(mdr, njets);
+    else if (year==2017) return GetDataTRFvmdr3pb2017(mdr, njets);
+    else if (year==2018) return GetDataTRFvmdr3pb2018(mdr, njets);
+    else {
+        pair<double, double> effpair (1.0, 0.0);
+	    return effpair ;
+    }
+  }
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2016(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2017(double mdr, int njets)
+{
+	if (njets == 5) {
+        if  (mdr < 0.686274509804) {
+            effJetDr_b3p = 0.0267793024662;
+            effJetDr_error_b3p = 0.00221553173501;
+             }
+        else if  (mdr >= 0.686274509804 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.0238783770117;
+            effJetDr_error_b3p = 0.00233345426863;
+             }
+        else if  (mdr >= 0.882352941176 && mdr < 1.17647058824) {
+            effJetDr_b3p = 0.0249090664371;
+            effJetDr_error_b3p = 0.00212543274521;
+             }
+        else if  (mdr >= 1.17647058824 && mdr < 1.47058823529) {
+            effJetDr_b3p = 0.0271231599209;
+            effJetDr_error_b3p = 0.00256396846193;
+            }
+        else if  (mdr >= 1.47058823529 && mdr < 1.86274509804) {
+            effJetDr_b3p = 0.0303088913239;
+            effJetDr_error_b3p = 0.00260078309735;
+             }
+        else if  (mdr >= 1.86274509804 && mdr < 2.35294117647) {
+            effJetDr_b3p = 0.0287149394321;
+            effJetDr_error_b3p = 0.00264488964819;
+             }
+        else if (mdr >= 2.35294117647) {
+            effJetDr_b3p = 0.0323909170087;
+            effJetDr_error_b3p = 0.00301192382939;
+            }
+	}
+	else if (njets ==6) {
+        if  (mdr < 0.686274509804) {
+            effJetDr_b3p = 0.028063672309 ;
+            effJetDr_error_b3p = 0.00185203913326;
+             }
+        else if  (mdr >= 0.686274509804 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.0261729440016 ;
+            effJetDr_error_b3p = 0.00196731060082;
+             }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr_b3p = 0.0251276016688 ;
+            effJetDr_error_b3p = 0.00196794114982;
+             }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr_b3p = 0.0324235270749 ;
+            effJetDr_error_b3p = 0.00246782627572;
+             }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr_b3p = 0.0278215329332 ;
+            effJetDr_error_b3p = 0.00231848826735;
+             }
+        else if  (mdr >= 1.47058823529 && mdr < 1.66666666667) {
+            effJetDr_b3p = 0.0293496710095 ;
+            effJetDr_error_b3p = 0.00254701559535;
+             }
+        else if  (mdr >= 1.66666666667 && mdr < 1.86274509804) {
+            effJetDr_b3p = 0.0285626075877 ;
+            effJetDr_error_b3p = 0.00275567587589;
+             }
+        else if  (mdr >= 1.86274509804 && mdr < 2.1568627451) {
+            effJetDr_b3p = 0.0314366087422 ;
+            effJetDr_error_b3p = 0.00249095649051;
+             }
+        else if  (mdr >= 2.1568627451 && mdr < 2.45098039216) {
+            effJetDr_b3p = 0.0321887785459 ;
+            effJetDr_error_b3p = 0.00288314286618;
+             }
+        else if (mdr >= 2.45098039216) {
+            effJetDr_b3p = 0.0252690969324 ;
+            effJetDr_error_b3p = 0.00226685788966;
+             }
+	}
+	else if (njets ==7) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr_b3p = 0.0424865782536;
+            effJetDr_error_b3p = 0.00314044377641;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr_b3p = 0.0301774020729;
+            effJetDr_error_b3p = 0.00283393595926;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr_b3p = 0.0276215843637;
+            effJetDr_error_b3p = 0.00270762057942;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.980392156863) {
+            effJetDr_b3p = 0.0317039726121;
+            effJetDr_error_b3p = 0.00223946018312;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.17647058824) {
+            effJetDr_b3p = 0.029252875355;
+            effJetDr_error_b3p = 0.00213011994052;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.37254901961) {
+            effJetDr_b3p = 0.0331051447555;
+            effJetDr_error_b3p = 0.00242644109768;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.0234155021914;
+            effJetDr_error_b3p = 0.00205122924717;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.76470588235) {
+            effJetDr_b3p = 0.0308437855759;
+            effJetDr_error_b3p = 0.00259374487489;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.96078431373) {
+            effJetDr_b3p = 0.0306116919394;
+            effJetDr_error_b3p = 0.00271447369643;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.25490196078) {
+            effJetDr_b3p = 0.0285761985066;
+            effJetDr_error_b3p = 0.00246091497131;
+        }
+        else if  (mdr >= 2.25490196078 && mdr < 2.54901960784) {
+            effJetDr_b3p = 0.0302826607403;
+            effJetDr_error_b3p = 0.00294946293653;
+        }
+        else if (mdr >= 2.54901960784) {
+            effJetDr_b3p = 0.0272500989911;
+            effJetDr_error_b3p = 0.00247931414924;
+        }
+	}
+	else if (njets ==8) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr_b3p = 0.0417022139126;
+            effJetDr_error_b3p = 0.00332898797972;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.686274509804) {
+            effJetDr_b3p = 0.0393228946971;
+            effJetDr_error_b3p = 0.00364628081462;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.78431372549) {
+            effJetDr_b3p = 0.0361324220234;
+            effJetDr_error_b3p = 0.00353615268777;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.980392156863) {
+            effJetDr_b3p = 0.033609929597;
+            effJetDr_error_b3p = 0.00257107075234;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.17647058824) {
+            effJetDr_b3p = 0.0301940306042;
+            effJetDr_error_b3p = 0.00232272357737;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.37254901961) {
+            effJetDr_b3p = 0.0334034506463;
+            effJetDr_error_b3p = 0.00245327583212;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.027731661711;
+            effJetDr_error_b3p = 0.00204242211569;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.76470588235) {
+            effJetDr_b3p = 0.0276406882588;
+            effJetDr_error_b3p = 0.00242965700129;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 1.96078431373) {
+            effJetDr_b3p = 0.0299248246334;
+            effJetDr_error_b3p = 0.00271344152475;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.1568627451) {
+            effJetDr_b3p = 0.0275082886851;
+            effJetDr_error_b3p = 0.00257771202961;
+        }
+        else if  (mdr >= 2.1568627451 && mdr < 2.54901960784) {
+            effJetDr_b3p = 0.0295959889573;
+            effJetDr_error_b3p = 0.00245667837922;
+        }
+        else if (mdr >= 2.54901960784) {
+            effJetDr_b3p = 0.0268514422736;
+            effJetDr_error_b3p = 0.00255256149108;
+        }
+	}
+	else if (njets ==9) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr_b3p = 0.0425738334658;
+            effJetDr_error_b3p = 0.0035368308396;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.78431372549) {
+            effJetDr_b3p = 0.0350093068334;
+            effJetDr_error_b3p = 0.00253760612295;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.037557173195;
+            effJetDr_error_b3p = 0.00352655640053;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr_b3p = 0.0321324228516;
+            effJetDr_error_b3p = 0.00300928211676;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr_b3p = 0.0293544402154;
+            effJetDr_error_b3p = 0.00240099310989;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr_b3p = 0.0302013300697;
+            effJetDr_error_b3p = 0.0026217916669;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.66666666667) {
+            effJetDr_b3p = 0.0255240164256;
+            effJetDr_error_b3p = 0.00216290687566;
+        }
+        else if  (mdr >= 1.66666666667 && mdr < 1.96078431373) {
+            effJetDr_b3p = 0.0279107804916;
+            effJetDr_error_b3p = 0.00218693111967;
+        }
+        else if  (mdr >= 1.96078431373 && mdr < 2.35294117647) {
+            effJetDr_b3p = 0.0294440087094;
+            effJetDr_error_b3p = 0.00266927339834;
+        }
+        else if  (mdr >= 2.35294117647 && mdr < 2.64705882353) {
+            effJetDr_b3p = 0.0236900418347;
+            effJetDr_error_b3p = 0.00221044978984;
+        }
+        else if (mdr >= 2.64705882353) {
+            effJetDr_b3p = 0.0217816936607;
+            effJetDr_error_b3p = 0.00196837263961;
+        }
+	}
+	else if (njets ==10) {
+        if  ( mdr < 0.588235294118) {
+            effJetDr_b3p = 0.0441433215995;
+            effJetDr_error_b3p = 0.0042557447254;
+        }
+        else if  (mdr >= 0.588235294118 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.0360028044497;
+            effJetDr_error_b3p = 0.00278724539817;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.07843137255) {
+            effJetDr_b3p = 0.0279380730835;
+            effJetDr_error_b3p = 0.00224891009793;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.27450980392) {
+            effJetDr_b3p = 0.0235373956724;
+            effJetDr_error_b3p = 0.00230169788519;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.0265579281668;
+            effJetDr_error_b3p = 0.00215632010575;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.76470588235) {
+            effJetDr_b3p = 0.0264179220552;
+            effJetDr_error_b3p = 0.00250116491368;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.25490196078) {
+            effJetDr_b3p = 0.0297775636673;
+            effJetDr_error_b3p = 0.00284823813935;
+        }
+        else if (mdr >= 2.25490196078) {
+            effJetDr_b3p = 0.0256724115938;
+            effJetDr_error_b3p = 0.00253046910364;
+        }
+	}
+	else {
+	    effJetDr_b3p = 1.0;
+	    effJetDr_error_b3p = 0.0;
+	}
+
+    pair<double, double> effpair (effJetDr_b3p, effJetDr_error_b3p);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2018(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2016(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2017(double mdr, int njets)
+{
+	if (njets == 5) {
+        if  ( mdr < 0.980392156863) {
+            effJetDr_b3p = 0.0275351495968;
+            effJetDr_error_b3p = 0.00469298937624;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.0227717295224;
+            effJetDr_error_b3p = 0.0049940921927;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 2.1568627451) {
+            effJetDr_b3p = 0.0280223660349;
+            effJetDr_error_b3p = 0.00670281011328;
+        }
+        else if (mdr >= 2.1568627451) {
+            effJetDr_b3p = 0.035355696367;
+            effJetDr_error_b3p = 0.00844011561415;
+        }
+	}
+	else if (njets ==6) {
+        if  ( mdr < 0.78431372549) {
+            effJetDr_b3p = 0.0301630526696;
+            effJetDr_error_b3p = 0.00491945072149;
+        }
+        else if  (mdr >= 0.78431372549 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.0425985738615;
+            effJetDr_error_b3p = 0.0106875225721;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.17647058824) {
+            effJetDr_b3p = 0.0261355461471;
+            effJetDr_error_b3p = 0.0051829586981;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.37254901961) {
+            effJetDr_b3p = 0.0320089287496;
+            effJetDr_error_b3p = 0.00713418666229;
+        }
+        else if  (mdr >= 1.37254901961 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.0340640192784;
+            effJetDr_error_b3p = 0.00790582611533;
+        }
+        else if  (mdr >= 1.56862745098 && mdr < 1.86274509804) {
+            effJetDr_b3p = 0.0276559031569;
+            effJetDr_error_b3p = 0.00654898881678;
+        }
+        else if  (mdr >= 1.86274509804 && mdr < 2.25490196078) {
+            effJetDr_b3p = 0.0306625604619;
+            effJetDr_error_b3p = 0.00724135776081;
+        }
+        else if (mdr >= 2.25490196078) {
+            effJetDr_b3p = 0.027807244824;
+            effJetDr_error_b3p = 0.0063094097077;
+        }
+	}
+	else if (njets ==7) {
+        if  ( mdr < 0.686274509804) {
+            effJetDr_b3p = 0.035844333489;
+            effJetDr_error_b3p = 0.00664028516981;
+        }
+        else if  (mdr >= 0.686274509804 && mdr < 0.882352941176) {
+            effJetDr_b3p = 0.0415198134328;
+            effJetDr_error_b3p = 0.00785583397027;
+        }
+        else if  (mdr >= 0.882352941176 && mdr < 1.27450980392) {
+            effJetDr_b3p = 0.0192186434447;
+            effJetDr_error_b3p = 0.00416181929142;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.47058823529) {
+            effJetDr_b3p = 0.031339011786;
+            effJetDr_error_b3p = 0.00748238401049;
+        }
+        else if  (mdr >= 1.47058823529 && mdr < 1.76470588235) {
+            effJetDr_b3p = 0.0367626574448;
+            effJetDr_error_b3p = 0.00701157491525;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.35294117647) {
+            effJetDr_b3p = 0.023148795665;
+            effJetDr_error_b3p = 0.00484906341629;
+        }
+        else if (mdr >= 2.35294117647) {
+            effJetDr_b3p = 0.0294935674875;
+            effJetDr_error_b3p = 0.00688116685304;
+        }
+	}
+	else if (njets ==8) {
+        if  ( mdr < 0.980392156863) {
+            effJetDr_b3p = 0.0309523312693;
+            effJetDr_error_b3p = 0.00551877084033;
+        }
+        else if  (mdr >= 0.980392156863 && mdr < 1.27450980392) {
+            effJetDr_b3p = 0.0380694053723;
+            effJetDr_error_b3p = 0.00835919284479;
+        }
+        else if  (mdr >= 1.27450980392 && mdr < 1.76470588235) {
+            effJetDr_b3p = 0.0221319227309;
+            effJetDr_error_b3p = 0.00533923281147;
+        }
+        else if  (mdr >= 1.76470588235 && mdr < 2.1568627451) {
+            effJetDr_b3p = 0.0369655539968;
+            effJetDr_error_b3p = 0.00874421466088;
+        }
+        else if (mdr >= 2.1568627451) {
+            effJetDr_b3p = 0.0366239216769;
+            effJetDr_error_b3p = 0.00822313147813;
+        }
+	}
+	else if (njets ==9) {
+        if  ( mdr < 1.17647058824) {
+            effJetDr_b3p = 0.0292215354182;
+            effJetDr_error_b3p = 0.00701585296865;
+        }
+        else if  (mdr >= 1.17647058824 && mdr < 1.86274509804) {
+            effJetDr_b3p = 0.0266551789579;
+            effJetDr_error_b3p = 0.00781438781218;
+        }
+        else if (mdr >= 1.86274509804) {
+            effJetDr_b3p = 0.0316573894232;
+            effJetDr_error_b3p = 0.00907476000601;
+        }
+	}
+	else if (njets ==10) {
+        if  ( mdr < 1.07843137255) {
+            effJetDr_b3p = 0.0351745118327;
+            effJetDr_error_b3p = 0.0125161748137;
+        }
+        else if  (mdr >= 1.07843137255 && mdr < 1.56862745098) {
+            effJetDr_b3p = 0.0457419329483;
+            effJetDr_error_b3p = 0.0170823709128;
+        }
+        else if (mdr >= 1.56862745098) {
+            effJetDr_b3p = 0.03096378811;
+            effJetDr_error_b3p = 0.0118571101833;
+        }
+	}
+	else {
+	    effJetDr_b3p = 1.0;
+	    effJetDr_error_b3p = 0.0;
+	}
+
+    pair<double, double> effpair (effJetDr_b3p, effJetDr_error_b3p);
+	return effpair ;
+
+}
+pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2018(double mdr, int njets)
+{
+	// TO-BE-IMPLEMENTED!!!!!!!
+    pair<double, double> effpair (1.0, 0.0);
+	return effpair ;
+}

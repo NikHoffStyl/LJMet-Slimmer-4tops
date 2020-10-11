@@ -14,6 +14,13 @@ public:
     ~HardcodedConditions();
 
     void GetPileupWeight(int nTrueInt, float *pileupweight, float *pileupweightup, float *pileupweightdn, int year = 2017, std::string sample = "");
+
+    pair<double,double> HardcodedConditions::GetTRFvpt2pb(double pt, int njets, int year = 2017, bool sampleMC = true);
+    pair<double,double> HardcodedConditions::GetTRFveta2pb(double eta, int njets, int year = 2017, bool sampleMC = true);
+    pair<double,double> HardcodedConditions::GetTRFvmdr2pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
+    pair<double,double> HardcodedConditions::GetTRFvpt3pb(double pt, int njets, int year = 2017, bool sampleMC = true);
+    pair<double,double> HardcodedConditions::GetTRFveta3pb(double eta, int njets, int year = 2017, bool sampleMC = true);
+    pair<double,double> HardcodedConditions::GetTRFvmdr3pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
     
     double GetEGammaGsfSF(double pt, double eta, int year = 2017);
     double GetElectronIdSF(double pt, double eta, int year = 2017);
@@ -43,6 +50,44 @@ private:
     void GetPileupWeight2016(int nTrueInt, float *pileupweight, float *pileupweightup, float *pileupweightdn, std::string sample = "");
     void GetPileupWeight2017(int nTrueInt, float *pileupweight, float *pileupweightup, float *pileupweightdn, std::string sample = "");
     void GetPileupWeight2018(int nTrueInt, float *pileupweight, float *pileupweightup, float *pileupweightdn, std::string sample = "");
+
+    pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2016(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2017(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvpt2pb2018(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2016(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2017(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt2pb2018(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta2pb2016(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta2pb2017(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta2pb2018(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta2pb2016(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta2pb2017(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta2pb2018(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2016(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2017(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr2pb2018(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2016(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2017(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr2pb2018(double mdr, int njets);
+
+    pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2016(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2017(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvpt3pb2018(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2016(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2017(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvpt3pb2018(double pt, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta3pb2016(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta3pb2017(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFveta3pb2018(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta3pb2016(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta3pb2017(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFveta3pb2018(double eta, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2016(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2017(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetMcTRFvmdr3pb2018(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2016(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2017(double mdr, int njets);
+    pair<double,double> HardcodedConditions::GetDataTRFvmdr3pb2018(double mdr, int njets);
     
     double GetEGammaGsfSF2016(double pt, double eta);
     double GetEGammaGsfSF2017(double pt, double eta);
