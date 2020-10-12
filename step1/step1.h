@@ -219,8 +219,69 @@ public :
    double          deltaR_jetJets;
    vector<double>  deltaR_lepJets;
    vector<double>  minDR_jetJets;
+   vector<double>  minDR_jetBJets;
    vector<double>  deltaPhi_lepJets;
    vector<double>  mass_lepJets;
+
+   //TRF related variables
+
+    double Prob0_TrfvptTags2BpTmp ;
+    double Prob1_TrfvptTags2BpTmp ;
+    double Prob1_TrfvptTags2BpTmp2 ;
+    double Prob0_TrfvetaTags2BpTmp ;
+    double Prob1_TrfvetaTags2BpTmp ;
+    double Prob1_TrfvetaTags2BpTmp2 ;
+    double Prob0_TrfvmdrTags2BpTmp ;
+    double Prob1_TrfvmdrTags2BpTmp ;
+    double Prob1_TrfvmdrTags2BpTmp2 ;
+    double Prob0_TrfTags2BpTmp ;
+    double Prob1_TrfTags2BpTmp ;
+    double Prob1_TrfTags2BpTmp2 ;
+
+   vector<double> TRFvpt_2Bp;
+   vector<double> TRFvpt_3Bp;
+   double avTRFvpt_2Bp;
+   double avTRFvpt_3Bp;
+   double Prob0_TrfvptTags2Bp;
+   double Prob0_TrfvptTags2Bp;
+   double Prob1_TrfvptTags2Bp;
+   double Prob1_TrfvptTags3Bp;
+   double Prob2p_TrfvptTags3Bp;
+   double Prob2p_TrfvptTags3Bp;
+
+   vector<double> TRFveta_2Bp;
+   vector<double> TRFveta_3Bp;
+   double avTRFveta_2Bp;
+   double avTRFveta_3Bp;
+   double Prob0_TrfvetaTags2Bp;
+   double Prob0_TrfvetaTags2Bp;
+   double Prob1_TrfvetaTags2Bp;
+   double Prob1_TrfvetaTags3Bp;
+   double Prob2p_TrfvetaTags3Bp;
+   double Prob2p_TrfvetaTags3Bp;
+
+   vector<double> TRFvmdr_2Bp;
+   vector<double> TRFvmdr_3Bp;
+   double avTRFvmdr_2Bp;
+   double avTRFvmdr_3Bp;
+   double Prob0_TrfvmdrTags2Bp;
+   double Prob0_TrfvmdrTags2Bp;
+   double Prob1_TrfvmdrTags2Bp;
+   double Prob1_TrfvmdrTags3Bp;
+   double Prob2p_TrfvmdrTags3Bp;
+   double Prob2p_TrfvmdrTags3Bp;
+
+   vector<double> TRFv3Var_2Bp;
+   vector<double> TRFv3Var_3Bp;
+   double Prob0_TrfTags2Bp;
+   double Prob0_TrfTags2Bp;
+   double Prob1_TrfTags2Bp;
+   double Prob1_TrfTags3Bp;
+   double Prob2p_TrfTags3Bp;
+   double Prob2p_TrfTags3Bp;
+
+   Float_t BJetLeadPt_viaTRF;
+
 
    Float_t         BJetLeadPt;
    Float_t         BJetLeadPt_bSFup;

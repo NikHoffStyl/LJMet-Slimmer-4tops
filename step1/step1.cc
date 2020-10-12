@@ -12,6 +12,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <numeric>
 #include <TH3.h>
 #include "HardcodedConditions.h"
 #include "BTagCalibForLJMet.h"
@@ -123,7 +124,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    inputTree->SetBranchStatus("event_CommonCalc",1);
    inputTree->SetBranchStatus("run_CommonCalc",1);
    inputTree->SetBranchStatus("lumi_CommonCalc",1);
-   //   inputTree->SetBranchStatus("nPV_MultiLepCalc",1);
+   inputTree->SetBranchStatus("nPV_MultiLepCalc",1);
    inputTree->SetBranchStatus("nTrueInteractions_MultiLepCalc",1);
    inputTree->SetBranchStatus("MCWeight_MultiLepCalc",1);
    inputTree->SetBranchStatus("evtWeightsMC_MultiLepCalc",1);
@@ -336,6 +337,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("event_CommonCalc",&event_CommonCalc,"event_CommonCalc/L");
    outputTree->Branch("run_CommonCalc",&run_CommonCalc,"run_CommonCalc/I");
    outputTree->Branch("lumi_CommonCalc",&lumi_CommonCalc,"lumi_CommonCalc/I");
+   outputTree->Branch("nPV_MultiLepCalc",&nPV_MultiLepCalc,"nPV_MultiLepCalc/I");
    outputTree->Branch("nTrueInteractions_MultiLepCalc",&nTrueInteractions_MultiLepCalc,"nTrueInteractions_MultiLepCalc/I");
    outputTree->Branch("isElectron",&isElectron,"isElectron/I");
    outputTree->Branch("isMuon",&isMuon,"isMuon/I");
@@ -453,6 +455,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("theJetEta_JetSubCalc",&theJetEta_JetSubCalc);
    outputTree->Branch("theJetPhi_JetSubCalc",&theJetPhi_JetSubCalc);
    outputTree->Branch("theJetEnergy_JetSubCalc",&theJetEnergy_JetSubCalc);
+   outputTree->Branch("theJetPt_JetSubCalc_BtagOrdered",&theJetPt_JetSubCalc_BtagOrdered);
    outputTree->Branch("theJetPt_JetSubCalc_PtOrdered",&theJetPt_JetSubCalc_PtOrdered);
    outputTree->Branch("theJetEta_JetSubCalc_PtOrdered",&theJetEta_JetSubCalc_PtOrdered);
    outputTree->Branch("theJetPhi_JetSubCalc_PtOrdered",&theJetPhi_JetSubCalc_PtOrdered);
@@ -500,12 +503,52 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("minDR_lepJet",&minDR_lepJet,"minDR_lepJet/F");
    outputTree->Branch("ptRel_lepJet",&ptRel_lepJet,"ptRel_lepJet/F");
    outputTree->Branch("minDR_jetJets",&minDR_jetJets);
+   outputTree->Branch("minDR_jetBJets",&minDR_jetBJets);
    outputTree->Branch("deltaR_lepJets",&deltaR_lepJets);
    outputTree->Branch("deltaR_lepBJets",&deltaR_lepBJets);
    outputTree->Branch("deltaR_lepBJets_bSFup",&deltaR_lepBJets_bSFup);
    outputTree->Branch("deltaR_lepBJets_bSFdn",&deltaR_lepBJets_bSFdn);
    outputTree->Branch("deltaR_lepBJets_lSFup",&deltaR_lepBJets_lSFup);
    outputTree->Branch("deltaR_lepBJets_lSFdn",&deltaR_lepBJets_lSFdn);
+
+   //AK4 TRF related branches
+   outputTree->Branch("NJetTrfBtagged",&NJetTrfBtagged,"NJetTrfBtagged/I";
+
+   outputTree->Branch("TRFvpt_2Bp",&TRFvpt_2Bp);
+   outputTree->Branch("TRFvpt_3Bp",&TRFvpt_3Bp);
+   outputTree->Branch("Prob0_TrfvptTags2Bp",&Prob0_TrfvptTags2Bp, "Prob0_TrfvptTags2Bp/D");
+   outputTree->Branch("Prob1_TrfvptTags2Bp",&Prob1_TrfvptTags2Bp, "Prob1_TrfvptTags2Bp/D");
+   outputTree->Branch("Prob2p_TrfvptTags2Bp",&Prob2p_TrfvptTags2Bp, "Prob2p_TrfvptTags2Bp/D");
+   outputTree->Branch("Prob0_TrfvptTags3Bp",&Prob0_TrfvptTags3Bp, "Prob0_TrfvptTags3Bp/D");
+   outputTree->Branch("Prob1_TrfvptTags3Bp",&Prob1_TrfvptTags3Bp, "Prob1_TrfvptTags3Bp/D");
+   outputTree->Branch("Prob2p_TrfvptTags3Bp",&Prob2p_TrfvptTags3Bp, "Prob2p_TrfvptTags3Bp/D");
+
+   outputTree->Branch("TRFveta_2Bp",&TRFveta_2Bp);
+   outputTree->Branch("TRFveta_3Bp",&TRFveta_3Bp);
+   outputTree->Branch("Prob0_TrfvetaTags2Bp",&Prob0_TrfvetaTags2Bp, "Prob0_TrfvetaTags2Bp/D");
+   outputTree->Branch("Prob1_TrfvetaTags2Bp",&Prob1_TrfvetaTags2Bp, "Prob1_TrfvetaTags2Bp/D");
+   outputTree->Branch("Prob2p_TrfvetaTags2Bp",&Prob2p_TrfvetaTags2Bp, "Prob2p_TrfvetaTags2Bp/D");
+   outputTree->Branch("Prob0_TrfvetaTags3Bp",&Prob0_TrfvetaTags3Bp, "Prob0_TrfvetaTags3Bp/D");
+   outputTree->Branch("Prob1_TrfvetaTags3Bp",&Prob1_TrfvetaTags3Bp, "Prob1_TrfvetaTags3Bp/D");
+   outputTree->Branch("Prob2p_TrfvetaTags3Bp",&Prob2p_TrfvetaTags3Bp, "Prob2p_TrfvetaTags3Bp/D");
+
+   outputTree->Branch("TRFvmdr_2Bp",&TRFvmdr_2Bp);
+   outputTree->Branch("TRFvmdr_3Bp",&TRFvmdr_3Bp);
+   outputTree->Branch("Prob0_TrfvmdrTags2Bp",&Prob0_TrfvmdrTags2Bp, "Prob0_TrfvmdrTags2Bp/D");
+   outputTree->Branch("Prob1_TrfvmdrTags2Bp",&Prob1_TrfvmdrTags2Bp, "Prob1_TrfvmdrTags2Bp/D");
+   outputTree->Branch("Prob1p_TrfvmdrTags2Bp",&Prob2p_TrfvmdrTags2Bp, "Prob2p_TrfvmdrTags2Bp/D");
+   outputTree->Branch("Prob0_TrfvmdrTags3Bp",&Prob0_TrfvmdrTags3Bp, "Prob0_TrfvmdrTags3Bp/D");
+   outputTree->Branch("Prob1_TrfvmdrTags3Bp",&Prob1_TrfvmdrTags3Bp, "Prob1_TrfvmdrTags3Bp/D");
+   outputTree->Branch("Prob1p_TrfvmdrTags3Bp",&Prob2p_TrfvmdrTags3Bp, "Prob2p_TrfvmdrTags3Bp/D");
+
+   outputTree->Branch("TRFv3Var_2Bp",&TRFvmdr_2Bp);
+   outputTree->Branch("TRFv3Var_3Bp",&TRFvmdr_3Bp);
+   outputTree->Branch("Prob0_TrfTags2Bp",&Prob0_TrfTags2Bp, "Prob0_TrfTags2Bp/D");
+   outputTree->Branch("Prob1_TrfTags2Bp",&Prob1_TrfTags2Bp, "Prob1_TrfTags2Bp/D");
+   outputTree->Branch("Prob2p_TrfTags2Bp",&Prob2p_TrfTags2Bp, "Prob2p_TrfTags2Bp/D");
+   outputTree->Branch("Prob0_TrfTags3Bp",&Prob0_TrfTags3Bp, "Prob0_TrfTags3Bp/D");
+   outputTree->Branch("Prob1_TrfTags3Bp",&Prob1_TrfTags3Bp, "Prob1_TrfTags3Bp/D");
+   outputTree->Branch("Prob2p_TrfTags3Bp",&Prob2p_TrfTags3Bp, "Prob2p_TrfTags3Bp/D");
 
    // AK4 gen
    outputTree->Branch("genPt_MultiLepCalc",&genPt_MultiLepCalc);
@@ -909,6 +952,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       NJets_JetSubCalc = 0;
       AK4HT = 0;
       vector<pair<double,int>> jetptindpair;
+      vector<pair<double,int>> jetbtagpair;
       btagCSVWeight = 1.0;
       btagCSVWeight_HFup = 1.0;
       btagCSVWeight_HFdn = 1.0;
@@ -1020,6 +1064,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 	// ----------------------------------------------------------------------------
 
 	jetptindpair.push_back(std::make_pair(theJetPt_JetSubCalc->at(ijet),ijet));
+	jetbtagpair.push_back(std::make_pair((AK4JetDeepCSVb_MultiLepCalc->at(ijet) + AK4JetDeepCSVbb_MultiLepCalc->at(ijet)),ijet));
 	NJets_JetSubCalc+=1;
 	AK4HT+=theJetPt_JetSubCalc->at(ijet);
       }
@@ -1229,11 +1274,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       if(!isMC && DataPastTrigger) npass_trigger+=1;
 
 
-
-
-
-
-
       // ----------------------------------------------------------------------------
       // Loop over AK8 jets for calculations and pt ordering pair
       // ----------------------------------------------------------------------------
@@ -1328,6 +1368,8 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       // ----------------------------------------------------------------------------
 
       std::sort(jetptindpair.begin(), jetptindpair.end(), comparepair);
+      std::sort(jetbtagpair.begin(), jetbtagpair.end(), comparepair);
+      theJetPt_JetSubCalc_BtagOrdered.clear();
       theJetPt_JetSubCalc_PtOrdered.clear();
       theJetEta_JetSubCalc_PtOrdered.clear();
       theJetPhi_JetSubCalc_PtOrdered.clear();
@@ -1354,7 +1396,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       	theJetEta_JetSubCalc_PtOrdered.push_back(theJetEta_JetSubCalc->at(jetptindpair[ijet].second));
       	theJetPhi_JetSubCalc_PtOrdered.push_back(theJetPhi_JetSubCalc->at(jetptindpair[ijet].second));
       	theJetEnergy_JetSubCalc_PtOrdered.push_back(theJetEnergy_JetSubCalc->at(jetptindpair[ijet].second));
-         theJetDeepFlavB_JetSubCalc_PtOrdered.push_back(theJetDeepFlavB_JetSubCalc->at(jetptindpair[ijet].second));
+        theJetDeepFlavB_JetSubCalc_PtOrdered.push_back(theJetDeepFlavB_JetSubCalc->at(jetptindpair[ijet].second));
       	AK4JetDeepCSVb_MultiLepCalc_PtOrdered.push_back(AK4JetDeepCSVb_MultiLepCalc->at(jetptindpair[ijet].second));
 		AK4JetDeepCSVbb_MultiLepCalc_PtOrdered.push_back(AK4JetDeepCSVbb_MultiLepCalc->at(jetptindpair[ijet].second));
 		AK4JetDeepCSVc_MultiLepCalc_PtOrdered.push_back(AK4JetDeepCSVc_MultiLepCalc->at(jetptindpair[ijet].second));
@@ -1362,21 +1404,35 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       	theJetHFlav_JetSubCalc_PtOrdered.push_back(theJetHFlav_JetSubCalc->at(jetptindpair[ijet].second));
       	theJetPFlav_JetSubCalc_PtOrdered.push_back(theJetPFlav_JetSubCalc->at(jetptindpair[ijet].second));
 		theJetBTag_JetSubCalc_PtOrdered.push_back(theJetBTag_JetSubCalc->at(jetptindpair[ijet].second));
-	theJetBTag_bSFup_JetSubCalc_PtOrdered.push_back(theJetBTag_bSFup_JetSubCalc->at(jetptindpair[ijet].second));
-	theJetBTag_bSFdn_JetSubCalc_PtOrdered.push_back(theJetBTag_bSFdn_JetSubCalc->at(jetptindpair[ijet].second));
-	theJetBTag_lSFup_JetSubCalc_PtOrdered.push_back(theJetBTag_lSFup_JetSubCalc->at(jetptindpair[ijet].second));
-	theJetBTag_lSFdn_JetSubCalc_PtOrdered.push_back(theJetBTag_lSFdn_JetSubCalc->at(jetptindpair[ijet].second));
+        theJetBTag_bSFup_JetSubCalc_PtOrdered.push_back(theJetBTag_bSFup_JetSubCalc->at(jetptindpair[ijet].second));
+        theJetBTag_bSFdn_JetSubCalc_PtOrdered.push_back(theJetBTag_bSFdn_JetSubCalc->at(jetptindpair[ijet].second));
+        theJetBTag_lSFup_JetSubCalc_PtOrdered.push_back(theJetBTag_lSFup_JetSubCalc->at(jetptindpair[ijet].second));
+        theJetBTag_lSFdn_JetSubCalc_PtOrdered.push_back(theJetBTag_lSFdn_JetSubCalc->at(jetptindpair[ijet].second));
 		AK4JetBTag_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_MultiLepCalc->at(jetptindpair[ijet].second));
-	AK4JetBTag_bSFup_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_bSFup_MultiLepCalc->at(jetptindpair[ijet].second));
-	AK4JetBTag_bSFdn_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_bSFdn_MultiLepCalc->at(jetptindpair[ijet].second));
-	AK4JetBTag_lSFup_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_lSFup_MultiLepCalc->at(jetptindpair[ijet].second));
-	AK4JetBTag_lSFdn_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_lSFdn_MultiLepCalc->at(jetptindpair[ijet].second));
+        AK4JetBTag_bSFup_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_bSFup_MultiLepCalc->at(jetptindpair[ijet].second));
+        AK4JetBTag_bSFdn_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_bSFdn_MultiLepCalc->at(jetptindpair[ijet].second));
+        AK4JetBTag_lSFup_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_lSFup_MultiLepCalc->at(jetptindpair[ijet].second));
+        AK4JetBTag_lSFdn_MultiLepCalc_PtOrdered.push_back(AK4JetBTag_lSFdn_MultiLepCalc->at(jetptindpair[ijet].second));
+      }
+
+      for(unsigned int ijet=0; ijet < jetptindpair.size(); ijet++){
+         theJetPt_JetSubCalc_BtagOrdered.push_back(theJetPt_JetSubCalc->at(jetbtagpair[ijet].second));
+
       }
 
       // ----------------------------------------------------------------------------
       // AK4 Jet - lepton associations
       // ----------------------------------------------------------------------------
-         
+
+      TRFvpt_2Bp.clear();
+      TRFvpt_3Bp.clear();
+      TRFveta_2Bp.clear();
+      TRFveta_3Bp.clear();
+      TRFvmdr_2Bp.clear();
+      TRFvmdr_3Bp.clear();
+      TRFv3Var_2Bp.clear();
+      TRFv3Var_3Bp.clear();
+
       BJetLeadPt = -99;
       BJetLeadPt_bSFup = -99;
       BJetLeadPt_bSFdn = -99;
@@ -1392,6 +1448,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       minDR_lepJet = 1e8;
       ptRel_lepJet = -99;
       minDR_jetJets.clear();
+      minDR_jetBJets.clear();
       deltaR_lepJets.clear();
       deltaR_lepBJets.clear();
       deltaR_lepBJets_bSFup.clear();
@@ -1427,108 +1484,228 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 
       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_PtOrdered.size(); ijet++){
         jet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_PtOrdered.at(ijet),theJetEta_JetSubCalc_PtOrdered.at(ijet),theJetPhi_JetSubCalc_PtOrdered.at(ijet),theJetEnergy_JetSubCalc_PtOrdered.at(ijet));
-	if((lepton_lv + jet_lv).M() < minMleppJet) {
-	  minMleppJet = fabs((lepton_lv + jet_lv).M());
-	  deltaR_lepMinMlj = jet_lv.DeltaR(lepton_lv);
-	}
-
-	deltaR_lepJets.push_back(lepton_lv.DeltaR(jet_lv));
-
-   	if(AK4JetDeepCSVb_MultiLepCalc_PtOrdered.at(ijet) + AK4JetDeepCSVbb_MultiLepCalc_PtOrdered.at(ijet) > btagWPdcsv){
-          NJetsCSV_MultiLepCalc += 1;
+        if((lepton_lv + jet_lv).M() < minMleppJet) {
+          minMleppJet = fabs((lepton_lv + jet_lv).M());
+          deltaR_lepMinMlj = jet_lv.DeltaR(lepton_lv);
         }
-	if(AK4JetBTag_MultiLepCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_MultiLepCalc += 1;
+
+        deltaR_lepJets.push_back(lepton_lv.DeltaR(jet_lv));
+
+        if(AK4JetDeepCSVb_MultiLepCalc_PtOrdered.at(ijet) + AK4JetDeepCSVbb_MultiLepCalc_PtOrdered.at(ijet) > btagWPdcsv){
+              NJetsCSV_MultiLepCalc += 1;
+        }
+
+        if(AK4JetBTag_MultiLepCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_MultiLepCalc += 1;
           if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt) BJetLeadPt = theJetPt_JetSubCalc_PtOrdered.at(ijet);
           deltaR_lepBJets.push_back(lepton_lv.DeltaR(jet_lv));
 
           if((lepton_lv + jet_lv).M() < minMleppBjet) {
-            minMleppBjet = fabs( (lepton_lv + jet_lv).M() );
-            deltaR_lepMinMlb = jet_lv.DeltaR(lepton_lv);
+                minMleppBjet = fabs( (lepton_lv + jet_lv).M() );
+                deltaR_lepMinMlb = jet_lv.DeltaR(lepton_lv);
           }
-	}
-	if(AK4JetBTag_bSFup_MultiLepCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_MultiLepCalc_bSFup += 1;
-         if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_bSFup) BJetLeadPt_bSFup = theJetPt_JetSubCalc_PtOrdered.at(ijet);
-          deltaR_lepBJets_bSFup.push_back(lepton_lv.DeltaR(jet_lv));
-	  
-          if((lepton_lv + jet_lv).M() < minMleppBjet_bSFup) {
-            minMleppBjet_bSFup = fabs( (lepton_lv + jet_lv).M() );
-	    deltaR_lepMinMlb_bSFup = jet_lv.DeltaR(lepton_lv);
-           }
-	}
-	if(AK4JetBTag_bSFdn_MultiLepCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_MultiLepCalc_bSFdn += 1;
-          if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_bSFdn) BJetLeadPt_bSFdn = theJetPt_JetSubCalc_PtOrdered.at(ijet);
-          deltaR_lepBJets_bSFdn.push_back(lepton_lv.DeltaR(jet_lv));
-	  
-          if((lepton_lv + jet_lv).M() < minMleppBjet_bSFdn) {
-            minMleppBjet_bSFdn = fabs( (lepton_lv + jet_lv).M() );
-	    deltaR_lepMinMlb_bSFdn = jet_lv.DeltaR(lepton_lv);
-          }
-	}
-	if(AK4JetBTag_lSFup_MultiLepCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_MultiLepCalc_lSFup += 1;
-          if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_lSFup) BJetLeadPt_lSFup = theJetPt_JetSubCalc_PtOrdered.at(ijet);
-          deltaR_lepBJets_lSFup.push_back(lepton_lv.DeltaR(jet_lv));
-	  
-          if((lepton_lv + jet_lv).M() < minMleppBjet_lSFup) {
-            minMleppBjet_lSFup = fabs( (lepton_lv + jet_lv).M() );
-	    deltaR_lepMinMlb_lSFup = jet_lv.DeltaR(lepton_lv);
-          }
-	}
-	if(AK4JetBTag_lSFdn_MultiLepCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_MultiLepCalc_lSFdn += 1;
-          if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_lSFdn) BJetLeadPt_lSFdn = theJetPt_JetSubCalc_PtOrdered.at(ijet);
-          deltaR_lepBJets_lSFdn.push_back(lepton_lv.DeltaR(jet_lv));
-	  
-          if((lepton_lv + jet_lv).M() < minMleppBjet_lSFdn) {
-            minMleppBjet_lSFdn = fabs( (lepton_lv + jet_lv).M() );
-	    deltaR_lepMinMlb_lSFdn = jet_lv.DeltaR(lepton_lv);
-          }
-	}
-
-  	if(theJetDeepFlavB_JetSubCalc_PtOrdered.at(ijet) > btagWPdjet){
-          NJetsCSV_JetSubCalc += 1;
         }
-	if(theJetBTag_JetSubCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_JetSubCalc += 1;	  
-	}
-	if(theJetBTag_bSFup_JetSubCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_JetSubCalc_bSFup += 1;
-	}
-	if(theJetBTag_bSFdn_JetSubCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_JetSubCalc_bSFdn += 1;
-	}
-	if(theJetBTag_lSFup_JetSubCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_JetSubCalc_lSFup += 1;
-	}
-	if(theJetBTag_lSFdn_JetSubCalc_PtOrdered.at(ijet) == 1){
-	  NJetsCSVwithSF_JetSubCalc_lSFdn += 1;
-	}
-	
-	if(jet_lv.DeltaPhi(nu) < minDPhi_MetJet) minDPhi_MetJet = jet_lv.DeltaPhi(nu);	  
+        if(AK4JetBTag_bSFup_MultiLepCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_MultiLepCalc_bSFup += 1;
+              if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_bSFup) BJetLeadPt_bSFup = theJetPt_JetSubCalc_PtOrdered.at(ijet);
+              deltaR_lepBJets_bSFup.push_back(lepton_lv.DeltaR(jet_lv));
 
- 	if(deltaR_lepJets[ijet] < minDR_lepJet) {
-	  minDR_lepJet = deltaR_lepJets[ijet];
-	  ptRel_lepJet = lepton_lv.P()*(jet_lv.Vect().Cross(lepton_lv.Vect()).Mag()/jet_lv.P()/lepton_lv.P());
-	}
+              if((lepton_lv + jet_lv).M() < minMleppBjet_bSFup) {
+                minMleppBjet_bSFup = fabs( (lepton_lv + jet_lv).M() );
+                deltaR_lepMinMlb_bSFup = jet_lv.DeltaR(lepton_lv);
+              }
+        }
 
-    // ----------------------------------------------------------------------------
-    //  TRF Related section for TTJet estimates
-    // ----------------------------------------------------------------------------
-	minDR_jetJet = 1e8;
-	for(unsigned int kjet=0; kjet < theJetPt_JetSubCalc_PtOrdered.size(); kjet++){
-	    if(ijet == kjet){continue;}
-	    kjet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_PtOrdered.at(kjet),theJetEta_JetSubCalc_PtOrdered.at(kjet),theJetPhi_JetSubCalc_PtOrdered.at(kjet),theJetEnergy_JetSubCalc_PtOrdered.at(kjet));
-	    deltaR_jetJets = jet_lv.DeltaR(kjet_lv);
-	    if(deltaR_jetJets < minDR_jetJet) {
-	        minDR_jetJet = deltaR_jetJets;
-	    }
-	}
-	minDR_jetJets.push_back(minDR_jetJet);
+        if(AK4JetBTag_bSFdn_MultiLepCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_MultiLepCalc_bSFdn += 1;
+              if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_bSFdn) BJetLeadPt_bSFdn = theJetPt_JetSubCalc_PtOrdered.at(ijet);
+              deltaR_lepBJets_bSFdn.push_back(lepton_lv.DeltaR(jet_lv));
+
+              if((lepton_lv + jet_lv).M() < minMleppBjet_bSFdn) {
+                minMleppBjet_bSFdn = fabs( (lepton_lv + jet_lv).M() );
+                deltaR_lepMinMlb_bSFdn = jet_lv.DeltaR(lepton_lv);
+              }
+        }
+
+        if(AK4JetBTag_lSFup_MultiLepCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_MultiLepCalc_lSFup += 1;
+              if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_lSFup) BJetLeadPt_lSFup = theJetPt_JetSubCalc_PtOrdered.at(ijet);
+              deltaR_lepBJets_lSFup.push_back(lepton_lv.DeltaR(jet_lv));
+
+              if((lepton_lv + jet_lv).M() < minMleppBjet_lSFup) {
+                minMleppBjet_lSFup = fabs( (lepton_lv + jet_lv).M() );
+                deltaR_lepMinMlb_lSFup = jet_lv.DeltaR(lepton_lv);
+              }
+        }
+        if(AK4JetBTag_lSFdn_MultiLepCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_MultiLepCalc_lSFdn += 1;
+              if(theJetPt_JetSubCalc_PtOrdered.at(ijet) > BJetLeadPt_lSFdn) BJetLeadPt_lSFdn = theJetPt_JetSubCalc_PtOrdered.at(ijet);
+              deltaR_lepBJets_lSFdn.push_back(lepton_lv.DeltaR(jet_lv));
+
+              if((lepton_lv + jet_lv).M() < minMleppBjet_lSFdn) {
+                minMleppBjet_lSFdn = fabs( (lepton_lv + jet_lv).M() );
+                deltaR_lepMinMlb_lSFdn = jet_lv.DeltaR(lepton_lv);
+              }
+        }
+
+        if(theJetDeepFlavB_JetSubCalc_PtOrdered.at(ijet) > btagWPdjet){
+              NJetsCSV_JetSubCalc += 1;
+        }
+        if(theJetBTag_JetSubCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_JetSubCalc += 1;
+        }
+        if(theJetBTag_bSFup_JetSubCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_JetSubCalc_bSFup += 1;
+        }
+        if(theJetBTag_bSFdn_JetSubCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_JetSubCalc_bSFdn += 1;
+        }
+        if(theJetBTag_lSFup_JetSubCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_JetSubCalc_lSFup += 1;
+        }
+        if(theJetBTag_lSFdn_JetSubCalc_PtOrdered.at(ijet) == 1){
+          NJetsCSVwithSF_JetSubCalc_lSFdn += 1;
+        }
+
+        if(jet_lv.DeltaPhi(nu) < minDPhi_MetJet) minDPhi_MetJet = jet_lv.DeltaPhi(nu);
+
+        if(deltaR_lepJets[ijet] < minDR_lepJet) {
+          minDR_lepJet = deltaR_lepJets[ijet];
+          ptRel_lepJet = lepton_lv.P()*(jet_lv.Vect().Cross(lepton_lv.Vect()).Mag()/jet_lv.P()/lepton_lv.P());
+        }
+      }
+
+      for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
+        minDR_jetJet = 1e8;
+        minDR_jetBJet = 1e8;
+        for(unsigned int kjet=0; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
+            if(ijet == kjet){continue;}
+            kjet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_BtagOrdered.at(kjet),theJetEta_JetSubCalc_PtOrdered.at(kjet),theJetPhi_JetSubCalc_PtOrdered.at(kjet),theJetEnergy_JetSubCalc_PtOrdered.at(kjet));
+            deltaR_jetJets = jet_lv.DeltaR(kjet_lv);
+            if(deltaR_jetJets < minDR_jetJet) {
+                minDR_jetJet = deltaR_jetJets;
+            }
+            if(AK4JetDeepCSVb_MultiLepCalc_PtOrdered.at(kjet) + AK4JetDeepCSVbb_MultiLepCalc_PtOrdered.at(kjet) > btagWPdcsv){
+              if(deltaR_jetJets < minDR_jetBJet) {
+                minDR_jetBJet = deltaR_jetJets;
+                }
+            }
+        }
+        minDR_jetJets.push_back(minDR_jetJet);
+        minDR_jetBJets.push_back(minDR_jetBJet);
+
+        TRFvpt_2Bp.push_back((hardcodedConditions.GetTRFvpt2pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
+        TRFvpt_3Bp.push_back((hardcodedConditions.GetTRFvpt3pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
+        TRFveta_2Bp.push_back((hardcodedConditions.GetTRFveta2pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
+        TRFveta_3Bp.push_back((hardcodedConditions.GetTRFveta3pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
+        TRFvmdr_2Bp.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
+        TRFvmdr_3Bp.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
 
       }
+
+       //avTRFvpt_2Bp = accumulate(TRFvpt_2Bp.begin(), TRFvpt_2Bp.end(), 0.0) / (TRFvpt_2Bp.size() - 2);
+       //avTRFvpt_3Bp = accumulate(TRFvpt_3Bp.begin(), TRFvpt_3Bp.end(), 0.0) / (TRFvpt_3Bp.size() - 3);
+       avTRFveta_2Bp = accumulate(TRFveta_2Bp.begin(), TRFveta_2Bp.end(), 0.0) / (TRFveta_2Bp.size() - 2);
+       avTRFveta_3Bp = accumulate(TRFveta_3Bp.begin(), TRFveta_3Bp.end(), 0.0) / (TRFveta_3Bp.size() - 3);
+       avTRFvmdr_2Bp = accumulate(TRFvmdr_2Bp.begin(), TRFvmdr_2Bp.end(), 0.0) / (TRFvmdr_2Bp.size() - 2);
+       avTRFvmdr_3Bp = accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0) / (TRFvmdr_3Bp.size() - 3);
+       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
+            TRFv3Var_2Bp.push_back(avTRFveta_2Bp * avTRFvmdr_2Bp * TRFveta_2Bp.at(ijet) * TRFvmdr_2Bp.at(ijet)) ;
+            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.att(ijet)) ;
+       }
+
+
+      Prob0_TrfvptTags2BpTmp = 1;
+      Prob1_TrfvptTags2BpTmp = 0;
+      Prob0_TrfvetaTags2BpTmp = 1;
+      Prob1_TrfvetaTags2BpTmp = 0;
+      Prob0_TrfvmdrTags2BpTmp = 1;
+      Prob1_TrfvmdrTags2BpTmp = 0;
+      Prob0_TrfTags2BpTmp = 1;
+      Prob1_TrfTags2BpTmp = 0;
+      for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
+        Prob0_TrfvptTags2BpTmp *= (1 - TRFvpt_2Bp[ijet]);
+        Prob0_TrfvetaTags2BpTmp *= (1 - TRFveta_2Bp[ijet]);
+        Prob0_TrfvmdrTags2BpTmp *= (1 - TRFvmdr_2Bp[ijet]);
+        Prob0_TrfTags2BpTmp *= (1 - TRFv3Var_2Bp[ijet]);
+
+        Prob1_TrfvptTags2BpTmp2 = TRFvpt_2Bp[ijet];
+        Prob1_TrfvetaTags2BpTmp2 = TRFveta_2Bp[ijet];
+        Prob1_TrfvmdrTags2BpTmp2 = TRFvmdr_2Bp[ijet];
+        Prob1_TrfTags2BpTmp2 = TRFv3Var_2Bp[ijet];
+        for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
+            if (kjet==ijet){
+                continue;
+            }
+            Prob1_TrfvptTags2BpTmp2 *= (1-TRFvpt_2Bp[kjet]);
+            Prob1_TrfvetaTags2BpTmp2 *= (1-TRFveta_2Bp[kjet]);
+            Prob1_TrfvmdrTags2BpTmp2 *= (1-TRFvmdr_2Bp[kjet]);
+            Prob1_TrfTags2BpTmp2 *= (1-TRFv3Var_2Bp[kjet]);
+        }
+        Prob1_TrfvptTags2BpTmp += Prob1_TrfvptTags2BpTmp2;
+        Prob1_TrfvetaTags2BpTmp += Prob1_TrfvetaTags2BpTmp2;
+        Prob1_TrfvmdrTags2BpTmp += Prob1_TrfvmdrTags2BpTmp2;
+        Prob1_TrfTags2BpTmp += Prob1_TrfTags2BpTmp2;
+      }
+      Prob0_TrfvptTags2Bp = Prob0_TrfvptTags2BpTmp;
+      Prob1_TrfvptTags2Bp = Prob1_TrfvptTags2BpTmp;
+      Prob2p_TrfvptTags2Bp = 1 - Prob0_TrfvptTags2Bp - Prob1_TrfvptTags2Bp;
+      Prob0_TrfvetaTags2Bp = Prob0_TrfvetaTags2BpTmp;
+      Prob1_TrfvetaTags2Bp = Prob1_TrfvetaTags2BpTmp;
+      Prob2p_TrfvetaTags2Bp = 1 - Prob0_TrfvetaTags2Bp - Prob1_TrfvetaTags2Bp;
+      Prob0_TrfvmdrTags2Bp = Prob0_TrfvmdrTags2BpTmp;
+      Prob1_TrfvmdrTags2Bp = Prob1_TrfvmdrTags2BpTmp;
+      Prob2p_TrfvmdrTags2Bp = 1 - Prob0_TrfvmdrTags2Bp - Prob1_TrfvmdrTags2Bp;
+      Prob0_TrfTags2Bp = Prob0_TrfTags2BpTmp;
+      Prob1_TrfTags2Bp = Prob1_TrfTags2BpTmp;
+      Prob2p_TrfTags2Bp = 1 - Prob0_TrfTags2Bp - Prob1_TrfTags2Bp;
+
+
+      Prob0_TrfvptTags3BpTmp = 1;
+      Prob1_TrfvptTags3BpTmp = 0;
+      Prob0_TrfvetaTags3BpTmp = 1;
+      Prob1_TrfvetaTags3BpTmp = 0;
+      Prob0_TrfvmdrTags3BpTmp = 1;
+      Prob1_TrfvmdrTags3BpTmp = 0;
+      Prob0_TrfTags3BpTmp = 1;
+      Prob1_TrfTags3BpTmp = 0;
+      for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
+        Prob0_TrfvptTags3BpTmp *= (1 - TRFvpt_3Bp[ijet]);
+        Prob0_TrfvetaTags3BpTmp *= (1 - TRFveta_3Bp[ijet]);
+        Prob0_TrfvmdrTags3BpTmp *= (1 - TRFvmdr_3Bp[ijet]);
+        Prob0_TrfTags3BpTmp *= (1 - TRFv3Var_3Bp[ijet]);
+
+        Prob1_TrfvptTags3BpTmp3 = TRFvpt_3Bp[ijet];
+        Prob1_TrfvetaTags3BpTmp3 = TRFveta_3Bp[ijet];
+        Prob1_TrfvmdrTags3BpTmp3 = TRFvmdr_3Bp[ijet];
+        Prob1_TrfTags3BpTmp3 = TRFv3Var_3Bp[ijet];
+        for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
+            if (kjet==ijet){
+                continue;
+            }
+            Prob1_TrfvptTags3BpTmp3 *= (1-TRFvpt_3Bp[kjet]);
+            Prob1_TrfvetaTags3BpTmp3 *= (1-TRFveta_3Bp[kjet]);
+            Prob1_TrfvmdrTags3BpTmp3 *= (1-TRFvmdr_3Bp[kjet]);
+            Prob1_TrfTags3BpTmp3 *= (1-TRFv3Var_3Bp[kjet]);
+        }
+        Prob1_TrfvptTags3BpTmp += Prob1_TrfvptTags3BpTmp3;
+        Prob1_TrfvetaTags3BpTmp += Prob1_TrfvetaTags3BpTmp3;
+        Prob1_TrfvmdrTags3BpTmp += Prob1_TrfvmdrTags3BpTmp3;
+        Prob1_TrfTags3BpTmp += Prob1_TrfTags3BpTmp3;
+      }
+      Prob0_TrfvptTags3Bp = Prob0_TrfvptTags3BpTmp;
+      Prob1_TrfvptTags3Bp = Prob1_TrfvptTags3BpTmp;
+      Prob2p_TrfvptTags3Bp = 1 - Prob0_TrfvptTags3Bp - Prob1_TrfvptTags3Bp;
+      Prob0_TrfvetaTags3Bp = Prob0_TrfvetaTags3BpTmp;
+      Prob1_TrfvetaTags3Bp = Prob1_TrfvetaTags3BpTmp;
+      Prob2p_TrfvetaTags3Bp = 1 - Prob0_TrfvetaTags3Bp - Prob1_TrfvetaTags3Bp;
+      Prob0_TrfvmdrTags3Bp = Prob0_TrfvmdrTags3BpTmp;
+      Prob1_TrfvmdrTags3Bp = Prob1_TrfvmdrTags3BpTmp;
+      Prob2p_TrfvmdrTags3Bp = 1 - Prob0_TrfvmdrTags3Bp - Prob1_TrfvmdrTags3Bp;
+      Prob0_TrfTags3Bp = Prob0_TrfTags3BpTmp;
+      Prob1_TrfTags3Bp = Prob1_TrfTags3BpTmp;
+      Prob2p_TrfTags3Bp = 1 - Prob0_TrfTags3Bp - Prob1_TrfTags3Bp;
+
 
       // ----------------------------------------------------------------------------
       // Skip events that fail # of btag requirement
