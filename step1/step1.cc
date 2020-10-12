@@ -512,7 +512,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("deltaR_lepBJets_lSFdn",&deltaR_lepBJets_lSFdn);
 
    //AK4 TRF related branches
-   outputTree->Branch("NJetTrfBtagged",&NJetTrfBtagged,"NJetTrfBtagged/I";
+   outputTree->Branch("NJetTrfBtagged",&NJetTrfBtagged,"NJetTrfBtagged/I");
 
    outputTree->Branch("TRFvpt_2Bp",&TRFvpt_2Bp);
    outputTree->Branch("TRFvpt_3Bp",&TRFvpt_3Bp);
@@ -1598,8 +1598,8 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         TRFvpt_3Bp.push_back((hardcodedConditions.GetTRFvpt3pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFveta_2Bp.push_back((hardcodedConditions.GetTRFveta2pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFveta_3Bp.push_back((hardcodedConditions.GetTRFveta3pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
-        TRFvmdr_2Bp.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
-        TRFvmdr_3Bp.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
+        TRFvmdr_2Bp.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
+        TRFvmdr_3Bp.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
 
       }
 
@@ -1611,7 +1611,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
        avTRFvmdr_3Bp = accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0) / (TRFvmdr_3Bp.size() - 3);
        for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
             TRFv3Var_2Bp.push_back(avTRFveta_2Bp * avTRFvmdr_2Bp * TRFveta_2Bp.at(ijet) * TRFvmdr_2Bp.at(ijet)) ;
-            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.att(ijet)) ;
+            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.at(ijet)) ;
        }
 
 
@@ -1675,23 +1675,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         Prob0_TrfvmdrTags3BpTmp *= (1 - TRFvmdr_3Bp[ijet]);
         Prob0_TrfTags3BpTmp *= (1 - TRFv3Var_3Bp[ijet]);
 
-        Prob1_TrfvptTags3BpTmp3 = TRFvpt_3Bp[ijet];
-        Prob1_TrfvetaTags3BpTmp3 = TRFveta_3Bp[ijet];
-        Prob1_TrfvmdrTags3BpTmp3 = TRFvmdr_3Bp[ijet];
-        Prob1_TrfTags3BpTmp3 = TRFv3Var_3Bp[ijet];
+        Prob1_TrfvptTags3BpTmp2 = TRFvpt_3Bp[ijet];
+        Prob1_TrfvetaTags3BpTmp2 = TRFveta_3Bp[ijet];
+        Prob1_TrfvmdrTags3BpTmp2 = TRFvmdr_3Bp[ijet];
+        Prob1_TrfTags3BpTmp2 = TRFv3Var_3Bp[ijet];
         for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags3BpTmp3 *= (1-TRFvpt_3Bp[kjet]);
-            Prob1_TrfvetaTags3BpTmp3 *= (1-TRFveta_3Bp[kjet]);
-            Prob1_TrfvmdrTags3BpTmp3 *= (1-TRFvmdr_3Bp[kjet]);
-            Prob1_TrfTags3BpTmp3 *= (1-TRFv3Var_3Bp[kjet]);
+            Prob1_TrfvptTags3BpTmp2 *= (1-TRFvpt_3Bp[kjet]);
+            Prob1_TrfvetaTags3BpTmp2 *= (1-TRFveta_3Bp[kjet]);
+            Prob1_TrfvmdrTags3BpTmp2 *= (1-TRFvmdr_3Bp[kjet]);
+            Prob1_TrfTags3BpTmp2 *= (1-TRFv3Var_3Bp[kjet]);
         }
-        Prob1_TrfvptTags3BpTmp += Prob1_TrfvptTags3BpTmp3;
-        Prob1_TrfvetaTags3BpTmp += Prob1_TrfvetaTags3BpTmp3;
-        Prob1_TrfvmdrTags3BpTmp += Prob1_TrfvmdrTags3BpTmp3;
-        Prob1_TrfTags3BpTmp += Prob1_TrfTags3BpTmp3;
+        Prob1_TrfvptTags3BpTmp += Prob1_TrfvptTags3BpTmp2;
+        Prob1_TrfvetaTags3BpTmp += Prob1_TrfvetaTags3BpTmp2;
+        Prob1_TrfvmdrTags3BpTmp += Prob1_TrfvmdrTags3BpTmp2;
+        Prob1_TrfTags3BpTmp += Prob1_TrfTags3BpTmp2;
       }
       Prob0_TrfvptTags3Bp = Prob0_TrfvptTags3BpTmp;
       Prob1_TrfvptTags3Bp = Prob1_TrfvptTags3BpTmp;
