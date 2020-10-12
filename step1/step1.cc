@@ -512,8 +512,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("deltaR_lepBJets_lSFdn",&deltaR_lepBJets_lSFdn);
 
    //AK4 TRF related branches
-//   outputTree->Branch("NJetTrfBtagged",&NJetTrfBtagged,"NJetTrfBtagged/I");
-//   outputTree->Branch("BJetLeadPt_viaTRF",&BJetLeadPt_viaTRF,"BJetLeadPt_viaTRF/F");
+   outputTree->Branch("NJetTrfBtagged",&NJetTrfBtagged,"NJetTrfBtagged/I";
 
    outputTree->Branch("TRFvpt_2Bp",&TRFvpt_2Bp);
    outputTree->Branch("TRFvpt_3Bp",&TRFvpt_3Bp);
@@ -523,19 +522,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("Prob0_TrfvptTags3Bp",&Prob0_TrfvptTags3Bp, "Prob0_TrfvptTags3Bp/D");
    outputTree->Branch("Prob1_TrfvptTags3Bp",&Prob1_TrfvptTags3Bp, "Prob1_TrfvptTags3Bp/D");
    outputTree->Branch("Prob2p_TrfvptTags3Bp",&Prob2p_TrfvptTags3Bp, "Prob2p_TrfvptTags3Bp/D");
-   outputTree->Branch("Prob0_TrfvptTags2BpUp",&Prob0_TrfvptTags2BpUp, "Prob0_TrfvptTags2BpUp/D");
-   outputTree->Branch("Prob1_TrfvptTags2BpUp",&Prob1_TrfvptTags2BpUp, "Prob1_TrfvptTags2BpUp/D");
-   outputTree->Branch("Prob2p_TrfvptTags2BpUp",&Prob2p_TrfvptTags2BpUp, "Prob2p_TrfvptTags2BpUp/D");
-   outputTree->Branch("Prob0_TrfvptTags3BpUp",&Prob0_TrfvptTags3BpUp, "Prob0_TrfvptTags3BpUp/D");
-   outputTree->Branch("Prob1_TrfvptTags3BpUp",&Prob1_TrfvptTags3BpUp, "Prob1_TrfvptTags3BpUp/D");
-   outputTree->Branch("Prob2p_TrfvptTags3BpUp",&Prob2p_TrfvptTags3BpUp, "Prob2p_TrfvptTags3BpUp/D");
-   outputTree->Branch("Prob0_TrfvptTags2BpDn",&Prob0_TrfvptTags2BpDn, "Prob0_TrfvptTags2BpDn/D");
-   outputTree->Branch("Prob1_TrfvptTags2BpDn",&Prob1_TrfvptTags2BpDn, "Prob1_TrfvptTags2BpDn/D");
-   outputTree->Branch("Prob2p_TrfvptTags2BpDn",&Prob2p_TrfvptTags2BpDn, "Prob2p_TrfvptTags2BpDn/D");
-   outputTree->Branch("Prob0_TrfvptTags3BpDn",&Prob0_TrfvptTags3BpDn, "Prob0_TrfvptTags3BpDn/D");
-   outputTree->Branch("Prob1_TrfvptTags3BpDn",&Prob1_TrfvptTags3BpDn, "Prob1_TrfvptTags3BpDn/D");
-   outputTree->Branch("Prob2p_TrfvptTags3BpDn",&Prob2p_TrfvptTags3BpDn, "Prob2p_TrfvptTags3BpDn/D");
-
 
    outputTree->Branch("TRFveta_2Bp",&TRFveta_2Bp);
    outputTree->Branch("TRFveta_3Bp",&TRFveta_3Bp);
@@ -545,18 +531,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("Prob0_TrfvetaTags3Bp",&Prob0_TrfvetaTags3Bp, "Prob0_TrfvetaTags3Bp/D");
    outputTree->Branch("Prob1_TrfvetaTags3Bp",&Prob1_TrfvetaTags3Bp, "Prob1_TrfvetaTags3Bp/D");
    outputTree->Branch("Prob2p_TrfvetaTags3Bp",&Prob2p_TrfvetaTags3Bp, "Prob2p_TrfvetaTags3Bp/D");
-   outputTree->Branch("Prob0_TrfvetaTags2BpUp",&Prob0_TrfvetaTags2BpUp, "Prob0_TrfvetaTags2BpUp/D");
-   outputTree->Branch("Prob1_TrfvetaTags2BpUp",&Prob1_TrfvetaTags2BpUp, "Prob1_TrfvetaTags2BpUp/D");
-   outputTree->Branch("Prob2p_TrfvetaTags2BpUp",&Prob2p_TrfvetaTags2BpUp, "Prob2p_TrfvetaTags2BpUp/D");
-   outputTree->Branch("Prob0_TrfvetaTags3BpUp",&Prob0_TrfvetaTags3BpUp, "Prob0_TrfvetaTags3BpUp/D");
-   outputTree->Branch("Prob1_TrfvetaTags3BpUp",&Prob1_TrfvetaTags3BpUp, "Prob1_TrfvetaTags3BpUp/D");
-   outputTree->Branch("Prob2p_TrfvetaTags3BpUp",&Prob2p_TrfvetaTags3BpUp, "Prob2p_TrfvetaTags3BpUp/D");
-   outputTree->Branch("Prob0_TrfvetaTags2BpDn",&Prob0_TrfvetaTags2BpDn, "Prob0_TrfvetaTags2BpDn/D");
-   outputTree->Branch("Prob1_TrfvetaTags2BpDn",&Prob1_TrfvetaTags2BpDn, "Prob1_TrfvetaTags2BpDn/D");
-   outputTree->Branch("Prob2p_TrfvetaTags2BpDn",&Prob2p_TrfvetaTags2BpDn, "Prob2p_TrfvetaTags2BpDn/D");
-   outputTree->Branch("Prob0_TrfvetaTags3BpDn",&Prob0_TrfvetaTags3BpDn, "Prob0_TrfvetaTags3BpDn/D");
-   outputTree->Branch("Prob1_TrfvetaTags3BpDn",&Prob1_TrfvetaTags3BpDn, "Prob1_TrfvetaTags3BpDn/D");
-   outputTree->Branch("Prob2p_TrfvetaTags3BpDn",&Prob2p_TrfvetaTags3BpDn, "Prob2p_TrfvetaTags3BpDn/D");
 
    outputTree->Branch("TRFvmdr_2Bp",&TRFvmdr_2Bp);
    outputTree->Branch("TRFvmdr_3Bp",&TRFvmdr_3Bp);
@@ -566,39 +540,15 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("Prob0_TrfvmdrTags3Bp",&Prob0_TrfvmdrTags3Bp, "Prob0_TrfvmdrTags3Bp/D");
    outputTree->Branch("Prob1_TrfvmdrTags3Bp",&Prob1_TrfvmdrTags3Bp, "Prob1_TrfvmdrTags3Bp/D");
    outputTree->Branch("Prob1p_TrfvmdrTags3Bp",&Prob2p_TrfvmdrTags3Bp, "Prob2p_TrfvmdrTags3Bp/D");
-   outputTree->Branch("Prob0_TrfvmdrTags2BpUp",&Prob0_TrfvmdrTags2BpUp, "Prob0_TrfvmdrTags2BpUp/D");
-   outputTree->Branch("Prob1_TrfvmdrTags2BpUp",&Prob1_TrfvmdrTags2BpUp, "Prob1_TrfvmdrTags2BpUp/D");
-   outputTree->Branch("Prob1p_TrfvmdrTags2BpUp",&Prob2p_TrfvmdrTags2BpUp, "Prob2p_TrfvmdrTags2BpUp/D");
-   outputTree->Branch("Prob0_TrfvmdrTags3BpUp",&Prob0_TrfvmdrTags3BpUp, "Prob0_TrfvmdrTags3BpUp/D");
-   outputTree->Branch("Prob1_TrfvmdrTags3BpUp",&Prob1_TrfvmdrTags3BpUp, "Prob1_TrfvmdrTags3BpUp/D");
-   outputTree->Branch("Prob1p_TrfvmdrTags3BpUp",&Prob2p_TrfvmdrTags3BpUp, "Prob2p_TrfvmdrTags3BpUp/D");
-   outputTree->Branch("Prob0_TrfvmdrTags2BpDn",&Prob0_TrfvmdrTags2BpDn, "Prob0_TrfvmdrTags2BpDn/D");
-   outputTree->Branch("Prob1_TrfvmdrTags2BpDn",&Prob1_TrfvmdrTags2BpDn, "Prob1_TrfvmdrTags2BpDn/D");
-   outputTree->Branch("Prob1p_TrfvmdrTags2BpDn",&Prob2p_TrfvmdrTags2BpDn, "Prob2p_TrfvmdrTags2BpDn/D");
-   outputTree->Branch("Prob0_TrfvmdrTags3BpDn",&Prob0_TrfvmdrTags3BpDn, "Prob0_TrfvmdrTags3BpDn/D");
-   outputTree->Branch("Prob1_TrfvmdrTags3BpDn",&Prob1_TrfvmdrTags3BpDn, "Prob1_TrfvmdrTags3BpDn/D");
-   outputTree->Branch("Prob1p_TrfvmdrTags3BpDn",&Prob2p_TrfvmdrTags3BpDn, "Prob2p_TrfvmdrTags3BpDn/D");
 
-   outputTree->Branch("TRFv3Var_2Bp",&TRFv3Var_2Bp);
-   outputTree->Branch("TRFv3Var_3Bp",&TRFv3Var_3Bp);
+   outputTree->Branch("TRFv3Var_2Bp",&TRFvmdr_2Bp);
+   outputTree->Branch("TRFv3Var_3Bp",&TRFvmdr_3Bp);
    outputTree->Branch("Prob0_TrfTags2Bp",&Prob0_TrfTags2Bp, "Prob0_TrfTags2Bp/D");
    outputTree->Branch("Prob1_TrfTags2Bp",&Prob1_TrfTags2Bp, "Prob1_TrfTags2Bp/D");
    outputTree->Branch("Prob2p_TrfTags2Bp",&Prob2p_TrfTags2Bp, "Prob2p_TrfTags2Bp/D");
    outputTree->Branch("Prob0_TrfTags3Bp",&Prob0_TrfTags3Bp, "Prob0_TrfTags3Bp/D");
    outputTree->Branch("Prob1_TrfTags3Bp",&Prob1_TrfTags3Bp, "Prob1_TrfTags3Bp/D");
    outputTree->Branch("Prob2p_TrfTags3Bp",&Prob2p_TrfTags3Bp, "Prob2p_TrfTags3Bp/D");
-   outputTree->Branch("Prob0_TrfTags2BpUp",&Prob0_TrfTags2BpUp, "Prob0_TrfTags2BpUp/D");
-   outputTree->Branch("Prob1_TrfTags2BpUp",&Prob1_TrfTags2BpUp, "Prob1_TrfTags2BpUp/D");
-   outputTree->Branch("Prob2p_TrfTags2BpUp",&Prob2p_TrfTags2BpUp, "Prob2p_TrfTags2BpUp/D");
-   outputTree->Branch("Prob0_TrfTags3BpUp",&Prob0_TrfTags3BpUp, "Prob0_TrfTags3BpUp/D");
-   outputTree->Branch("Prob1_TrfTags3BpUp",&Prob1_TrfTags3BpUp, "Prob1_TrfTags3BpUp/D");
-   outputTree->Branch("Prob2p_TrfTags3BpUp",&Prob2p_TrfTags3BpUp, "Prob2p_TrfTags3BpUp/D");
-   outputTree->Branch("Prob0_TrfTags2BpDn",&Prob0_TrfTags2BpDn, "Prob0_TrfTags2BpDn/D");
-   outputTree->Branch("Prob1_TrfTags2BpDn",&Prob1_TrfTags2BpDn, "Prob1_TrfTags2BpDn/D");
-   outputTree->Branch("Prob2p_TrfTags2BpDn",&Prob2p_TrfTags2BpDn, "Prob2p_TrfTags2BpDn/D");
-   outputTree->Branch("Prob0_TrfTags3BpDn",&Prob0_TrfTags3BpDn, "Prob0_TrfTags3BpDn/D");
-   outputTree->Branch("Prob1_TrfTags3BpDn",&Prob1_TrfTags3BpDn, "Prob1_TrfTags3BpDn/D");
-   outputTree->Branch("Prob2p_TrfTags3BpDn",&Prob2p_TrfTags3BpDn, "Prob2p_TrfTags3BpDn/D");
 
    // AK4 gen
    outputTree->Branch("genPt_MultiLepCalc",&genPt_MultiLepCalc);
@@ -1483,15 +1433,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       TRFv3Var_2Bp.clear();
       TRFv3Var_3Bp.clear();
 
-      TRFvpt_2BpErr.clear();
-      TRFvpt_3BpErr.clear();
-      TRFveta_2BpErr.clear();
-      TRFveta_3BpErr.clear();
-      TRFvmdr_2BpErr.clear();
-      TRFvmdr_3BpErr.clear();
-      TRFv3Var_2BpErr.clear();
-      TRFv3Var_3BpErr.clear();
-
       BJetLeadPt = -99;
       BJetLeadPt_bSFup = -99;
       BJetLeadPt_bSFdn = -99;
@@ -1657,18 +1598,8 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         TRFvpt_3Bp.push_back((hardcodedConditions.GetTRFvpt3pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFveta_2Bp.push_back((hardcodedConditions.GetTRFveta2pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFveta_3Bp.push_back((hardcodedConditions.GetTRFveta3pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
-        TRFvmdr_2Bp.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
-        TRFvmdr_3Bp.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
-
-        TRFvpt_2BpErr.push_back((hardcodedConditions.GetTRFvpt2pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-        TRFvpt_3BpErr.push_back((hardcodedConditions.GetTRFvpt3pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-        TRFveta_2BpErr.push_back((hardcodedConditions.GetTRFveta2pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-        TRFveta_3BpErr.push_back((hardcodedConditions.GetTRFveta3pb(theJetEta_JetSubCalc_PtOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-        TRFvmdr_2BpErr.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-        TRFvmdr_3BpErr.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
-
-        TRFv3Var_2Bp.push_back( sqrt( pow((TRFvpt_2BpErr[ijet]),2) * pow((TRFveta_2BpErr[ijet]),2) * pow((TRFvmdr_2BpErr[ijet]),2) ));
-        TRFv3Var_3Bp.push_back( sqrt( pow((TRFvpt_3BpErr[ijet]),2) * pow((TRFveta_3BpErr[ijet]),2) * pow((TRFvmdr_3BpErr[ijet]),2) ));
+        TRFvmdr_2Bp.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
+        TRFvmdr_3Bp.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets, NJets_JetSubCalc, Year, isMC)).first);
 
       }
 
@@ -1680,232 +1611,100 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
        avTRFvmdr_3Bp = accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0) / (TRFvmdr_3Bp.size() - 3);
        for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
             TRFv3Var_2Bp.push_back(avTRFveta_2Bp * avTRFvmdr_2Bp * TRFveta_2Bp.at(ijet) * TRFvmdr_2Bp.at(ijet)) ;
-            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.at(ijet)) ;
+            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.att(ijet)) ;
        }
 
 
-      Prob0_TrfvptTags2Bp = 1;
-      Prob1_TrfvptTags2Bp = 0;
-      Prob0_TrfvetaTags2Bp = 1;
-      Prob1_TrfvetaTags2Bp = 0;
-      Prob0_TrfvmdrTags2Bp = 1;
-      Prob1_TrfvmdrTags2Bp = 0;
-      Prob0_TrfTags2Bp = 1;
-      Prob1_TrfTags2Bp = 0;
+      Prob0_TrfvptTags2BpTmp = 1;
+      Prob1_TrfvptTags2BpTmp = 0;
+      Prob0_TrfvetaTags2BpTmp = 1;
+      Prob1_TrfvetaTags2BpTmp = 0;
+      Prob0_TrfvmdrTags2BpTmp = 1;
+      Prob1_TrfvmdrTags2BpTmp = 0;
+      Prob0_TrfTags2BpTmp = 1;
+      Prob1_TrfTags2BpTmp = 0;
       for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2Bp *= (1 - TRFvpt_2Bp[ijet]);
-        Prob0_TrfvetaTags2Bp *= (1 - TRFveta_2Bp[ijet]);
-        Prob0_TrfvmdrTags2Bp *= (1 - TRFvmdr_2Bp[ijet]);
-        Prob0_TrfTags2Bp *= (1 - TRFv3Var_2Bp[ijet]);
+        Prob0_TrfvptTags2BpTmp *= (1 - TRFvpt_2Bp[ijet]);
+        Prob0_TrfvetaTags2BpTmp *= (1 - TRFveta_2Bp[ijet]);
+        Prob0_TrfvmdrTags2BpTmp *= (1 - TRFvmdr_2Bp[ijet]);
+        Prob0_TrfTags2BpTmp *= (1 - TRFv3Var_2Bp[ijet]);
 
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet];
+        Prob1_TrfvptTags2BpTmp2 = TRFvpt_2Bp[ijet];
+        Prob1_TrfvetaTags2BpTmp2 = TRFveta_2Bp[ijet];
+        Prob1_TrfvmdrTags2BpTmp2 = TRFvmdr_2Bp[ijet];
+        Prob1_TrfTags2BpTmp2 = TRFv3Var_2Bp[ijet];
         for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet]);
+            Prob1_TrfvptTags2BpTmp2 *= (1-TRFvpt_2Bp[kjet]);
+            Prob1_TrfvetaTags2BpTmp2 *= (1-TRFveta_2Bp[kjet]);
+            Prob1_TrfvmdrTags2BpTmp2 *= (1-TRFvmdr_2Bp[kjet]);
+            Prob1_TrfTags2BpTmp2 *= (1-TRFv3Var_2Bp[kjet]);
         }
-        Prob1_TrfvptTags2Bp += Prob1_TrfvptTags2BpTmp;
-        Prob1_TrfvetaTags2Bp += Prob1_TrfvetaTags2BpTmp;
-        Prob1_TrfvmdrTags2Bp += Prob1_TrfvmdrTags2BpTmp;
-        Prob1_TrfTags2Bp += Prob1_TrfTags2BpTmp;
+        Prob1_TrfvptTags2BpTmp += Prob1_TrfvptTags2BpTmp2;
+        Prob1_TrfvetaTags2BpTmp += Prob1_TrfvetaTags2BpTmp2;
+        Prob1_TrfvmdrTags2BpTmp += Prob1_TrfvmdrTags2BpTmp2;
+        Prob1_TrfTags2BpTmp += Prob1_TrfTags2BpTmp2;
       }
+      Prob0_TrfvptTags2Bp = Prob0_TrfvptTags2BpTmp;
+      Prob1_TrfvptTags2Bp = Prob1_TrfvptTags2BpTmp;
       Prob2p_TrfvptTags2Bp = 1 - Prob0_TrfvptTags2Bp - Prob1_TrfvptTags2Bp;
+      Prob0_TrfvetaTags2Bp = Prob0_TrfvetaTags2BpTmp;
+      Prob1_TrfvetaTags2Bp = Prob1_TrfvetaTags2BpTmp;
       Prob2p_TrfvetaTags2Bp = 1 - Prob0_TrfvetaTags2Bp - Prob1_TrfvetaTags2Bp;
+      Prob0_TrfvmdrTags2Bp = Prob0_TrfvmdrTags2BpTmp;
+      Prob1_TrfvmdrTags2Bp = Prob1_TrfvmdrTags2BpTmp;
       Prob2p_TrfvmdrTags2Bp = 1 - Prob0_TrfvmdrTags2Bp - Prob1_TrfvmdrTags2Bp;
+      Prob0_TrfTags2Bp = Prob0_TrfTags2BpTmp;
+      Prob1_TrfTags2Bp = Prob1_TrfTags2BpTmp;
       Prob2p_TrfTags2Bp = 1 - Prob0_TrfTags2Bp - Prob1_TrfTags2Bp;
 
-      Prob0_TrfvptTags2BpUp = 1;
-      Prob1_TrfvptTags2BpUp = 0;
-      Prob0_TrfvetaTags2BpUp = 1;
-      Prob1_TrfvetaTags2BpUp = 0;
-      Prob0_TrfvmdrTags2BpUp = 1;
-      Prob1_TrfvmdrTags2BpUp = 0;
-      Prob0_TrfTags2BpUp = 1;
-      Prob1_TrfTags2BpUp = 0;
-      for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2BpUp *= (1 - TRFvpt_2Bp[ijet] + TRFvpt_2BpErr[ijet]);
-        Prob0_TrfvetaTags2BpUp *= (1 - TRFveta_2Bp[ijet] + TRFveta_2BpErr[ijet]);
-        Prob0_TrfvmdrTags2BpUp *= (1 - TRFvmdr_2Bp[ijet] + TRFvmdr_2BpErr[ijet]);
-        Prob0_TrfTags2BpUp *= (1 - TRFv3Var_2Bp[ijet] + TRFv3Var_2BpErr[ijet]);
 
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet] + TRFvpt_2BpErr[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet]  + TRFveta_2BpErr[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet] + TRFvmdr_2BpErr[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet] + TRFv3Var_2BpErr[ijet];
-        for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
-            if (kjet==ijet){
-                continue;
-            }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet] + TRFvpt_2BpErr[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet] + TRFveta_2BpErr[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet] + TRFvmdr_2BpErr[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet] + TRFv3Var_2BpErr[kjet]);
-        }
-        Prob1_TrfvptTags2BpUp += Prob1_TrfvptTags2BpTmp;
-        Prob1_TrfvetaTags2BpUp += Prob1_TrfvetaTags2BpTmp;
-        Prob1_TrfvmdrTags2BpUp += Prob1_TrfvmdrTags2BpTmp;
-        Prob1_TrfTags2BpUp += Prob1_TrfTags2BpTmp;
-      }
-      Prob2p_TrfvptTags2BpUp = 1 - Prob0_TrfvptTags2BpUp - Prob1_TrfvptTags2BpUp;
-      Prob2p_TrfvetaTags2BpUp = 1 - Prob0_TrfvetaTags2Bp - Prob1_TrfvetaTags2BpUp;
-      Prob2p_TrfvmdrTags2BpUp = 1 - Prob0_TrfvmdrTags2Bp - Prob1_TrfvmdrTags2BpUp;
-      Prob2p_TrfTags2BpUp = 1 - Prob0_TrfTags2BpUp - Prob1_TrfTags2BpUp;
-
-      Prob0_TrfvptTags2BpDn = 1;
-      Prob1_TrfvptTags2BpDn = 0;
-      Prob0_TrfvetaTags2BpDn = 1;
-      Prob1_TrfvetaTags2BpDn = 0;
-      Prob0_TrfvmdrTags2BpDn = 1;
-      Prob1_TrfvmdrTags2BpDn = 0;
-      Prob0_TrfTags2BpDn = 1;
-      Prob1_TrfTags2BpDn = 0;
-      for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2BpDn *= (1 - TRFvpt_2Bp[ijet] - TRFvpt_2BpErr[ijet]);
-        Prob0_TrfvetaTags2BpDn *= (1 - TRFveta_2Bp[ijet] - TRFveta_2BpErr[ijet]);
-        Prob0_TrfvmdrTags2BpDn *= (1 - TRFvmdr_2Bp[ijet] - TRFvmdr_2BpErr[ijet]);
-        Prob0_TrfTags2BpDn *= (1 - TRFv3Var_2Bp[ijet] - TRFv3Var_2BpErr[ijet]);
-
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet] - TRFvpt_2BpErr[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet]  - TRFveta_2BpErr[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet] - TRFvmdr_2BpErr[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet] - TRFv3Var_2BpErr[ijet];
-        for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
-            if (kjet==ijet){
-                continue;
-            }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet] - TRFvpt_2BpErr[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet] - TRFveta_2BpErr[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet] - TRFvmdr_2BpErr[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet] - TRFv3Var_2BpErr[kjet]);
-        }
-        Prob1_TrfvptTags2BpDn += Prob1_TrfvptTags2BpTmp;
-        Prob1_TrfvetaTags2BpDn += Prob1_TrfvetaTags2BpTmp;
-        Prob1_TrfvmdrTags2BpDn += Prob1_TrfvmdrTags2BpTmp;
-        Prob1_TrfTags2BpDn += Prob1_TrfTags2BpTmp;
-      }
-      Prob2p_TrfvptTags2BpDn = 1 - Prob0_TrfvptTags2BpDn - Prob1_TrfvptTags2BpDn;
-      Prob2p_TrfvetaTags2BpDn = 1 - Prob0_TrfvetaTags2Bp - Prob1_TrfvetaTags2BpDn;
-      Prob2p_TrfvmdrTags2BpDn = 1 - Prob0_TrfvmdrTags2Bp - Prob1_TrfvmdrTags2BpDn;
-      Prob2p_TrfTags2BpDn = 1 - Prob0_TrfTags2BpDn - Prob1_TrfTags2BpDn;
-
-
-      Prob0_TrfvptTags3Bp = 1;
-      Prob1_TrfvptTags3Bp = 0;
-      Prob0_TrfvetaTags3Bp = 1;
-      Prob1_TrfvetaTags3Bp = 0;
-      Prob0_TrfvmdrTags3Bp = 1;
-      Prob1_TrfvmdrTags3Bp = 0;
-      Prob0_TrfTags3Bp = 1;
-      Prob1_TrfTags3Bp = 0;
+      Prob0_TrfvptTags3BpTmp = 1;
+      Prob1_TrfvptTags3BpTmp = 0;
+      Prob0_TrfvetaTags3BpTmp = 1;
+      Prob1_TrfvetaTags3BpTmp = 0;
+      Prob0_TrfvmdrTags3BpTmp = 1;
+      Prob1_TrfvmdrTags3BpTmp = 0;
+      Prob0_TrfTags3BpTmp = 1;
+      Prob1_TrfTags3BpTmp = 0;
       for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3Bp *= (1 - TRFvpt_3Bp[ijet]);
-        Prob0_TrfvetaTags3Bp *= (1 - TRFveta_3Bp[ijet]);
-        Prob0_TrfvmdrTags3Bp *= (1 - TRFvmdr_3Bp[ijet]);
-        Prob0_TrfTags3Bp *= (1 - TRFv3Var_3Bp[ijet]);
+        Prob0_TrfvptTags3BpTmp *= (1 - TRFvpt_3Bp[ijet]);
+        Prob0_TrfvetaTags3BpTmp *= (1 - TRFveta_3Bp[ijet]);
+        Prob0_TrfvmdrTags3BpTmp *= (1 - TRFvmdr_3Bp[ijet]);
+        Prob0_TrfTags3BpTmp *= (1 - TRFv3Var_3Bp[ijet]);
 
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet];
+        Prob1_TrfvptTags3BpTmp3 = TRFvpt_3Bp[ijet];
+        Prob1_TrfvetaTags3BpTmp3 = TRFveta_3Bp[ijet];
+        Prob1_TrfvmdrTags3BpTmp3 = TRFvmdr_3Bp[ijet];
+        Prob1_TrfTags3BpTmp3 = TRFv3Var_3Bp[ijet];
         for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet]);
+            Prob1_TrfvptTags3BpTmp3 *= (1-TRFvpt_3Bp[kjet]);
+            Prob1_TrfvetaTags3BpTmp3 *= (1-TRFveta_3Bp[kjet]);
+            Prob1_TrfvmdrTags3BpTmp3 *= (1-TRFvmdr_3Bp[kjet]);
+            Prob1_TrfTags3BpTmp3 *= (1-TRFv3Var_3Bp[kjet]);
         }
-        Prob1_TrfvptTags3Bp += Prob1_TrfvptTags3BpTmp;
-        Prob1_TrfvetaTags3Bp += Prob1_TrfvetaTags3BpTmp;
-        Prob1_TrfvmdrTags3Bp += Prob1_TrfvmdrTags3BpTmp;
-        Prob1_TrfTags3Bp += Prob1_TrfTags3BpTmp;
+        Prob1_TrfvptTags3BpTmp += Prob1_TrfvptTags3BpTmp3;
+        Prob1_TrfvetaTags3BpTmp += Prob1_TrfvetaTags3BpTmp3;
+        Prob1_TrfvmdrTags3BpTmp += Prob1_TrfvmdrTags3BpTmp3;
+        Prob1_TrfTags3BpTmp += Prob1_TrfTags3BpTmp3;
       }
+      Prob0_TrfvptTags3Bp = Prob0_TrfvptTags3BpTmp;
+      Prob1_TrfvptTags3Bp = Prob1_TrfvptTags3BpTmp;
       Prob2p_TrfvptTags3Bp = 1 - Prob0_TrfvptTags3Bp - Prob1_TrfvptTags3Bp;
+      Prob0_TrfvetaTags3Bp = Prob0_TrfvetaTags3BpTmp;
+      Prob1_TrfvetaTags3Bp = Prob1_TrfvetaTags3BpTmp;
       Prob2p_TrfvetaTags3Bp = 1 - Prob0_TrfvetaTags3Bp - Prob1_TrfvetaTags3Bp;
+      Prob0_TrfvmdrTags3Bp = Prob0_TrfvmdrTags3BpTmp;
+      Prob1_TrfvmdrTags3Bp = Prob1_TrfvmdrTags3BpTmp;
       Prob2p_TrfvmdrTags3Bp = 1 - Prob0_TrfvmdrTags3Bp - Prob1_TrfvmdrTags3Bp;
+      Prob0_TrfTags3Bp = Prob0_TrfTags3BpTmp;
+      Prob1_TrfTags3Bp = Prob1_TrfTags3BpTmp;
       Prob2p_TrfTags3Bp = 1 - Prob0_TrfTags3Bp - Prob1_TrfTags3Bp;
-
-      Prob0_TrfvptTags3BpUp = 1;
-      Prob1_TrfvptTags3BpUp = 0;
-      Prob0_TrfvetaTags3BpUp = 1;
-      Prob1_TrfvetaTags3BpUp = 0;
-      Prob0_TrfvmdrTags3BpUp = 1;
-      Prob1_TrfvmdrTags3BpUp = 0;
-      Prob0_TrfTags3BpUp = 1;
-      Prob1_TrfTags3BpUp = 0;
-      for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3BpUp *= (1 - TRFvpt_3Bp[ijet] + TRFvpt_3BpErr[ijet]);
-        Prob0_TrfvetaTags3BpUp *= (1 - TRFveta_3Bp[ijet] + TRFveta_3BpErr[ijet]);
-        Prob0_TrfvmdrTags3BpUp *= (1 - TRFvmdr_3Bp[ijet] + TRFvmdr_3BpErr[ijet]);
-        Prob0_TrfTags3BpUp *= (1 - TRFv3Var_3Bp[ijet] + TRFv3Var_3BpErr[ijet]);
-
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet] + TRFvpt_3BpErr[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet] + TRFveta_3BpErr[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet] + TRFvmdr_3BpErr[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet] + TRFv3Var_3BpErr[ijet];
-        for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
-            if (kjet==ijet){
-                continue;
-            }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet] + TRFvpt_3BpErr[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet] + TRFveta_3BpErr[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet] + TRFvmdr_3BpErr[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet] + TRFv3Var_3BpErr[kjet]);
-        }
-        Prob1_TrfvptTags3BpUp += Prob1_TrfvptTags3BpTmp;
-        Prob1_TrfvetaTags3BpUp += Prob1_TrfvetaTags3BpTmp;
-        Prob1_TrfvmdrTags3BpUp += Prob1_TrfvmdrTags3BpTmp;
-        Prob1_TrfTags3BpUp += Prob1_TrfTags3BpTmp;
-      }
-      Prob2p_TrfvptTags3BpUp = 1 - Prob0_TrfvptTags3BpUp - Prob1_TrfvptTags3BpUp;
-      Prob2p_TrfvetaTags3BpUp = 1 - Prob0_TrfvetaTags3BpUp - Prob1_TrfvetaTags3BpUp;
-      Prob2p_TrfvmdrTags3BpUp = 1 - Prob0_TrfvmdrTags3BpUp - Prob1_TrfvmdrTags3BpUp;
-      Prob2p_TrfTags3BpUp = 1 - Prob0_TrfTags3BpUp - Prob1_TrfTags3BpUp;
-
-      Prob0_TrfvptTags3BpDn = 1;
-      Prob1_TrfvptTags3BpDn = 0;
-      Prob0_TrfvetaTags3BpDn = 1;
-      Prob1_TrfvetaTags3BpDn = 0;
-      Prob0_TrfvmdrTags3BpDn = 1;
-      Prob1_TrfvmdrTags3BpDn = 0;
-      Prob0_TrfTags3BpDn = 1;
-      Prob1_TrfTags3BpDn = 0;
-      for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3BpDn *= (1 - TRFvpt_3Bp[ijet] - TRFvpt_3BpErr[ijet]);
-        Prob0_TrfvetaTags3BpDn *= (1 - TRFveta_3Bp[ijet] - TRFveta_3BpErr[ijet]);
-        Prob0_TrfvmdrTags3BpDn *= (1 - TRFvmdr_3Bp[ijet] - TRFvmdr_3BpErr[ijet]);
-        Prob0_TrfTags3BpDn *= (1 - TRFv3Var_3Bp[ijet] - TRFv3Var_3BpErr[ijet]);
-
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet] - TRFvpt_3BpErr[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet] - TRFveta_3BpErr[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet] - TRFvmdr_3BpErr[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet] - TRFv3Var_3BpErr[ijet];
-        for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
-            if (kjet==ijet){
-                continue;
-            }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet] - TRFvpt_3BpErr[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet] - TRFveta_3BpErr[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet] - TRFvmdr_3BpErr[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet] - TRFv3Var_3BpErr[kjet]);
-        }
-        Prob1_TrfvptTags3BpDn += Prob1_TrfvptTags3BpTmp;
-        Prob1_TrfvetaTags3BpDn += Prob1_TrfvetaTags3BpTmp;
-        Prob1_TrfvmdrTags3BpDn += Prob1_TrfvmdrTags3BpTmp;
-        Prob1_TrfTags3BpDn += Prob1_TrfTags3BpTmp;
-      }
-      Prob2p_TrfvptTags3BpDn = 1 - Prob0_TrfvptTags3BpDn - Prob1_TrfvptTags3BpDn;
-      Prob2p_TrfvetaTags3BpDn = 1 - Prob0_TrfvetaTags3BpDn - Prob1_TrfvetaTags3BpDn;
-      Prob2p_TrfvmdrTags3BpDn = 1 - Prob0_TrfvmdrTags3BpDn - Prob1_TrfvmdrTags3BpDn;
-      Prob2p_TrfTags3BpDn = 1 - Prob0_TrfTags3BpDn - Prob1_TrfTags3Bp;
 
 
       // ----------------------------------------------------------------------------
