@@ -226,34 +226,21 @@ public :
    vector<double>  mass_lepJets;
 
    //TRF related variables
-    int NJetTrfBtagged;
-    double Prob0_TrfvptTags2BpTmp ;
+//    int NJetTrfBtagged;
+//    Float_t BJetLeadPt_viaTRF;
     double Prob1_TrfvptTags2BpTmp ;
-    double Prob1_TrfvptTags2BpTmp2 ;
-    double Prob0_TrfvetaTags2BpTmp ;
     double Prob1_TrfvetaTags2BpTmp ;
-    double Prob1_TrfvetaTags2BpTmp2 ;
-    double Prob0_TrfvmdrTags2BpTmp ;
     double Prob1_TrfvmdrTags2BpTmp ;
-    double Prob1_TrfvmdrTags2BpTmp2 ;
-    double Prob0_TrfTags2BpTmp ;
     double Prob1_TrfTags2BpTmp ;
-    double Prob1_TrfTags2BpTmp2 ;
-    double Prob0_TrfvptTags3BpTmp ;
     double Prob1_TrfvptTags3BpTmp ;
-    double Prob1_TrfvptTags3BpTmp2 ;
-    double Prob0_TrfvetaTags3BpTmp ;
     double Prob1_TrfvetaTags3BpTmp ;
-    double Prob1_TrfvetaTags3BpTmp2 ;
-    double Prob0_TrfvmdrTags3BpTmp ;
     double Prob1_TrfvmdrTags3BpTmp ;
-    double Prob1_TrfvmdrTags3BpTmp2 ;
-    double Prob0_TrfTags3BpTmp ;
     double Prob1_TrfTags3BpTmp ;
-    double Prob1_TrfTags3BpTmp2 ;
 
    vector<double> TRFvpt_2Bp;
    vector<double> TRFvpt_3Bp;
+   vector<double> TRFvpt_2BpErr;
+   vector<double> TRFvpt_3BpErr;
    double avTRFvpt_2Bp;
    double avTRFvpt_3Bp;
    double Prob0_TrfvptTags2Bp;
@@ -262,9 +249,23 @@ public :
    double Prob1_TrfvptTags3Bp;
    double Prob2p_TrfvptTags2Bp;
    double Prob2p_TrfvptTags3Bp;
+   double Prob0_TrfvptTags2BpUp;
+   double Prob0_TrfvptTags3BpUp;
+   double Prob1_TrfvptTags2BpUp;
+   double Prob1_TrfvptTags3BpUp;
+   double Prob2p_TrfvptTags2BpUp;
+   double Prob2p_TrfvptTags3BpUp;
+   double Prob0_TrfvptTags2BpDn;
+   double Prob0_TrfvptTags3BpDn;
+   double Prob1_TrfvptTags2BpDn;
+   double Prob1_TrfvptTags3BpDn;
+   double Prob2p_TrfvptTags2BpDn;
+   double Prob2p_TrfvptTags3BpDn;
 
    vector<double> TRFveta_2Bp;
    vector<double> TRFveta_3Bp;
+   vector<double> TRFveta_2BpErr;
+   vector<double> TRFveta_3BpErr;
    double avTRFveta_2Bp;
    double avTRFveta_3Bp;
    double Prob0_TrfvetaTags2Bp;
@@ -273,9 +274,23 @@ public :
    double Prob1_TrfvetaTags3Bp;
    double Prob2p_TrfvetaTags2Bp;
    double Prob2p_TrfvetaTags3Bp;
+   double Prob0_TrfvetaTags2BpUp;
+   double Prob0_TrfvetaTags3BpUp;
+   double Prob1_TrfvetaTags2BpUp;
+   double Prob1_TrfvetaTags3BpUp;
+   double Prob2p_TrfvetaTags2BpUp;
+   double Prob2p_TrfvetaTags3BpUp;
+   double Prob0_TrfvetaTags2BpDn;
+   double Prob0_TrfvetaTags3BpDn;
+   double Prob1_TrfvetaTags2BpDn;
+   double Prob1_TrfvetaTags3BpDn;
+   double Prob2p_TrfvetaTags2BpDn;
+   double Prob2p_TrfvetaTags3BpDn;
 
    vector<double> TRFvmdr_2Bp;
    vector<double> TRFvmdr_3Bp;
+   vector<double> TRFvmdr_2BpErr;
+   vector<double> TRFvmdr_3BpErr;
    double avTRFvmdr_2Bp;
    double avTRFvmdr_3Bp;
    double Prob0_TrfvmdrTags2Bp;
@@ -284,17 +299,41 @@ public :
    double Prob1_TrfvmdrTags3Bp;
    double Prob2p_TrfvmdrTags2Bp;
    double Prob2p_TrfvmdrTags3Bp;
+   double Prob0_TrfvmdrTags2BpUp;
+   double Prob0_TrfvmdrTags3BpUp;
+   double Prob1_TrfvmdrTags2BpUp;
+   double Prob1_TrfvmdrTags3BpUp;
+   double Prob2p_TrfvmdrTags2BpUp;
+   double Prob2p_TrfvmdrTags3BpUp;
+   double Prob0_TrfvmdrTags2BpDn;
+   double Prob0_TrfvmdrTags3BpDn;
+   double Prob1_TrfvmdrTags2BpDn;
+   double Prob1_TrfvmdrTags3BpDn;
+   double Prob2p_TrfvmdrTags2BpDn;
+   double Prob2p_TrfvmdrTags3BpDn;
 
    vector<double> TRFv3Var_2Bp;
    vector<double> TRFv3Var_3Bp;
+   vector<double> TRFv3Var_2BpErr;
+   vector<double> TRFv3Var_3BpErr;
    double Prob0_TrfTags2Bp;
    double Prob0_TrfTags3Bp;
    double Prob1_TrfTags2Bp;
    double Prob1_TrfTags3Bp;
    double Prob2p_TrfTags2Bp;
    double Prob2p_TrfTags3Bp;
-
-   Float_t BJetLeadPt_viaTRF;
+   double Prob0_TrfTags2BpUp;
+   double Prob0_TrfTags3BpUp;
+   double Prob1_TrfTags2BpUp;
+   double Prob1_TrfTags3BpUp;
+   double Prob2p_TrfTags2BpUp;
+   double Prob2p_TrfTags3BpUp;
+   double Prob0_TrfTags2BpDn;
+   double Prob0_TrfTags3BpDn;
+   double Prob1_TrfTags2BpDn;
+   double Prob1_TrfTags3BpDn;
+   double Prob2p_TrfTags2BpDn;
+   double Prob2p_TrfTags3BpDn;
 
 
    Float_t         BJetLeadPt;
