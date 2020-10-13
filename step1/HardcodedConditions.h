@@ -15,12 +15,12 @@ public:
 
     void GetPileupWeight(int nTrueInt, float *pileupweight, float *pileupweightup, float *pileupweightdn, int year = 2017, std::string sample = "");
 
-    pair<double,double> GetTRFvpt2pb(double pt, int njets, int year = 2017, bool sampleMC = true);
-    pair<double,double> GetTRFveta2pb(double eta, int njets, int year = 2017, bool sampleMC = true);
-    pair<double,double> GetTRFvmdr2pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
-    pair<double,double> GetTRFvpt3pb(double pt, int njets, int year = 2017, bool sampleMC = true);
-    pair<double,double> GetTRFveta3pb(double eta, int njets, int year = 2017, bool sampleMC = true);
-    pair<double,double> GetTRFvmdr3pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFvpt2pb(double pt, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFveta2pb(double eta, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFvmdr2pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFvpt3pb(double pt, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFveta3pb(double eta, int njets, int year = 2017, bool sampleMC = true);
+    std::pair<double,double> GetTRFvmdr3pb(double mdr, int njets, int year = 2017, bool sampleMC = true);
 
     double GetEGammaGsfSF(double pt, double eta, int year = 2017);
     double GetElectronIdSF(double pt, double eta, int year = 2017);

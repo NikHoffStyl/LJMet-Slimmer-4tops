@@ -66,14 +66,14 @@ for SHIFT in nominal JECup JECdown JERup JERdown
 
   echo "gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/nistylia/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
   gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-  if [[ $outputDir == /pnfs/iihe/* ]] ;
-  then # for qsub jobs
-    echo "gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/$USER/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-    gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-  else # for condor jobs on lpc
-    echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-    xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-  fi
+#  if [[ $outputDir == /pnfs/iihe/* ]] ;
+#  then # for qsub jobs
+#    echo "gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/$USER/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+#    gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+#  else # for condor jobs on lpc
+#    echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+#    xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+#  fi
 
   XRDEXIT=$?
   if [[ $XRDEXIT -ne 0 ]]; then
