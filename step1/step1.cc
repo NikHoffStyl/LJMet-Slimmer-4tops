@@ -1659,6 +1659,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
         minDR_jetJet = 1e8;
         minDR_jetBJet = 1e8;
+        jet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_BtagOrdered.at(ijet),theJetEta_JetSubCalc_BtagOrdered.at(ijet),theJetPhi_JetSubCalc_BtagOrdered.at(ijet),theJetEnergy_JetSubCalc_BtagOrdered.at(ijet));
         for(unsigned int kjet=0; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if(ijet == kjet){continue;}
             kjet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_BtagOrdered.at(kjet),theJetEta_JetSubCalc_BtagOrdered.at(kjet),theJetPhi_JetSubCalc_BtagOrdered.at(kjet),theJetEnergy_JetSubCalc_BtagOrdered.at(kjet));
@@ -1700,10 +1701,10 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 
         //avTRFvpt_2Bp = accumulate(TRFvpt_2Bp.begin(), TRFvpt_2Bp.end(), 0.0) / (TRFvpt_2Bp.size() - 2);
        //avTRFvpt_3Bp = accumulate(TRFvpt_3Bp.begin(), TRFvpt_3Bp.end(), 0.0) / (TRFvpt_3Bp.size() - 3);
-       avTRFveta_2Bp = accumulate(TRFveta_2Bp.begin(), TRFveta_2Bp.end(), 0.0) / (TRFveta_2Bp.size() - 2);
-       avTRFveta_3Bp = accumulate(TRFveta_3Bp.begin(), TRFveta_3Bp.end(), 0.0) / (TRFveta_3Bp.size() - 3);
-       avTRFvmdr_2Bp = accumulate(TRFvmdr_2Bp.begin(), TRFvmdr_2Bp.end(), 0.0) / (TRFvmdr_2Bp.size() - 2);
-       avTRFvmdr_3Bp = accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0) / (TRFvmdr_3Bp.size() - 3);
+       avTRFveta_2Bp = (accumulate(TRFveta_2Bp.begin(), TRFveta_2Bp.end(), 0.0)-2) / (TRFveta_2Bp.size() - 2);
+       avTRFveta_3Bp = (accumulate(TRFveta_3Bp.begin(), TRFveta_3Bp.end(), 0.0)-3) / (TRFveta_3Bp.size() - 3);
+       avTRFvmdr_2Bp = (accumulate(TRFvmdr_2Bp.begin(), TRFvmdr_2Bp.end(), 0.0)-2) / (TRFvmdr_2Bp.size() - 2);
+       avTRFvmdr_3Bp = (accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0)-3) / (TRFvmdr_3Bp.size() - 3);
 
        for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
             if(jentry % 1000 ==0) std::cout<<"TRFval= "<<TRFvpt_2Bp.at(ijet)<<std::endl;
