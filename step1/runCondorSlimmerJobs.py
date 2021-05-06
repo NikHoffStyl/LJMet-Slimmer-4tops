@@ -9,16 +9,20 @@ start_time = time.time()
 
 #IO directories must be full paths
 
-Year = 2017 # or 2018
+Year = 2018 # or 2018
 finalStateYear = 'singleLep'+str(Year)
 inputDir='/eos/uscms/store/user/lpcljm/FWLJMET102X_1lep'+str(Year)+'_Oct2019/' # or 2018
 #inputDir='/isilon/hadoop/store/group/bruxljm/FWLJMET102X_1lep'+str(Year)+'_Oct2019/' # or 2018
-outputDir='/eos/uscms/store/user/ssagir/FWLJMET102X_1lep'+str(Year)+'_Oct2019_4t_041220_step1/nominal/' # or 2018
-condorDir='/uscms_data/d3/ssagir/FWLJMET102X_1lep'+str(Year)+'_Oct2019_4t_041220_step1/' # or 2018
+outputDir='/eos/uscms/store/user/ssagir/FWLJMET102X_1lep'+str(Year)+'_Oct2019_4t_080420_step1/nominal/' # or 2018
+condorDir='/uscms_data/d3/ssagir/FWLJMET102X_1lep'+str(Year)+'_Oct2019_4t_080420_step1/' # or 2018
 shifts = ['JECup','JECdown','JERup','JERdown']
+nFilesPerJob=30
 inputLoc='lpc'
 if inputDir.startswith('/isilon/hadoop/'): inputLoc='brux'
 
+csvFilename='DeepCSV_94XSF_V5_B_F.csv'
+if Year==2018: 
+    csvFilename='DeepCSV_102XSF_V2.csv'
 runDir=os.getcwd()
 inDir=inputDir[10:]
 if inputLoc=='brux': inDir=inputDir
@@ -56,8 +60,8 @@ dirList17 = [
 'TTTJ_TuneCP5_13TeV-madgraph-pythia8',
 'TTTT_TuneCP5_PSweights_13TeV-amcatnlo-pythia8',
 'TTTW_TuneCP5_13TeV-madgraph-pythia8',
-'TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8',
-# 'TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8',
+# 'TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8',
+'TTTo2L2Nu_TuneCP5_erdON_13TeV-powheg-pythia8',
 'TTTo2L2Nu_TuneCP5down_PSweights_13TeV-powheg-pythia8',
 'TTTo2L2Nu_TuneCP5up_PSweights_13TeV-powheg-pythia8',
 'TTTo2L2Nu_hdampDOWN_TuneCP5_PSweights_13TeV-powheg-pythia8',
@@ -230,7 +234,6 @@ for sample in dirList:
                 basefilename = '_'.join(basefilename)
                 print "Running path:",pathsuffix,"\tBase filenames:",basefilename
 
-                nFilesPerJob=30
                 for i in range(0,len(rootfiles),nFilesPerJob):
                     count+=1
                     tmpcount += 1
@@ -259,9 +262,14 @@ for sample in dirList:
                             idlist += (rootfiles[j].split('.')[0]).split('_')[-1]+' '
                         
                     idlist = idlist.strip()
+                    #remove the problematic 2018 fwljmet jobs
+                    if Year==2018 and sample=='ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8':
+                    	problematicIDs = ['1048','1177','1217','1412','1413','1414','1415','1416','1417','1418','1419','1429','1441','1664','1883']
+                    	for id_ in problematicIDs:
+                    		idlist = idlist.replace(id_,'').replace('  ',' ')
                     print "Running IDs",idlist
                 
-                    dict={'RUNDIR':runDir, 'SAMPLE':sample, 'INPATHSUFFIX':pathsuffix, 'INPUTDIR':inDir, 'FILENAME':basefilename, 'OUTFILENAME':outsample, 'OUTPUTDIR':outDir, 'LIST':idlist, 'ID':tmpcount, 'YEAR':Year}
+                    dict={'RUNDIR':runDir, 'SAMPLE':sample, 'INPATHSUFFIX':pathsuffix, 'INPUTDIR':inDir, 'FILENAME':basefilename, 'OUTFILENAME':outsample, 'OUTPUTDIR':outDir, 'LIST':idlist, 'ID':tmpcount, 'YEAR':Year, 'CSVFILE':csvFilename}
                     jdfName=condorDir+'/%(OUTFILENAME)s/%(OUTFILENAME)s_%(ID)s.job'%dict
                     print jdfName
                     jdf=open(jdfName,'w')
@@ -271,13 +279,12 @@ universe = vanilla
 Executable = %(RUNDIR)s/makeStep1.sh
 Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
-Transfer_Input_Files = %(RUNDIR)s/compileStep1.C, %(RUNDIR)s/makeStep1.C, %(RUNDIR)s/step1.cc, %(RUNDIR)s/step1.h, %(RUNDIR)s/HardcodedConditions.cc, %(RUNDIR)s/HardcodedConditions.h
+Transfer_Input_Files = %(RUNDIR)s/compileStep1.C, %(RUNDIR)s/makeStep1.C, %(RUNDIR)s/step1.cc, %(RUNDIR)s/step1.h, %(RUNDIR)s/HardcodedConditions.cc, %(RUNDIR)s/HardcodedConditions.h, %(RUNDIR)s/BTagCalibForLJMet.cpp, %(RUNDIR)s/BTagCalibForLJMet.h, %(RUNDIR)s/%(CSVFILE)s
 Output = %(OUTFILENAME)s_%(ID)s.out
 Error = %(OUTFILENAME)s_%(ID)s.err
 Log = %(OUTFILENAME)s_%(ID)s.log
 Notification = Never
 Arguments = "%(FILENAME)s %(OUTFILENAME)s %(INPUTDIR)s/%(SAMPLE)s/%(INPATHSUFFIX)s %(OUTPUTDIR)s/%(OUTFILENAME)s '%(LIST)s' %(ID)s %(YEAR)s"
-
 Queue 1"""%dict)
                     jdf.close()
                     os.chdir('%s/%s'%(condorDir,outsample))
