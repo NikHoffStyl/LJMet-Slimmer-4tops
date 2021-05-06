@@ -13,9 +13,9 @@ Year=${7}
 scratch=${PWD}
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-export SCRAM_ARCH=slc6_amd64_gcc700
-scramv1 project CMSSW CMSSW_10_2_10
-cd CMSSW_10_2_10
+export SCRAM_ARCH=slc7_amd64_gcc700
+scramv1 project CMSSW CMSSW_10_2_16_UL
+cd CMSSW_10_2_16_UL
 eval `scramv1 runtime -sh`
 cd -
 
@@ -29,6 +29,8 @@ if [[ $inputDir == /isilon/hadoop/* ]] ;
 then
 XRDpath=root://brux11.hep.brown.edu:1094/$inputDir
 fi
+
+# export PYTHONHOME=/cvmfs/cms.cern.ch/slc7_amd64_gcc700/external/python/2.7.14/
 
 echo "Running step1 over list: ${idlist}"
 rm filelist
@@ -61,19 +63,21 @@ for SHIFT in nominal JECup JECdown JERup JERdown
   do
   haddFile=${outfilename}_${ID}${SHIFT}_hadd.root
   hadd ${haddFile} *${SHIFT}.root
-  # echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-  #xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
 
-  echo "gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/nistylia/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-  gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-#  if [[ $outputDir == /pnfs/iihe/* ]] ;
-#  then # for qsub jobs
-#    echo "gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/$USER/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-#    gfal-copy -f file://$TMPDIR/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-#  else # for condor jobs on lpc
-#    echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
-#    xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
-#  fi
+  if [[ $outputDir == /pnfs/iihe/* ]] ;
+  then # for qsub or cmsconnnect jobs
+    echo scram unsetenv -sh
+    eval `scram unsetenv -sh`
+    echo "gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+    gfal-copy -f file://$PWD/${haddFile} srm://maite.iihe.ac.be:8443/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+    echo "cmsenv"
+    cd CMSSW_10_2_16_UL
+    eval `scramv1 runtime -sh`
+    cd -
+  else # for condor jobs on lpc
+    echo "xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/}"
+    xrdcp -f ${haddFile} root://cmseos.fnal.gov/${outputDir//$NOM/$SHIFT}/${haddFile//${SHIFT}_hadd/} 2>&1
+  fi
 
   XRDEXIT=$?
   if [[ $XRDEXIT -ne 0 ]]; then

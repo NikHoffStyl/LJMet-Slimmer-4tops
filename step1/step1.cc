@@ -124,7 +124,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    inputTree->SetBranchStatus("event_CommonCalc",1);
    inputTree->SetBranchStatus("run_CommonCalc",1);
    inputTree->SetBranchStatus("lumi_CommonCalc",1);
-   inputTree->SetBranchStatus("nPV_MultiLepCalc",1);
+   //   inputTree->SetBranchStatus("nPV_MultiLepCalc",1);
    inputTree->SetBranchStatus("nTrueInteractions_MultiLepCalc",1);
    inputTree->SetBranchStatus("MCWeight_MultiLepCalc",1);
    inputTree->SetBranchStatus("evtWeightsMC_MultiLepCalc",1);
@@ -337,7 +337,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
    outputTree->Branch("event_CommonCalc",&event_CommonCalc,"event_CommonCalc/L");
    outputTree->Branch("run_CommonCalc",&run_CommonCalc,"run_CommonCalc/I");
    outputTree->Branch("lumi_CommonCalc",&lumi_CommonCalc,"lumi_CommonCalc/I");
-   outputTree->Branch("nPV_MultiLepCalc",&nPV_MultiLepCalc,"nPV_MultiLepCalc/I");
    outputTree->Branch("nTrueInteractions_MultiLepCalc",&nTrueInteractions_MultiLepCalc,"nTrueInteractions_MultiLepCalc/I");
    outputTree->Branch("isElectron",&isElectron,"isElectron/I");
    outputTree->Branch("isMuon",&isMuon,"isMuon/I");
@@ -1036,6 +1035,8 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 	double ijetPt = theJetPt_JetSubCalc->at(ijet);
 	double ijetEta= theJetEta_JetSubCalc->at(ijet);
 	int ijetHFlv  = theJetHFlav_JetSubCalc->at(ijet);
+
+
 	
 	// Get btag SF and uncertainty
 	hardcodedConditions.GetBtaggingSF(ijetPt, ijetEta, &btagSF, &btagSFerr, "DeepJetMEDIUM", ijetHFlv, Year);
@@ -1081,6 +1082,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 		AK4JetBTag_lSFup_MultiLepCalc->at(ijet) = applySF(istagged,btagSF+btagSFerr,btagEff);
 		AK4JetBTag_lSFdn_MultiLepCalc->at(ijet) = applySF(istagged,btagSF-btagSFerr,btagEff);
 		}
+
 	// csv reshaping
 	double csv = AK4JetDeepCSVb_MultiLepCalc->at(ijet) + AK4JetDeepCSVbb_MultiLepCalc->at(ijet);
 	double jptForBtag(ijetPt>1000. ? 999. : ijetPt), jetaForBtag(fabs(ijetEta));
@@ -1108,6 +1110,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 	if (csvWgt_hfdn != 0) btagCSVWeight_HFdn *= csvWgt_hfdn;
         if (csvWgt_lfup != 0) btagCSVWeight_LFup *= csvWgt_lfup;
         if (csvWgt_lfdn != 0) btagCSVWeight_LFdn *= csvWgt_lfdn;
+
 	}
 
 	else{
@@ -1359,7 +1362,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         jetak8ptindpair.push_back(std::make_pair(theJetAK8Pt_JetSubCalc->at(ijet),ijet));
 	
       }
- 
+
       // ----------------------------------------------------------------------------
       // Apply kinematic cuts
       // ----------------------------------------------------------------------------
@@ -1392,7 +1395,6 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
             
       if(!(isPastMETcut && isPastHTCut && isPastNAK8JetsCut && isPastNjetsCut && isPastLepPtCut && (isPastElEtaCut || isPastMuEtaCut))) continue;
       npass_all+=1;
-      
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       /////////////// ONLY ON SELECTED EVENTS ////////////////////////////////////////////////////////////////////////////////////
@@ -1400,7 +1402,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
 
       AK4HTpMETpLepPt = AK4HT + corr_met_MultiLepCalc + leppt; //ST
-      
+
       // ----------------------------------------------------------------------------
       // Combine lepton variables into one set
       // ----------------------------------------------------------------------------
@@ -1423,7 +1425,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
 	leptonRelIso_MultiLepCalc = muRelIso_MultiLepCalc->at(0);
 	leptonMVAValue_MultiLepCalc = -99.9;
      }
-   
+
       // ----------------------------------------------------------------------------
       // Apply pt ordering to AK4 vectors
       // ----------------------------------------------------------------------------
@@ -1431,6 +1433,11 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       std::sort(jetptindpair.begin(), jetptindpair.end(), comparepair);
       std::sort(jetbtagpair.begin(), jetbtagpair.end(), comparepair);
       theJetPt_JetSubCalc_BtagOrdered.clear();
+      theJetPt_JetSubCalc_BtagOrdered.clear();
+      theJetEta_JetSubCalc_BtagOrdered.clear();
+      theJetPhi_JetSubCalc_BtagOrdered.clear();
+      AK4JetDeepCSVb_MultiLepCalc_BtagOrdered.clear();
+      AK4JetDeepCSVbb_MultiLepCalc_BtagOrdered.clear();
       theJetPt_JetSubCalc_PtOrdered.clear();
       theJetEta_JetSubCalc_PtOrdered.clear();
       theJetPhi_JetSubCalc_PtOrdered.clear();
@@ -1652,6 +1659,7 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
         minDR_jetJet = 1e8;
         minDR_jetBJet = 1e8;
+        jet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_BtagOrdered.at(ijet),theJetEta_JetSubCalc_BtagOrdered.at(ijet),theJetPhi_JetSubCalc_BtagOrdered.at(ijet),theJetEnergy_JetSubCalc_BtagOrdered.at(ijet));
         for(unsigned int kjet=0; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if(ijet == kjet){continue;}
             kjet_lv.SetPtEtaPhiE(theJetPt_JetSubCalc_BtagOrdered.at(kjet),theJetEta_JetSubCalc_BtagOrdered.at(kjet),theJetPhi_JetSubCalc_BtagOrdered.at(kjet),theJetEnergy_JetSubCalc_BtagOrdered.at(kjet));
@@ -1668,6 +1676,8 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         minDR_jetJets.push_back(minDR_jetJet);
         minDR_jetBJets.push_back(minDR_jetBJet);
 
+        if(jentry % 1000 ==0) std::cout<<"Completed "<<jentry<<" out of "<<nentries<<" events"<< "nJets=" << NJets_JetSubCalc << " Year " << Year << "isMC" << isMC <<std::endl;
+
         TRFvpt_2Bp.push_back((hardcodedConditions.GetTRFvpt2pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFvpt_3Bp.push_back((hardcodedConditions.GetTRFvpt3pb(theJetPt_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
         TRFveta_2Bp.push_back((hardcodedConditions.GetTRFveta2pb(theJetEta_JetSubCalc_BtagOrdered.at(ijet), NJets_JetSubCalc, Year, isMC)).first);
@@ -1682,22 +1692,25 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
         TRFvmdr_2BpErr.push_back((hardcodedConditions.GetTRFvmdr2pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
         TRFvmdr_3BpErr.push_back((hardcodedConditions.GetTRFvmdr3pb(minDR_jetBJets.at(ijet), NJets_JetSubCalc, Year, isMC)).second);
 
-        TRFv3Var_2Bp.push_back( sqrt( pow((TRFvpt_2BpErr[ijet]),2) * pow((TRFveta_2BpErr[ijet]),2) * pow((TRFvmdr_2BpErr[ijet]),2) ));
-        TRFv3Var_3Bp.push_back( sqrt( pow((TRFvpt_3BpErr[ijet]),2) * pow((TRFveta_3BpErr[ijet]),2) * pow((TRFvmdr_3BpErr[ijet]),2) ));
+        TRFv3Var_2BpErr.push_back( sqrt( pow((TRFvpt_2BpErr.at(ijet)),2) * pow((TRFveta_2BpErr.at(ijet)),2) * pow((TRFvmdr_2BpErr.at(ijet)),2) ));
+        TRFv3Var_3BpErr.push_back( sqrt( pow((TRFvpt_3BpErr.at(ijet)),2) * pow((TRFveta_3BpErr.at(ijet)),2) * pow((TRFvmdr_3BpErr.at(ijet)),2) ));
+
+        if(jentry % 1000 ==0) std::cout<<"TRFval= "<<TRFvpt_2Bp.at(ijet)<<std::endl;
 
       }
 
-       //avTRFvpt_2Bp = accumulate(TRFvpt_2Bp.begin(), TRFvpt_2Bp.end(), 0.0) / (TRFvpt_2Bp.size() - 2);
+        //avTRFvpt_2Bp = accumulate(TRFvpt_2Bp.begin(), TRFvpt_2Bp.end(), 0.0) / (TRFvpt_2Bp.size() - 2);
        //avTRFvpt_3Bp = accumulate(TRFvpt_3Bp.begin(), TRFvpt_3Bp.end(), 0.0) / (TRFvpt_3Bp.size() - 3);
-       avTRFveta_2Bp = accumulate(TRFveta_2Bp.begin(), TRFveta_2Bp.end(), 0.0) / (TRFveta_2Bp.size() - 2);
-       avTRFveta_3Bp = accumulate(TRFveta_3Bp.begin(), TRFveta_3Bp.end(), 0.0) / (TRFveta_3Bp.size() - 3);
-       avTRFvmdr_2Bp = accumulate(TRFvmdr_2Bp.begin(), TRFvmdr_2Bp.end(), 0.0) / (TRFvmdr_2Bp.size() - 2);
-       avTRFvmdr_3Bp = accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0) / (TRFvmdr_3Bp.size() - 3);
-       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-            TRFv3Var_2Bp.push_back(avTRFveta_2Bp * avTRFvmdr_2Bp * TRFveta_2Bp.at(ijet) * TRFvmdr_2Bp.at(ijet)) ;
-            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.at(ijet)) ;
-       }
+       avTRFveta_2Bp = (accumulate(TRFveta_2Bp.begin(), TRFveta_2Bp.end(), 0.0)-2) / (TRFveta_2Bp.size() - 2);
+       avTRFveta_3Bp = (accumulate(TRFveta_3Bp.begin(), TRFveta_3Bp.end(), 0.0)-3) / (TRFveta_3Bp.size() - 3);
+       avTRFvmdr_2Bp = (accumulate(TRFvmdr_2Bp.begin(), TRFvmdr_2Bp.end(), 0.0)-2) / (TRFvmdr_2Bp.size() - 2);
+       avTRFvmdr_3Bp = (accumulate(TRFvmdr_3Bp.begin(), TRFvmdr_3Bp.end(), 0.0)-3) / (TRFvmdr_3Bp.size() - 3);
 
+       for(unsigned int ijet=0; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
+            if(jentry % 1000 ==0) std::cout<<"TRFval= "<<TRFvpt_2Bp.at(ijet)<<std::endl;
+            TRFv3Var_2Bp.push_back(avTRFveta_2Bp * avTRFvmdr_2Bp * TRFveta_2Bp.at(ijet) * TRFvmdr_2Bp.at(ijet) * TRFvpt_2Bp.at(ijet)) ;
+            TRFv3Var_3Bp.push_back(avTRFveta_3Bp * avTRFvmdr_3Bp * TRFveta_3Bp.at(ijet) * TRFvmdr_3Bp.at(ijet) * TRFvpt_3Bp.at(ijet)) ;
+       }
 
       Prob0_TrfvptTags2Bp = 1;
       Prob1_TrfvptTags2Bp = 0;
@@ -1708,23 +1721,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags2Bp = 1;
       Prob1_TrfTags2Bp = 0;
       for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2Bp *= (1 - TRFvpt_2Bp[ijet]);
-        Prob0_TrfvetaTags2Bp *= (1 - TRFveta_2Bp[ijet]);
-        Prob0_TrfvmdrTags2Bp *= (1 - TRFvmdr_2Bp[ijet]);
-        Prob0_TrfTags2Bp *= (1 - TRFv3Var_2Bp[ijet]);
+        Prob0_TrfvptTags2Bp *= (1 - TRFvpt_2Bp.at(ijet));
+        Prob0_TrfvetaTags2Bp *= (1 - TRFveta_2Bp.at(ijet));
+        Prob0_TrfvmdrTags2Bp *= (1 - TRFvmdr_2Bp.at(ijet));
+        Prob0_TrfTags2Bp *= (1 - TRFv3Var_2Bp.at(ijet));
 
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet];
+        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp.at(ijet);
+        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp.at(ijet);
+        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp.at(ijet);
+        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp.at(ijet);
         for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet]);
+            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp.at(kjet));
+            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp.at(kjet));
+            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp.at(kjet));
+            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp.at(kjet));
         }
         Prob1_TrfvptTags2Bp += Prob1_TrfvptTags2BpTmp;
         Prob1_TrfvetaTags2Bp += Prob1_TrfvetaTags2BpTmp;
@@ -1745,23 +1758,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags2BpUp = 1;
       Prob1_TrfTags2BpUp = 0;
       for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2BpUp *= (1 - TRFvpt_2Bp[ijet] + TRFvpt_2BpErr[ijet]);
-        Prob0_TrfvetaTags2BpUp *= (1 - TRFveta_2Bp[ijet] + TRFveta_2BpErr[ijet]);
-        Prob0_TrfvmdrTags2BpUp *= (1 - TRFvmdr_2Bp[ijet] + TRFvmdr_2BpErr[ijet]);
-        Prob0_TrfTags2BpUp *= (1 - TRFv3Var_2Bp[ijet] + TRFv3Var_2BpErr[ijet]);
+        Prob0_TrfvptTags2BpUp *= (1 - TRFvpt_2Bp.at(ijet) + TRFvpt_2BpErr.at(ijet));
+        Prob0_TrfvetaTags2BpUp *= (1 - TRFveta_2Bp.at(ijet) + TRFveta_2BpErr.at(ijet));
+        Prob0_TrfvmdrTags2BpUp *= (1 - TRFvmdr_2Bp.at(ijet) + TRFvmdr_2BpErr.at(ijet));
+        Prob0_TrfTags2BpUp *= (1 - TRFv3Var_2Bp.at(ijet) + TRFv3Var_2BpErr.at(ijet));
 
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet] + TRFvpt_2BpErr[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet]  + TRFveta_2BpErr[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet] + TRFvmdr_2BpErr[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet] + TRFv3Var_2BpErr[ijet];
+        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp.at(ijet) + TRFvpt_2BpErr.at(ijet);
+        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp.at(ijet)  + TRFveta_2BpErr.at(ijet);
+        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp.at(ijet) + TRFvmdr_2BpErr.at(ijet);
+        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp.at(ijet) + TRFv3Var_2BpErr.at(ijet);
         for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet] + TRFvpt_2BpErr[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet] + TRFveta_2BpErr[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet] + TRFvmdr_2BpErr[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet] + TRFv3Var_2BpErr[kjet]);
+            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp.at(kjet) + TRFvpt_2BpErr.at(kjet));
+            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp.at(kjet) + TRFveta_2BpErr.at(kjet));
+            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp.at(kjet) + TRFvmdr_2BpErr.at(kjet));
+            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp.at(kjet) + TRFv3Var_2BpErr.at(kjet));
         }
         Prob1_TrfvptTags2BpUp += Prob1_TrfvptTags2BpTmp;
         Prob1_TrfvetaTags2BpUp += Prob1_TrfvetaTags2BpTmp;
@@ -1782,23 +1795,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags2BpDn = 1;
       Prob1_TrfTags2BpDn = 0;
       for(unsigned int ijet=2; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags2BpDn *= (1 - TRFvpt_2Bp[ijet] - TRFvpt_2BpErr[ijet]);
-        Prob0_TrfvetaTags2BpDn *= (1 - TRFveta_2Bp[ijet] - TRFveta_2BpErr[ijet]);
-        Prob0_TrfvmdrTags2BpDn *= (1 - TRFvmdr_2Bp[ijet] - TRFvmdr_2BpErr[ijet]);
-        Prob0_TrfTags2BpDn *= (1 - TRFv3Var_2Bp[ijet] - TRFv3Var_2BpErr[ijet]);
+        Prob0_TrfvptTags2BpDn *= (1 - TRFvpt_2Bp.at(ijet) - TRFvpt_2BpErr.at(ijet));
+        Prob0_TrfvetaTags2BpDn *= (1 - TRFveta_2Bp.at(ijet) - TRFveta_2BpErr.at(ijet));
+        Prob0_TrfvmdrTags2BpDn *= (1 - TRFvmdr_2Bp.at(ijet) - TRFvmdr_2BpErr.at(ijet));
+        Prob0_TrfTags2BpDn *= (1 - TRFv3Var_2Bp.at(ijet) - TRFv3Var_2BpErr.at(ijet));
 
-        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp[ijet] - TRFvpt_2BpErr[ijet];
-        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp[ijet]  - TRFveta_2BpErr[ijet];
-        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp[ijet] - TRFvmdr_2BpErr[ijet];
-        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp[ijet] - TRFv3Var_2BpErr[ijet];
+        Prob1_TrfvptTags2BpTmp = TRFvpt_2Bp.at(ijet) - TRFvpt_2BpErr.at(ijet);
+        Prob1_TrfvetaTags2BpTmp = TRFveta_2Bp.at(ijet)  - TRFveta_2BpErr.at(ijet);
+        Prob1_TrfvmdrTags2BpTmp = TRFvmdr_2Bp.at(ijet) - TRFvmdr_2BpErr.at(ijet);
+        Prob1_TrfTags2BpTmp = TRFv3Var_2Bp.at(ijet) - TRFv3Var_2BpErr.at(ijet);
         for(unsigned int kjet=2; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp[kjet] - TRFvpt_2BpErr[kjet]);
-            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp[kjet] - TRFveta_2BpErr[kjet]);
-            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp[kjet] - TRFvmdr_2BpErr[kjet]);
-            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp[kjet] - TRFv3Var_2BpErr[kjet]);
+            Prob1_TrfvptTags2BpTmp *= (1-TRFvpt_2Bp.at(kjet) - TRFvpt_2BpErr.at(kjet));
+            Prob1_TrfvetaTags2BpTmp *= (1-TRFveta_2Bp.at(kjet) - TRFveta_2BpErr.at(kjet));
+            Prob1_TrfvmdrTags2BpTmp *= (1-TRFvmdr_2Bp.at(kjet) - TRFvmdr_2BpErr.at(kjet));
+            Prob1_TrfTags2BpTmp *= (1-TRFv3Var_2Bp.at(kjet) - TRFv3Var_2BpErr.at(kjet));
         }
         Prob1_TrfvptTags2BpDn += Prob1_TrfvptTags2BpTmp;
         Prob1_TrfvetaTags2BpDn += Prob1_TrfvetaTags2BpTmp;
@@ -1820,23 +1833,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags3Bp = 1;
       Prob1_TrfTags3Bp = 0;
       for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3Bp *= (1 - TRFvpt_3Bp[ijet]);
-        Prob0_TrfvetaTags3Bp *= (1 - TRFveta_3Bp[ijet]);
-        Prob0_TrfvmdrTags3Bp *= (1 - TRFvmdr_3Bp[ijet]);
-        Prob0_TrfTags3Bp *= (1 - TRFv3Var_3Bp[ijet]);
+        Prob0_TrfvptTags3Bp *= (1 - TRFvpt_3Bp.at(ijet));
+        Prob0_TrfvetaTags3Bp *= (1 - TRFveta_3Bp.at(ijet));
+        Prob0_TrfvmdrTags3Bp *= (1 - TRFvmdr_3Bp.at(ijet));
+        Prob0_TrfTags3Bp *= (1 - TRFv3Var_3Bp.at(ijet));
 
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet];
+        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp.at(ijet);
+        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp.at(ijet);
+        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp.at(ijet);
+        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp.at(ijet);
         for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet]);
+            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp.at(kjet));
+            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp.at(kjet));
+            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp.at(kjet));
+            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp.at(kjet));
         }
         Prob1_TrfvptTags3Bp += Prob1_TrfvptTags3BpTmp;
         Prob1_TrfvetaTags3Bp += Prob1_TrfvetaTags3BpTmp;
@@ -1857,23 +1870,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags3BpUp = 1;
       Prob1_TrfTags3BpUp = 0;
       for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3BpUp *= (1 - TRFvpt_3Bp[ijet] + TRFvpt_3BpErr[ijet]);
-        Prob0_TrfvetaTags3BpUp *= (1 - TRFveta_3Bp[ijet] + TRFveta_3BpErr[ijet]);
-        Prob0_TrfvmdrTags3BpUp *= (1 - TRFvmdr_3Bp[ijet] + TRFvmdr_3BpErr[ijet]);
-        Prob0_TrfTags3BpUp *= (1 - TRFv3Var_3Bp[ijet] + TRFv3Var_3BpErr[ijet]);
+        Prob0_TrfvptTags3BpUp *= (1 - TRFvpt_3Bp.at(ijet) + TRFvpt_3BpErr.at(ijet));
+        Prob0_TrfvetaTags3BpUp *= (1 - TRFveta_3Bp.at(ijet) + TRFveta_3BpErr.at(ijet));
+        Prob0_TrfvmdrTags3BpUp *= (1 - TRFvmdr_3Bp.at(ijet) + TRFvmdr_3BpErr.at(ijet));
+        Prob0_TrfTags3BpUp *= (1 - TRFv3Var_3Bp.at(ijet) + TRFv3Var_3BpErr.at(ijet));
 
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet] + TRFvpt_3BpErr[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet] + TRFveta_3BpErr[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet] + TRFvmdr_3BpErr[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet] + TRFv3Var_3BpErr[ijet];
+        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp.at(ijet) + TRFvpt_3BpErr.at(ijet);
+        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp.at(ijet) + TRFveta_3BpErr.at(ijet);
+        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp.at(ijet) + TRFvmdr_3BpErr.at(ijet);
+        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp.at(ijet) + TRFv3Var_3BpErr.at(ijet);
         for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet] + TRFvpt_3BpErr[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet] + TRFveta_3BpErr[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet] + TRFvmdr_3BpErr[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet] + TRFv3Var_3BpErr[kjet]);
+            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp.at(kjet) + TRFvpt_3BpErr.at(kjet));
+            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp.at(kjet) + TRFveta_3BpErr.at(kjet));
+            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp.at(kjet) + TRFvmdr_3BpErr.at(kjet));
+            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp.at(kjet) + TRFv3Var_3BpErr.at(kjet));
         }
         Prob1_TrfvptTags3BpUp += Prob1_TrfvptTags3BpTmp;
         Prob1_TrfvetaTags3BpUp += Prob1_TrfvetaTags3BpTmp;
@@ -1894,23 +1907,23 @@ void step1::Loop(TString inTreeName, TString outTreeName, const BTagCalibrationF
       Prob0_TrfTags3BpDn = 1;
       Prob1_TrfTags3BpDn = 0;
       for(unsigned int ijet=3; ijet < theJetPt_JetSubCalc_BtagOrdered.size(); ijet++){
-        Prob0_TrfvptTags3BpDn *= (1 - TRFvpt_3Bp[ijet] - TRFvpt_3BpErr[ijet]);
-        Prob0_TrfvetaTags3BpDn *= (1 - TRFveta_3Bp[ijet] - TRFveta_3BpErr[ijet]);
-        Prob0_TrfvmdrTags3BpDn *= (1 - TRFvmdr_3Bp[ijet] - TRFvmdr_3BpErr[ijet]);
-        Prob0_TrfTags3BpDn *= (1 - TRFv3Var_3Bp[ijet] - TRFv3Var_3BpErr[ijet]);
+        Prob0_TrfvptTags3BpDn *= (1 - TRFvpt_3Bp.at(ijet) - TRFvpt_3BpErr.at(ijet));
+        Prob0_TrfvetaTags3BpDn *= (1 - TRFveta_3Bp.at(ijet) - TRFveta_3BpErr.at(ijet));
+        Prob0_TrfvmdrTags3BpDn *= (1 - TRFvmdr_3Bp.at(ijet) - TRFvmdr_3BpErr.at(ijet));
+        Prob0_TrfTags3BpDn *= (1 - TRFv3Var_3Bp.at(ijet) - TRFv3Var_3BpErr.at(ijet));
 
-        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp[ijet] - TRFvpt_3BpErr[ijet];
-        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp[ijet] - TRFveta_3BpErr[ijet];
-        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp[ijet] - TRFvmdr_3BpErr[ijet];
-        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp[ijet] - TRFv3Var_3BpErr[ijet];
+        Prob1_TrfvptTags3BpTmp = TRFvpt_3Bp.at(ijet) - TRFvpt_3BpErr.at(ijet);
+        Prob1_TrfvetaTags3BpTmp = TRFveta_3Bp.at(ijet) - TRFveta_3BpErr.at(ijet);
+        Prob1_TrfvmdrTags3BpTmp = TRFvmdr_3Bp.at(ijet) - TRFvmdr_3BpErr.at(ijet);
+        Prob1_TrfTags3BpTmp = TRFv3Var_3Bp.at(ijet) - TRFv3Var_3BpErr.at(ijet);
         for(unsigned int kjet=3; kjet < theJetPt_JetSubCalc_BtagOrdered.size(); kjet++){
             if (kjet==ijet){
                 continue;
             }
-            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp[kjet] - TRFvpt_3BpErr[kjet]);
-            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp[kjet] - TRFveta_3BpErr[kjet]);
-            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp[kjet] - TRFvmdr_3BpErr[kjet]);
-            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp[kjet] - TRFv3Var_3BpErr[kjet]);
+            Prob1_TrfvptTags3BpTmp *= (1-TRFvpt_3Bp.at(kjet) - TRFvpt_3BpErr.at(kjet));
+            Prob1_TrfvetaTags3BpTmp *= (1-TRFveta_3Bp.at(kjet) - TRFveta_3BpErr.at(kjet));
+            Prob1_TrfvmdrTags3BpTmp *= (1-TRFvmdr_3Bp.at(kjet) - TRFvmdr_3BpErr.at(kjet));
+            Prob1_TrfTags3BpTmp *= (1-TRFv3Var_3Bp.at(kjet) - TRFv3Var_3BpErr[kjet]);
         }
         Prob1_TrfvptTags3BpDn += Prob1_TrfvptTags3BpTmp;
         Prob1_TrfvetaTags3BpDn += Prob1_TrfvetaTags3BpTmp;
